@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:medbridge/src/utils/constants.dart';
 
 class MainButton extends StatefulWidget {
   final String text;
@@ -24,7 +25,6 @@ class MainButton extends StatefulWidget {
 class _MainButtonState extends State<MainButton> {
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
     return InkWell(
       onTap: widget.disabled ? null : widget.onpressed,
       child: Material(
@@ -39,7 +39,7 @@ class _MainButtonState extends State<MainButton> {
                         ? const Color.fromARGB(255, 10, 49, 82)
                         : widget.red
                             ? const Color.fromARGB(255, 252, 82, 70)
-                            : theme.primaryColor),
+                            : Constants.primaryColor),
             // width: 343,
             height: 45,
             child: Padding(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:medbridge/src/features/video_call/presentation/join_screen.dart';
+import 'package:medbridge/src/utils/constants.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -18,9 +19,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'VideoSDK QuickStart',
+      title: 'Medbridge',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Constants.primaryColor,
+        fontFamily: Constants.appFont.fontFamily
+
       ),
       home: JoinScreen(),
     );
