@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medbridge/src/common_widgets/custom_button.dart';
+import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/features/video_call/data/api_call.dart';
 
 import 'meeting_screen.dart';

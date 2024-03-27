@@ -6,17 +6,12 @@ class MainButton extends StatefulWidget {
   final String text;
   final VoidCallback onpressed;
   final bool disabled;
-  final bool lightBlue;
-  final bool red;
-  final bool indicator;
-  const MainButton(
-      {super.key,
-      required this.text,
-      this.indicator = false,
-      required this.onpressed,
-      this.disabled = false,
-      this.lightBlue = false,
-      this.red = false});
+  const MainButton({
+    super.key,
+    required this.text,
+    required this.onpressed,
+    this.disabled = false,
+  });
 
   @override
   State<MainButton> createState() => _MainButtonState();
@@ -34,25 +29,23 @@ class _MainButtonState extends State<MainButton> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: widget.disabled
-                    ? Colors.black
-                    : widget.lightBlue
-                        ? const Color.fromARGB(255, 10, 49, 82)
-                        : widget.red
-                            ? const Color.fromARGB(255, 252, 82, 70)
-                            : Constants.primaryColor),
-            // width: 343,
-            height: 45,
+                    ? const Color.fromARGB(255, 100, 100, 100)
+                    : Constants.primaryColor),
+            height: 50,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Center(
-                  child: widget.indicator
+                  child: widget.disabled
                       ? const CupertinoActivityIndicator(
                           // strokeWidth: 3,
                           color: Colors.white,
                         )
                       : Text(
                           widget.text,
-                          style: const TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold),
                         )),
             )),
       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:medbridge/src/features/video_call/presentation/join_screen.dart';
+import 'package:medbridge/src/mockTests/layout_tests.dart';
 import 'package:medbridge/src/utils/constants.dart';
 
 void main() {
@@ -22,10 +23,10 @@ class MyApp extends StatelessWidget {
       title: 'MindBridge',
       theme: ThemeData(
         primaryColor: Constants.primaryColor,
-        fontFamily: Constants.appFont.fontFamily
+        fontFamily: "Roboto",
 
       ),
-      home: JoinScreen(),
+      home: LayOutTest(),
     );
   }
 }
