@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:medbridge/src/features/video_call/presentation/join_screen.dart';
 import 'package:medbridge/src/mockTests/layout_tests.dart';
 import 'package:medbridge/src/utils/constants.dart';
+import 'package:medbridge/src/utils/custom_theme.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -22,10 +22,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'MindBridge',
       theme: ThemeData(
-        primaryColor: Constants.primaryColor,
-        fontFamily: "Roboto",
-
-      ),
+          primaryColor: Constants.primaryColor,
+          fontFamily: "Roboto",
+          textTheme: textThemelight(context)),
       home: LayOutTest(),
     );
   }
