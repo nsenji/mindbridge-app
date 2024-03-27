@@ -9,8 +9,6 @@ class JoinScreen extends StatelessWidget {
 
   JoinScreen({super.key});
 
-
-
   void onJoinButtonPressed(BuildContext context) {
     String meetingId = _meetingIdController.text;
     var re = RegExp("\\w{4}\\-\\w{4}\\-\\w{4}");
@@ -37,7 +35,7 @@ class JoinScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('MedBridge'),
+        title: const Text('MindBridge'),
       ),
       body: Padding(
         padding:
@@ -45,7 +43,6 @@ class JoinScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-      
             Container(
                 margin: const EdgeInsets.only(bottom: 50),
                 child: const Column(
@@ -59,7 +56,10 @@ class JoinScreen extends StatelessWidget {
                     SizedBox(
                       height: 5,
                     ),
-                    Text("Call ID is sent to your email at time of call", style: TextStyle(color: Colors.grey),)
+                    Text(
+                      "Call ID is sent to your email at time of call",
+                      style: TextStyle(color: Colors.grey),
+                    )
                   ],
                 )),
             Container(
@@ -79,7 +79,6 @@ class JoinScreen extends StatelessWidget {
                     onpressed: () {
                       onJoinButtonPressed(context);
                     })),
-        
           ],
         ),
       ),

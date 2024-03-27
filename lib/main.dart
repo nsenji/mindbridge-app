@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Medbridge',
+      title: 'MindBridge',
       theme: ThemeData(
         primaryColor: Constants.primaryColor,
         fontFamily: Constants.appFont.fontFamily
