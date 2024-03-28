@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:medbridge/src/utils/constants.dart';
 
 class TextCustom extends StatelessWidget {
   final String text;
