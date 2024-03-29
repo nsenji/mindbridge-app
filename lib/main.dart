@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'MindBridge',
       theme: ThemeData(
-          primaryColor: Constants.primaryColor,
+          primaryColor: Color.fromARGB(255, 8, 33, 99),
           fontFamily: "Roboto",
           textTheme: textThemelight(context)),
       home: Landing(),
