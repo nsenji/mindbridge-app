@@ -29,7 +29,7 @@ class _MainButtonState extends State<MainButton> {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: widget.disabled
-                    ? const Color.fromARGB(255, 100, 100, 100)
+                    ? const Color.fromARGB(255, 8, 33, 99)
                     : Constants.primaryColor),
             height: 50,
             child: Padding(

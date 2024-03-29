@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medbridge/src/common_widgets/app_logo.dart';
+import 'package:medbridge/src/common_widgets/main_button.dart';
+import 'package:medbridge/src/common_widgets/outlined_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
 
@@ -17,18 +19,15 @@ class _LandingState extends State<Landing> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: AppLogo(),
-        // actions: [
-        //   TextCustom(
-        //     text: "sereneAI",
-        //     size: 14,
-        //   )
-        // ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            H(h: 10),
-            Container(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          // H(h: 10),
+          Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Container(
               color: Color.fromARGB(255, 223, 230, 248),
               width: double.maxFinite,
               child: Padding(
@@ -67,7 +66,7 @@ class _LandingState extends State<Landing> {
                         padding: const EdgeInsets.fromLTRB(10, 15, 10, 15),
                         child: TextCustom(
                           text:
-                              "Your honesty is essential for efficient detection and understanding your needs.",
+                              "Your honesty is essential for efficient detection and understanding your condition.",
                           size: 15,
                           color: Colors.white,
                         ),
@@ -96,9 +95,34 @@ class _LandingState extends State<Landing> {
                   ],
                 ),
               ),
-            )
-          ],
-        ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 40),
+            child: SizedBox(
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child: MainButton(
+                      text: "Take The Test",
+                      onpressed: () {},
+                    ),
+                  ),
+                  H(h: 20),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child: OutButton(
+                      text: "Talk To a Specialist",
+                      onpressed: () {},
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

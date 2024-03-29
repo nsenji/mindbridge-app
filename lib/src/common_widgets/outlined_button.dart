@@ -37,12 +37,12 @@ class _OutButtonState extends State<OutButton> {
                   child: widget.disabled
                       ? const CupertinoActivityIndicator(
                           // strokeWidth: 3,
-                          color: Color(0xFF0040DD),
+                          color: Color.fromARGB(255, 8, 33, 99),
                         )
                       : Text(
                           widget.text,
                           style: const TextStyle(
-                              color: Color(0xFF0040DD),
+                              color: Color.fromARGB(255, 8, 33, 99),
                               fontSize: 17,
                               fontWeight: FontWeight.bold),
                         )),
