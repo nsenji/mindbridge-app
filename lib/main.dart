@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:medbridge/src/features/landingPage/landing_page.dart';
 import 'package:medbridge/src/mockTests/layout_tests.dart';
 import 'package:medbridge/src/utils/constants.dart';
 import 'package:medbridge/src/utils/custom_theme.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Constants.primaryColor,
           fontFamily: "Roboto",
           textTheme: textThemelight(context)),
-      home: LayOutTest(),
+      home: Landing(),
     );
   }
 }
