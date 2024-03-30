@@ -39,6 +39,16 @@ class Diagnosis {
       this.concentration,
       this.optimisim);
 
+  double getProgress() {
+    double progress = 0;
+    toMap().forEach((key, value) {
+      if (value != "") {
+        progress += 5.8823529412;
+      }
+    });
+    return progress;
+  }
+
   Diagnosis copyWith({
     String? sadness,
     String? euphoric,

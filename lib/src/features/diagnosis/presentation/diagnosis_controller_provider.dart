@@ -6,6 +6,7 @@ class DiagnosisController extends StateNotifier<Diagnosis> {
       : super(Diagnosis("", "", "", "", "", "", "", "", "", "", "", "", "", "",
             "", "", ""));
 
+
   void updateDiagnosis(String option, String symptom) {
     String unique_option = option;
 
