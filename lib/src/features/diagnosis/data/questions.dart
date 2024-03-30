@@ -2,12 +2,12 @@ List screen_1 = [
   {
     "symptom": "sadness",
     "question": "1.Experience feelings of sadness or low mood",
-    "options": ["USUALLY", "SOMETIMES", "SELDOM", "NEVER"]
+    "options": ["Usually", "Sometimes", "Seldom","Most-Often", "Never"]
   },
   {
     "symptom": "exhausted",
     "question": "2.Feeling drained of energy, physically and mentally",
-    "options": ["USUALLY", "SOMETIMES", "SELDOM", "NEVER"]
+    "options":  ["Usually", "Sometimes", "Seldom","Most-Often", "Never"]
   },
   {
     "symptom": "mood_swing",
@@ -41,12 +41,12 @@ List screen_2 = [
   {
     "symptom": "euphoric",
     "question": "2.How often have you felt overly excited or unusually energetic",
-    "options": ["USUALLY", "SOMETIMES", "SELDOM", "NEVER"]
+    "options":  ["Usually", "Sometimes", "Seldom","Most-Often", "Never"]
   },
   {
     "symptom": "sleep_dissorder",
     "question": "3.Experience difficulty sleeping or staying asleep",
-    "options": ["USUALLY", "SOMETIMES", "SELDOM", "NEVER"]
+    "options":  ["Usually", "Sometimes", "Seldom","Most-Often", "Never"]
   },
   {
     "symptom": "anorxia",

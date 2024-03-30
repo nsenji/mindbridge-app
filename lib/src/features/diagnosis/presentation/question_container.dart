@@ -60,7 +60,7 @@ class _QuestionContainerState extends ConsumerState<QuestionContainer> {
                       constraints: BoxConstraints(minWidth: 40),
                       child: Text(
                         textAlign: TextAlign.center,
-                        widget.options[index],
+                        widget.options[index].toUpperCase(),
                         style: TextStyle(fontSize: 14),
                       ),
                     ),
