@@ -9,7 +9,10 @@ class QuestionContainer extends ConsumerStatefulWidget {
   final String question;
   final List<String> options;
   const QuestionContainer(
-      {super.key, required this.question, required this.options, required this.symptom});
+      {super.key,
+      required this.question,
+      required this.options,
+      required this.symptom});
 
   @override
   ConsumerState<QuestionContainer> createState() => _QuestionContainerState();
@@ -65,7 +68,11 @@ class _QuestionContainerState extends ConsumerState<QuestionContainer> {
                     onSelected: (bool selected) {
                       setState(() {
                         _value = selected ? index : null;
-                        ref.read(diagnosisControllerProvider.notifier).updateDiagnosis(widget.options[_value!], widget.symptom);
+                        ref
+                            .read(diagnosisControllerProvider.notifier)
+                            .updateDiagnosis(
+                                selected ? widget.options[_value!] : "",
+                                widget.symptom);
                       });
                     },
                   );
