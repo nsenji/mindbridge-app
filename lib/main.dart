@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/features/landingPage/landing_page.dart';
 import 'package:medbridge/src/mockTests/layout_tests.dart';
 import 'package:medbridge/src/utils/constants.dart';
@@ -10,7 +11,7 @@ void main() {
     systemNavigationBarColor: Colors.black, // navigation bar color
     // statusBarColor: Colors.pink, // status bar color
   ));
-  runApp(const MyApp());
+  runApp(ProviderScope(child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

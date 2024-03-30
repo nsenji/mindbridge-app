@@ -125,7 +125,8 @@ class Diagnosis {
 
   String toJson() => json.encode(toMap());
 
-  factory Diagnosis.fromJson(String source) => Diagnosis.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Diagnosis.fromJson(String source) =>
+      Diagnosis.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -135,45 +136,44 @@ class Diagnosis {
   @override
   bool operator ==(covariant Diagnosis other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.sadness == sadness &&
-      other.euphoric == euphoric &&
-      other.exhausted == exhausted &&
-      other.sleep_dissorder == sleep_dissorder &&
-      other.mood_swing == mood_swing &&
-      other.suicidal_thoughts == suicidal_thoughts &&
-      other.anorxia == anorxia &&
-      other.authority_respect == authority_respect &&
-      other.try_explanation == try_explanation &&
-      other.aggressive_response == aggressive_response &&
-      other.ignore_and_move_on == ignore_and_move_on &&
-      other.nervous_break_down == nervous_break_down &&
-      other.admit_mistakes == admit_mistakes &&
-      other.overthinking == overthinking &&
-      other.sexual_activity == sexual_activity &&
-      other.concentration == concentration &&
-      other.optimisim == optimisim;
+
+    return other.sadness == sadness &&
+        other.euphoric == euphoric &&
+        other.exhausted == exhausted &&
+        other.sleep_dissorder == sleep_dissorder &&
+        other.mood_swing == mood_swing &&
+        other.suicidal_thoughts == suicidal_thoughts &&
+        other.anorxia == anorxia &&
+        other.authority_respect == authority_respect &&
+        other.try_explanation == try_explanation &&
+        other.aggressive_response == aggressive_response &&
+        other.ignore_and_move_on == ignore_and_move_on &&
+        other.nervous_break_down == nervous_break_down &&
+        other.admit_mistakes == admit_mistakes &&
+        other.overthinking == overthinking &&
+        other.sexual_activity == sexual_activity &&
+        other.concentration == concentration &&
+        other.optimisim == optimisim;
   }
 
   @override
   int get hashCode {
     return sadness.hashCode ^
-      euphoric.hashCode ^
-      exhausted.hashCode ^
-      sleep_dissorder.hashCode ^
-      mood_swing.hashCode ^
-      suicidal_thoughts.hashCode ^
-      anorxia.hashCode ^
-      authority_respect.hashCode ^
-      try_explanation.hashCode ^
-      aggressive_response.hashCode ^
-      ignore_and_move_on.hashCode ^
-      nervous_break_down.hashCode ^
-      admit_mistakes.hashCode ^
-      overthinking.hashCode ^
-      sexual_activity.hashCode ^
-      concentration.hashCode ^
-      optimisim.hashCode;
+        euphoric.hashCode ^
+        exhausted.hashCode ^
+        sleep_dissorder.hashCode ^
+        mood_swing.hashCode ^
+        suicidal_thoughts.hashCode ^
+        anorxia.hashCode ^
+        authority_respect.hashCode ^
+        try_explanation.hashCode ^
+        aggressive_response.hashCode ^
+        ignore_and_move_on.hashCode ^
+        nervous_break_down.hashCode ^
+        admit_mistakes.hashCode ^
+        overthinking.hashCode ^
+        sexual_activity.hashCode ^
+        concentration.hashCode ^
+        optimisim.hashCode;
   }
 }

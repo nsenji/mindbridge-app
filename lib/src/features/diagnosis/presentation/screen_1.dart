@@ -7,6 +7,7 @@ import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
 import 'package:medbridge/src/features/diagnosis/data/questions.dart';
 import 'package:medbridge/src/features/diagnosis/presentation/question_container.dart';
+import 'package:medbridge/src/features/diagnosis/presentation/results.dart';
 
 class Screen1 extends StatefulWidget {
   const Screen1({super.key});
@@ -77,6 +78,7 @@ class _Screen1State extends State<Screen1> {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 20, right: 10, left: 10),
                 child: QuestionContainer(
+                    symptom: screen1List[index]["symptom"],
                     question: screen1List[index]["question"],
                     options: screen1List[index]["options"]),
               );
@@ -86,7 +88,14 @@ class _Screen1State extends State<Screen1> {
             child: Padding(
               padding: const EdgeInsets.only(
                   top: 30, bottom: 30, right: 20, left: 20),
-              child: MainButton(text: "Next", onpressed: () {}),
+              child: MainButton(
+                  text: "Next",
+                  onpressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Results()));
+                  }),
             ),
           )
         ],

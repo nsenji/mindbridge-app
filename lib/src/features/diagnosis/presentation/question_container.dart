@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
+import 'package:medbridge/src/features/diagnosis/presentation/diagnosis_controller_provider.dart';
 
-class QuestionContainer extends StatefulWidget {
+class QuestionContainer extends ConsumerStatefulWidget {
+  final String symptom;
   final String question;
   final List<String> options;
   const QuestionContainer(
-      {super.key, required this.question, required this.options});
+      {super.key, required this.question, required this.options, required this.symptom});
 
   @override
-  State<QuestionContainer> createState() => _QuestionContainerState();
+  ConsumerState<QuestionContainer> createState() => _QuestionContainerState();
 }
 
-class _QuestionContainerState extends State<QuestionContainer> {
+class _QuestionContainerState extends ConsumerState<QuestionContainer> {
   int? _value;
 
   @override
@@ -62,6 +65,7 @@ class _QuestionContainerState extends State<QuestionContainer> {
                     onSelected: (bool selected) {
                       setState(() {
                         _value = selected ? index : null;
+                        ref.read(diagnosisControllerProvider.notifier).updateDiagnosis(widget.options[_value!], widget.symptom);
                       });
                     },
                   );
