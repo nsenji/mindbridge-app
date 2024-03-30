@@ -7,17 +7,18 @@ import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
 import 'package:medbridge/src/features/diagnosis/data/questions.dart';
 import 'package:medbridge/src/features/diagnosis/presentation/normal_question_container.dart';
-import 'package:medbridge/src/features/diagnosis/presentation/screen_2.dart';
+import 'package:medbridge/src/features/diagnosis/presentation/results.dart';
+import 'package:medbridge/src/features/diagnosis/presentation/scaled_question_container.dart';
 
-class Screen1 extends StatefulWidget {
-  const Screen1({super.key});
+class Screen3 extends StatefulWidget {
+  const Screen3({super.key});
 
   @override
-  State<Screen1> createState() => _Screen1State();
+  State<Screen3> createState() => _Screen3State();
 }
 
-class _Screen1State extends State<Screen1> {
-  List screen1List = screen_1;
+class _Screen3State extends State<Screen3> {
+  List screen3List = screen_3;
 
   @override
   Widget build(BuildContext context) {
@@ -77,16 +78,32 @@ class _Screen1State extends State<Screen1> {
             ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
-                  childCount: screen1List.length, (context, index) {
+                  childCount: screen3List.length, (context, index) {
                 return Padding(
                   padding:
                       const EdgeInsets.only(bottom: 20, right: 10, left: 10),
                   child: NormalQuestionContainer(
-                      symptom: screen1List[index]["symptom"],
-                      question: screen1List[index]["question"],
-                      options: screen1List[index]["options"]),
+                      symptom: screen3List[index]["symptom"],
+                      question: screen3List[index]["question"],
+                      options: screen3List[index]["options"]),
                 );
               }),
+            ),
+             SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 20, right: 10, left: 10),
+                child: ScaledQuestionContainer(
+                  symptom: "concentration",
+                    question: "How well are you able to focus on a task without getting distracted (Select from scale)"),
+              ),
+            ),
+             SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 20, right: 10, left: 10),
+                child: ScaledQuestionContainer(
+                  symptom: "sexual_activity",
+                    question: "How optmistic are you (Select from scale)"),
+              ),
             ),
             SliverToBoxAdapter(
               child: Padding(
@@ -96,7 +113,7 @@ class _Screen1State extends State<Screen1> {
                     text: "Next",
                     onpressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Screen2()));
+                          MaterialPageRoute(builder: (context) => Results()));
                     }),
               ),
             )

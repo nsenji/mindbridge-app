@@ -4,21 +4,21 @@ import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
 import 'package:medbridge/src/features/diagnosis/presentation/diagnosis_controller_provider.dart';
 
-class QuestionContainer extends ConsumerStatefulWidget {
+class NormalQuestionContainer extends ConsumerStatefulWidget {
   final String symptom;
   final String question;
   final List<String> options;
-  const QuestionContainer(
+  const  NormalQuestionContainer(
       {super.key,
       required this.question,
       required this.options,
       required this.symptom});
 
   @override
-  ConsumerState<QuestionContainer> createState() => _QuestionContainerState();
+  ConsumerState<NormalQuestionContainer> createState() => _NormalQuestionContainerState();
 }
 
-class _QuestionContainerState extends ConsumerState<QuestionContainer> {
+class _NormalQuestionContainerState extends ConsumerState<NormalQuestionContainer> {
   int? _value;
 
   @override

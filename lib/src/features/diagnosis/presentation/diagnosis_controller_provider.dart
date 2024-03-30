@@ -63,7 +63,7 @@ class DiagnosisController extends StateNotifier<Diagnosis> {
       case 'concentration':
         state = state.copyWith(concentration: option);
         break;
-      case 'optimisim':
+      case 'optimism':
         state = state.copyWith(optimisim: option);
         break;
       default:

@@ -1,32 +1,32 @@
 List screen_1 = [
   {
     "symptom": "sadness",
-    "question": "1.Experience feelings of sadness or low mood",
+    "question": "Experience feelings of sadness or low mood",
     "options": ["Usually", "Sometimes", "Seldom","Most-Often", "Never"]
   },
   {
     "symptom": "exhausted",
-    "question": "2.Feeling drained of energy, physically and mentally",
+    "question": "Feeling drained of energy, physically and mentally",
     "options":  ["Usually", "Sometimes", "Seldom","Most-Often", "Never"]
   },
   {
     "symptom": "mood_swing",
-    "question": "3.Experience sudden and dramatic changes in your mood",
+    "question": "Experience sudden and dramatic changes in your mood",
     "options": ["YES", "NO"]
   },
   {
     "symptom": "authority_respect",
-    "question": "4.Generally respect and obey rules set by authority figures",
+    "question": "Generally respect and obey rules set by authority figures",
     "options": ["YES", "NO"]
   },
   {
     "symptom": "try_explanation",
-    "question": "5.Typically try to explain your actions or behavior to others",
+    "question": "Typically try to explain your actions or behavior to others",
     "options": ["YES", "NO"]
   },
   {
     "symptom": "aggressive_response",
-    "question": "6.Often react angrily or aggressively towards others",
+    "question": "Often react angrily or aggressively towards others",
     "options": ["YES", "NO"]
   },
 ];
@@ -35,28 +35,28 @@ List screen_2 = [
   {
     "symptom": "ignore_and_move_on",
     "question":
-        "1.Tend to avoid or ignore problems instead of dealing with them directly",
+        "Tend to avoid or ignore problems instead of dealing with them directly",
     "options": ["YES", "NO"]
   },
   {
     "symptom": "euphoric",
-    "question": "2.How often have you felt overly excited or unusually energetic",
+    "question": "How often have you felt overly excited or unusually energetic",
     "options":  ["Usually", "Sometimes", "Seldom","Most-Often", "Never"]
   },
   {
     "symptom": "sleep_dissorder",
-    "question": "3.Experience difficulty sleeping or staying asleep",
+    "question": "Experience difficulty sleeping or staying asleep",
     "options":  ["Usually", "Sometimes", "Seldom","Most-Often", "Never"]
   },
   {
     "symptom": "anorxia",
-    "question": "4.Often have concerns about your weight or eating habits",
+    "question": "Often have concerns about your weight or eating habits",
     "options": ["YES", "NO"]
   },
   {
-    "symptom": "nervous_breakdown",
+    "symptom": "nervous_break_down",
     "question":
-        "5.Ever experienced a nervous breakdown or overwhelming emotional episode",
+        "Ever experienced a nervous breakdown or overwhelming emotional episode",
     "options": ["YES", "NO"]
   },
 ];
@@ -64,18 +64,18 @@ List screen_2 = [
 List screen_3 = [
   {
     "symptom": "suicidal_thoughts",
-    "question": "1.Often consider harming yourself or ending your life",
+    "question": "Often consider harming yourself or ending your life",
     "options": ["YES", "NO"]
   },
   {
     "symptom": "admit_mistakes",
-    "question": "2.Have difficulty admitting when you're wrong",
+    "question": "Have difficulty admitting when you're wrong",
     "options": ["YES", "NO"]
   },
   {
-    "symptom": "over_thinking",
+    "symptom": "overthinking",
     "question":
-        "3.Find yourself dwelling on negative thoughts or worries excessively",
+        "Find yourself dwelling on negative thoughts or worries excessively",
     "options": ["YES", "NO"]
   },
 ];
@@ -83,15 +83,15 @@ List screen_3 = [
 List scaled = [
   {
     "symptom": "sexual_activity",
-    "question": "1.How frequently do you engage in sexual activity",
+    "question": "How frequently do you engage in sexual activity (Select from scale)",
   },
   {
     "symptom": "concentration",
     "question":
-        "2.How well are you able to focus on a task without getting distracted",
+        "How well are you able to focus on a task without getting distracted (Select from scale)",
   },
   {
     "symptom": "optimism",
-    "question": "3.How optmistic are you",
+    "question": "How optmistic are you (Select from scale)",
   },
 ];
