@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/common_widgets/app_logo.dart';
+import 'package:medbridge/src/common_widgets/custom_snackbar.dart';
 import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
@@ -136,10 +137,15 @@ class _Screen3State extends ConsumerState<Screen3> {
                 padding: const EdgeInsets.only(
                     top: 30, bottom: 30, right: 20, left: 20),
                 child: MainButton(
-                    text: "Next",
+                    text: "See Results",
                     onpressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Results()));
+                      if (currentDiagnosisState.getProgress().round() < 100) {
+                        CustomSnackBar.show(
+                            context, "Missed some fields", true);
+                      } else {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Results()));
+                      }
                     }),
               ),
             )
