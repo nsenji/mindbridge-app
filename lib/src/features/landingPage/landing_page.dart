@@ -25,7 +25,6 @@ class _LandingState extends State<Landing> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisSize: MainAxisSize.max,
         children: [
-          // H(h: 10),
           Padding(
             padding: const EdgeInsets.only(top: 10),
             child: Container(
@@ -118,7 +117,7 @@ class _LandingState extends State<Landing> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                     child: OutButton(
-                      text: "Talk To a Specialist",
+                      text: "Talk To a Professional",
                       onpressed: () {},
                     ),
                   ),
