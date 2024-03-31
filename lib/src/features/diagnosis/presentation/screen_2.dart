@@ -1,27 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/common_widgets/app_logo.dart';
 import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
 import 'package:medbridge/src/features/diagnosis/data/questions.dart';
+import 'package:medbridge/src/features/diagnosis/presentation/diagnosis_controller_provider.dart';
 import 'package:medbridge/src/features/diagnosis/presentation/normal_question_container.dart';
 import 'package:medbridge/src/features/diagnosis/presentation/scaled_question_container.dart';
 import 'package:medbridge/src/features/diagnosis/presentation/screen_3.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
-class Screen2 extends StatefulWidget {
+class Screen2 extends ConsumerStatefulWidget {
   const Screen2({super.key});
 
   @override
-  State<Screen2> createState() => _Screen2State();
+  ConsumerState<Screen2> createState() => _Screen2State();
 }
 
-class _Screen2State extends State<Screen2> {
+class _Screen2State extends ConsumerState<Screen2> {
   List screen2List = screen_2;
 
   @override
   Widget build(BuildContext context) {
+    var currentDiagnosisState = ref.watch(diagnosisControllerProvider);
+
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
@@ -31,6 +36,26 @@ class _Screen2State extends State<Screen2> {
               scrolledUnderElevation: 0,
               automaticallyImplyLeading: false,
               title: AppLogo(),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 17),
+                  child: CircularPercentIndicator(
+                    radius: 23.0,
+                    lineWidth: 6.5,
+                    // animation: true,
+                    percent:
+                        currentDiagnosisState.getProgress().roundToDouble() /
+                            100,
+                    center: new Text(
+                      "${currentDiagnosisState.getProgress().round().toString()}%",
+                      style: new TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 14.5),
+                    ),
+                    circularStrokeCap: CircularStrokeCap.round,
+                    progressColor: Color.fromARGB(255, 8, 33, 99),
+                  ),
+                ),
+              ],
             ),
             SliverToBoxAdapter(
               child: Padding(
@@ -93,9 +118,8 @@ class _Screen2State extends State<Screen2> {
               child: Padding(
                 padding: EdgeInsets.only(bottom: 20, right: 10, left: 10),
                 child: ScaledQuestionContainer(
-                  symptom: "optimism",
+                    symptom: "optimism",
                     question: "How optmistic are you  (Select from scale)"),
-                    
               ),
             ),
             SliverToBoxAdapter(

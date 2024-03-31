@@ -1,27 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/common_widgets/app_logo.dart';
 import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
 import 'package:medbridge/src/features/diagnosis/data/questions.dart';
+import 'package:medbridge/src/features/diagnosis/presentation/diagnosis_controller_provider.dart';
 import 'package:medbridge/src/features/diagnosis/presentation/normal_question_container.dart';
 import 'package:medbridge/src/features/diagnosis/presentation/results.dart';
 import 'package:medbridge/src/features/diagnosis/presentation/scaled_question_container.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 
-class Screen3 extends StatefulWidget {
+class Screen3 extends ConsumerStatefulWidget {
   const Screen3({super.key});
 
   @override
-  State<Screen3> createState() => _Screen3State();
+  ConsumerState<Screen3> createState() => _Screen3State();
 }
 
-class _Screen3State extends State<Screen3> {
+class _Screen3State extends ConsumerState<Screen3> {
   List screen3List = screen_3;
 
   @override
   Widget build(BuildContext context) {
+    var currentDiagnosisState = ref.watch(diagnosisControllerProvider);
+
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
@@ -31,6 +36,26 @@ class _Screen3State extends State<Screen3> {
               scrolledUnderElevation: 0,
               automaticallyImplyLeading: false,
               title: AppLogo(),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 17),
+                  child: CircularPercentIndicator(
+                    radius: 23.0,
+                    lineWidth: 6.5,
+                    // animation: true,
+                    percent:
+                        currentDiagnosisState.getProgress().roundToDouble() /
+                            100,
+                    center: new Text(
+                      "${currentDiagnosisState.getProgress().round().toString()}%",
+                      style: new TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 14),
+                    ),
+                    circularStrokeCap: CircularStrokeCap.round,
+                    progressColor: Color.fromARGB(255, 8, 33, 99),
+                  ),
+                ),
+              ],
             ),
             SliverToBoxAdapter(
               child: Padding(
@@ -89,19 +114,20 @@ class _Screen3State extends State<Screen3> {
                 );
               }),
             ),
-             SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.only(bottom: 20, right: 10, left: 10),
                 child: ScaledQuestionContainer(
-                  symptom: "concentration",
-                    question: "How well are you able to focus on a task without getting distracted (Select from scale)"),
+                    symptom: "concentration",
+                    question:
+                        "How well are you able to focus on a task without getting distracted (Select from scale)"),
               ),
             ),
-             SliverToBoxAdapter(
+            SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.only(bottom: 20, right: 10, left: 10),
                 child: ScaledQuestionContainer(
-                  symptom: "sexual_activity",
+                    symptom: "sexual_activity",
                     question: "How optmistic are you (Select from scale)"),
               ),
             ),
