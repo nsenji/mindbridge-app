@@ -7,8 +7,6 @@ import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/outlined_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
-import 'package:medbridge/src/features/diagnosis/presentation/diagnosis_controller_provider.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class Results extends ConsumerStatefulWidget {
   const Results({super.key});
@@ -20,7 +18,7 @@ class Results extends ConsumerStatefulWidget {
 class _ResultsState extends ConsumerState<Results> {
   @override
   Widget build(BuildContext context) {
-    var currentDiagnosisState = ref.watch(diagnosisControllerProvider);
+    // var currentDiagnosisState = ref.watch(diagnosisControllerProvider);
     return Scaffold(
         appBar: AppBar(
           scrolledUnderElevation: 0,

@@ -3,7 +3,6 @@ import 'package:medbridge/src/features/Doctors/presentation/select_doctor.dart';
 import 'package:medbridge/src/features/appointments/presentation/new_appointments.dart';
 import 'package:medbridge/src/features/history/presentation/history_screen.dart';
 import 'package:medbridge/src/features/navbar/navbar_icons.dart';
-import 'package:medbridge/src/features/profile/presentation/profile_screen.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -53,7 +52,7 @@ class _NavBarState extends State<NavBar> {
             unselectedIconTheme: IconThemeData(color: theme.disabledColor),
             items: [
               BottomNavigationBarItem(
-                  label: "Doctors",
+                  label: "Therapist",
                   icon: Padding(
                     padding: const EdgeInsets.only(top: 0),
                     child: BarIcon(
