@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
+import 'package:medbridge/src/features/doctors/presentation/summary_card.dart';
+import 'package:medbridge/src/features/navbar/navbar.dart';
 
 class ConfirmAppointment extends StatefulWidget {
   const ConfirmAppointment({super.key});
@@ -11,6 +13,8 @@ class ConfirmAppointment extends StatefulWidget {
 }
 
 class _ConfirmAppointmentState extends State<ConfirmAppointment> {
+  bool donePayment = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,74 +33,60 @@ class _ConfirmAppointmentState extends State<ConfirmAppointment> {
         padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
         child: Column(
           children: [
-            Column(
-              children: [
-                Container(
-                  width: double.maxFinite,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(6),
-                          topRight: Radius.circular(6)),
-                      color: Color.fromARGB(255, 223, 230, 248)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextCustom(
-                          text: "Virtual Session",
-                          isBold: true,
-                          color: Color.fromARGB(255, 8, 33, 99),
-                        ),
-                        TextCustom(
-                          text: "Dr Frank James",
-                          isBold: true,
-                        ),
-                        H(h: 10),
-                        TextCustom(
-                          text: "22nd Wed, June 2024",
-                          size: 15,
-                        ),
-                        TextCustom(
-                          text: "9:42AM - 10:41AM",
-                          size: 15,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(6),
-                          bottomRight: Radius.circular(6)),
-                      color: Color.fromARGB(255, 8, 33, 99)),
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        left: 10, right: 10, top: 15, bottom: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextCustom(
-                          text: "Rate",
-                          color: Colors.white,
-                        ),
-                        TextCustom(
-                          text: "Ugx 45000",
-                          color: Colors.white,
-                        )
-                      ],
-                    ),
-                  ),
-                )
-              ],
+            SummaryCard(
+              checkmark: donePayment,
             ),
+            H(h: 20),
+            donePayment
+                ? Container(
+                    width: double.maxFinite,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                        border: Border.all(
+                            color: Color.fromARGB(255, 30, 153, 34))),
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          top: 10, left: 10, right: 10, bottom: 10),
+                      child: Column(
+                        children: [
+                          TextCustom(
+                            text:
+                                "A virtual meeting with Dr Frank James has been scheduled.",
+                            isBold: true,
+                          ),
+                          H(h: 10),
+                          TextCustom(
+                            text:
+                                "A call ID will be sent to your email when the medic begins the call.",
+                            size: 15,
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                : SizedBox(),
             Spacer(),
             Padding(
               padding: const EdgeInsets.only(
                 bottom: 30,
               ),
-              child: MainButton(text: "Process payment", onpressed: () {}),
+              child: MainButton(
+                  text: donePayment ? "Done" : "Process payment",
+                  onpressed: () {
+                    !donePayment
+                        ? setState(() {
+                            donePayment = true;
+                          })
+                        : setState(() {
+                            Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (context) => const NavBar()),
+                              (Route<dynamic> route) =>
+                                  false, // Remove all routes from the stack
+                            );
+                          });
+                    ;
+                  }),
             )
           ],
         ),

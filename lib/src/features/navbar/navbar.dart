@@ -44,7 +44,7 @@ class _NavBarState extends State<NavBar> {
             onTap: onTap,
             elevation: 0,
             showSelectedLabels: true,
-            showUnselectedLabels: false,
+            showUnselectedLabels: true,
             selectedItemColor: Color.fromARGB(255, 8, 33, 99),
             // unselectedItemColor: theme.disabledColor,
             selectedIconTheme:
