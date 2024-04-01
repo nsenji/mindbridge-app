@@ -34,7 +34,7 @@ class _SelectDoctorsState extends State<SelectDoctors> {
             SliverToBoxAdapter(
                 child: Padding(
               padding: const EdgeInsets.only(
-                  left: 10, right: 10, top: 10, bottom: 30),
+                  left: 10, right: 10, top: 10, bottom: 10),
               child: TextFieldWidget(
                   controller: _searchContoller,
                   label: "Search for therapist",
