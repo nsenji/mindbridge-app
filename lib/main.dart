@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/features/diagnosis/presentation/results.dart';
 import 'package:medbridge/src/features/landingPage/landing_page.dart';
+import 'package:medbridge/src/features/navbar/navbar.dart';
 
 import 'package:medbridge/src/utils/custom_theme.dart';
 
@@ -27,8 +28,8 @@ class MyApp extends StatelessWidget {
           primaryColor: Color.fromARGB(255, 8, 33, 99),
           fontFamily: "Roboto",
           textTheme: textThemelight(context)),
-      home: Results(),
-      
+      home: NavBar(),
     );
   }
 }
+
