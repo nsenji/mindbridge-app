@@ -27,7 +27,7 @@ class _OutButtonState extends State<OutButton> {
         elevation: 1,
         child: Container(
             decoration: BoxDecoration(
-              border: Border.all(color: Constants.primaryColor, width: 1.5),
+              border: Border.all(color: Constants.primaryColor, width: 1),
               borderRadius: BorderRadius.circular(10),
             ),
             height: 50,

@@ -3,6 +3,7 @@ import 'package:medbridge/src/common_widgets/circle_avatar.dart';
 import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
+import 'package:medbridge/src/features/doctors/presentation/book_appointment.dart';
 
 class DoctorCard extends StatefulWidget {
   const DoctorCard({super.key});
@@ -34,7 +35,7 @@ class _DoctorCardState extends State<DoctorCard> {
             border: Border.all(color: Color.fromARGB(255, 198, 199, 201))),
         child: Padding(
           padding:
-              const EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 15),
+              const EdgeInsets.only(left: 10, right: 10, top: 15, bottom: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -104,7 +105,10 @@ class _DoctorCardState extends State<DoctorCard> {
                           size: 14,
                         ),
                         H(h: 15),
-                        MainButton(text: "Select", onpressed: () {})
+                        MainButton(text: "Select", onpressed: () {
+                          Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => BookAppointment()));
+                        })
                       ],
                     )
                   : SizedBox(),
