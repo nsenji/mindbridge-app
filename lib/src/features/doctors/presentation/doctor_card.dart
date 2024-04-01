@@ -54,7 +54,6 @@ class _DoctorCardState extends State<DoctorCard> {
                         size: 18,
                         isBold: true,
                       ),
-                      H(h: 10),
                       TextCustom(text: "Psychiatrist"),
                       TextCustom(text: "RayWay Clinic"),
                       H(h: 10),
@@ -105,10 +104,14 @@ class _DoctorCardState extends State<DoctorCard> {
                           size: 14,
                         ),
                         H(h: 15),
-                        MainButton(text: "Select", onpressed: () {
-                          Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => BookAppointment()));
-                        })
+                        MainButton(
+                            text: "Select",
+                            onpressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => BookAppointment()));
+                            })
                       ],
                     )
                   : SizedBox(),
