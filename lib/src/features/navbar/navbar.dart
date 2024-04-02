@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medbridge/src/features/Doctors/presentation/select_doctor.dart';
-import 'package:medbridge/src/features/appointments/presentation/new_appointments.dart';
+import 'package:medbridge/src/features/appointments/presentation/appointments_screen.dart';
 import 'package:medbridge/src/features/history/presentation/history_screen.dart';
 import 'package:medbridge/src/features/navbar/navbar_icons.dart';
 
@@ -24,7 +24,7 @@ class _NavBarState extends State<NavBar> {
     var theme = Theme.of(context);
     List pages = [
       const SelectDoctors(),
-      const NewAppointments(),
+      const AppointmentsScreen(),
       const HistoryScreen(),
     ];
     return Scaffold(

@@ -24,7 +24,7 @@ class _BookAppointmentState extends State<BookAppointment> {
         title: TextCustom(
           text: "Book an appointment",
           isBold: true,
-          size: 18,
+          size: 19,
           color: Color.fromARGB(255, 8, 33, 99),
         ),
       ),

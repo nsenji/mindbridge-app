@@ -32,7 +32,8 @@ class _DoctorCardState extends State<DoctorCard> {
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Color.fromARGB(255, 223, 230, 248))),
+            border: Border.all(
+                color: Color.fromARGB(255, 116, 124, 146), width: 0.5)),
         child: Padding(
           padding:
               const EdgeInsets.only(left: 10, right: 10, top: 15, bottom: 15),

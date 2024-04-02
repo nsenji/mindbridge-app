@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
 
 class ProfileWidget extends StatefulWidget {

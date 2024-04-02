@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:medbridge/src/common_widgets/circle_avatar.dart';
-import 'package:medbridge/src/common_widgets/outlined_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_field.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
@@ -31,7 +29,7 @@ class _SelectDoctorsState extends State<SelectDoctors> {
               title: TextCustom(
                 text: "Select Preferred Therapist",
                 isBold: true,
-                size: 18,
+                size: 19,
                 color: Color.fromARGB(255, 8, 33, 99),
               ),
               actions: [
@@ -81,7 +79,7 @@ class _SelectDoctorsState extends State<SelectDoctors> {
                                                 text:
                                                     "nsengiyumvavictor@gmail.com",
                                                 color: Color.fromARGB(
-                                                    255, 197, 197, 197),
+                                                    255, 122, 122, 122),
                                               ),
                                             ],
                                           ),
@@ -103,13 +101,6 @@ class _SelectDoctorsState extends State<SelectDoctors> {
                                     ),
                                   ),
                                 ),
-                                // H(h: 20),
-                                // Padding(
-                                //   padding: const EdgeInsets.only(
-                                //       left: 10, right: 10),
-                                //   child: OutButton(
-                                //       text: "Logout", onpressed: () {}),
-                                // )
                               ],
                             ),
                           );

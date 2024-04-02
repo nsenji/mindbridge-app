@@ -25,7 +25,7 @@ class _ConfirmAppointmentState extends State<ConfirmAppointment> {
         title: TextCustom(
           text: "Appointment Summary",
           isBold: true,
-          size: 18,
+          size: 19,
           color: Color.fromARGB(255, 8, 33, 99),
         ),
       ),
