@@ -39,7 +39,7 @@ class _NavBarState extends State<NavBar> {
             // unselectedLabelStyle: theme.textTheme.displaySmall,
             // selectedLabelStyle: theme.textTheme.displaySmall,
             type: BottomNavigationBarType.fixed,
-            backgroundColor: const Color.fromARGB(255, 240, 240, 240),
+            backgroundColor: Color.fromARGB(255, 227, 232, 245),
             currentIndex: nowIndex,
             onTap: onTap,
             elevation: 0,

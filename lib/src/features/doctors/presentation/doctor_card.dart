@@ -30,9 +30,9 @@ class _DoctorCardState extends State<DoctorCard> {
       child: Container(
         width: double.maxFinite,
         decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 243, 243, 243),
+            color: Colors.white,
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: Color.fromARGB(255, 198, 199, 201))),
+            border: Border.all(color: Color.fromARGB(255, 223, 230, 248))),
         child: Padding(
           padding:
               const EdgeInsets.only(left: 10, right: 10, top: 15, bottom: 15),
@@ -53,6 +53,7 @@ class _DoctorCardState extends State<DoctorCard> {
                         text: "Dr Frank James",
                         size: 18,
                         isBold: true,
+                        color: Color.fromARGB(255, 8, 33, 99),
                       ),
                       TextCustom(text: "Psychiatrist"),
                       TextCustom(text: "RayWay Clinic"),
