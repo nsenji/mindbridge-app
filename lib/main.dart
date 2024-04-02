@@ -26,11 +26,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'MindBridge',
       theme: ThemeData(
+          useMaterial3: true,
           primaryColor: Color.fromARGB(255, 8, 33, 99),
           fontFamily: "Roboto",
           textTheme: textThemelight(context)),
-      home: LayoutTest(),
+      home: NavBar(),
     );
   }
 }
-

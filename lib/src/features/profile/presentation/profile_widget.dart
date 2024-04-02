@@ -17,16 +17,16 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           borderRadius: BorderRadius.circular(20),
           border: Border.all(color: Color.fromARGB(255, 8, 33, 99))),
       child: Padding(
-        padding: const EdgeInsets.only(left: 1, right: 10, bottom: 5, top: 5),
+        padding: const EdgeInsets.only(left: 1, right: 6, bottom: 5, top: 5),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
               Icons.keyboard_arrow_down,
-              size: 30,
+              size: 21,
             ),
             CircleAvatar(
-              radius: 18,
+              radius: 12,
               child: TextCustom(
                 text: "V",
                 color: Colors.white,
