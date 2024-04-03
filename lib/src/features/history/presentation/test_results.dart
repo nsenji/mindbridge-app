@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
+import 'package:medbridge/src/features/history/data/all_questions.dart';
 
 class TestResults extends StatefulWidget {
   const TestResults({super.key});
@@ -10,6 +11,8 @@ class TestResults extends StatefulWidget {
 }
 
 class _TestResultsState extends State<TestResults> {
+  List allQuestionsList = all_questions;
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -37,7 +40,8 @@ class _TestResultsState extends State<TestResults> {
                               slivers: [
                                 SliverList(
                                   delegate: SliverChildBuilderDelegate(
-                                      childCount: 5, (context, index) {
+                                      childCount: allQuestionsList.length,
+                                      (context, index) {
                                     return Padding(
                                         padding:
                                             const EdgeInsets.only(bottom: 15),
@@ -46,7 +50,9 @@ class _TestResultsState extends State<TestResults> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              TextCustom(text: "text"),
+                                              TextCustom(
+                                                  text: allQuestionsList[index]
+                                                      ["question"]),
                                               TextCustom(
                                                   text: "MOST-OFTEN",
                                                   color: Color.fromARGB(
