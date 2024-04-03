@@ -123,11 +123,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
           ),
           body: TabBarView(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                    left: 10, right: 10, bottom: 10, top: 10),
-                child: TestResults(),
-              ),
+              TestResults(),
               Center(
                 child: Text("receipts"),
               )

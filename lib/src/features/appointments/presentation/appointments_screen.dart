@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
 import 'package:medbridge/src/features/appointments/presentation/appointment_card.dart';
-import 'package:medbridge/src/features/doctors/presentation/doctor_card.dart';
 import 'package:medbridge/src/features/profile/presentation/profile_widget.dart';
 
 class AppointmentsScreen extends StatefulWidget {
