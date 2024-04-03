@@ -35,17 +35,17 @@ class _AppointmentCardState extends State<AppointmentCard> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           TextCustom(
-                              size: 18,
+                              size: 17.5,
                               text: "Dr Frank James",
                               isBold: true,
                               color: Color.fromARGB(255, 8, 33, 99)),
                           TextCustom(
-                            size: 15,
+                            size: 14,
                             text: "Wed, 23 June 2024",
                             color: Colors.black,
                           ),
                           TextCustom(
-                            size: 15,
+                            size: 13,
                             text: "9:12 AM (60 min)",
                             color: Colors.black,
                           ),
