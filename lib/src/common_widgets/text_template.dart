@@ -5,9 +5,11 @@ class TextCustom extends StatelessWidget {
   final double size;
   final bool isBold;
   final Color color;
+  final bool overflow;
 
   const TextCustom(
       {super.key,
+      this.overflow = false,
       required this.text,
       this.color = const Color.fromARGB(255, 54, 54, 54),
       this.isBold = false,
@@ -20,7 +22,8 @@ class TextCustom extends StatelessWidget {
       style: TextStyle(
           fontSize: size,
           fontWeight: isBold ? FontWeight.bold : null,
-          color: color),
+          color: color,
+          overflow: overflow ? TextOverflow.ellipsis : null),
     );
   }
 }

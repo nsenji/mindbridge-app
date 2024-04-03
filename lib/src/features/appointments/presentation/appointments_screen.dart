@@ -124,7 +124,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
             delegate:
                 SliverChildBuilderDelegate(childCount: 3, (context, index) {
               return Padding(
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 20),
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
                 child: AppointmentCard(
                   ready: status[index],
                 ),

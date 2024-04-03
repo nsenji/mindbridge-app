@@ -17,7 +17,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          color: Color.fromARGB(255, 245, 242, 242)),
+          color: Color.fromARGB(255, 214, 223, 238)),
       width: double.maxFinite,
       child: Row(
         mainAxisSize: MainAxisSize.max,

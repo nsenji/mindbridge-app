@@ -6,6 +6,7 @@ class Constants {
   // colors
   static Color primaryColor = Color.fromARGB(255, 8, 33, 99);
   static Color secColor = Color.fromARGB(255, 223, 230, 248);
+  static Color bottomNavbarAndSomeContainers = Color.fromARGB(255, 214, 223, 238);
 
   // text-color
   static Color textDark = const Color.fromARGB(255, 54, 54, 54);

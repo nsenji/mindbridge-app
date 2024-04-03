@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
+import 'package:medbridge/src/features/history/presentation/test_results.dart';
 import 'package:medbridge/src/features/profile/presentation/profile_widget.dart';
 
 class HistoryScreen extends StatefulWidget {
@@ -122,8 +123,10 @@ class _HistoryScreenState extends State<HistoryScreen> {
           ),
           body: TabBarView(
             children: [
-              Center(
-                child: Text("test results"),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 10, right: 10, bottom: 10, top: 10),
+                child: TestResults(),
               ),
               Center(
                 child: Text("receipts"),
