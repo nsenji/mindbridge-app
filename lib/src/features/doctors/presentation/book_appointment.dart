@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/common_widgets/circle_avatar.dart';
 import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
 import 'package:medbridge/src/features/doctors/data/date_time_data.dart';
 import 'package:medbridge/src/features/doctors/presentation/confirm_appointment.dart';
+import 'package:medbridge/src/features/doctors/presentation/time_slots_controller.dart';
 
-class BookAppointment extends StatefulWidget {
+class BookAppointment extends ConsumerStatefulWidget {
   const BookAppointment({super.key});
 
   @override
-  State<BookAppointment> createState() => _BookAppointmentState();
+  ConsumerState<BookAppointment> createState() => _BookAppointmentState();
 }
 
-class _BookAppointmentState extends State<BookAppointment> {
+class _BookAppointmentState extends ConsumerState<BookAppointment> {
   int? _value;
+  int? _time_value;
 
   @override
   Widget build(BuildContext context) {
+    List timeslotsProvider = ref.watch(timeslotsControllerProvider);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -140,6 +145,9 @@ class _BookAppointmentState extends State<BookAppointment> {
                           onSelected: (bool selected) {
                             setState(() {
                               _value = selected ? index : null;
+                              ref
+                                  .read(timeslotsControllerProvider.notifier)
+                                  .setList(selected? dateTime[index]["time_slots"]:[]);
                             });
                           },
                         ),
@@ -147,6 +155,58 @@ class _BookAppointmentState extends State<BookAppointment> {
                     },
                   ).toList(),
                 )),
+          ),
+          !timeslotsProvider.isEmpty ? Padding(
+            padding:
+                const EdgeInsets.only(left: 10, right: 10, top: 30, bottom: 0),
+            child: TextCustom(text: "Select time"),
+          ):SizedBox(),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 5, 10, 0),
+            child: Container(
+              child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Wrap(
+                    spacing: 5,
+                    children: List<Widget>.generate(
+                      timeslotsProvider.length,
+                      (int index) {
+                        return Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                          child: ChoiceChip(
+                            padding: EdgeInsets.fromLTRB(8, 7, 8, 7),
+                            backgroundColor: Color.fromARGB(255, 223, 230, 248),
+                            labelStyle: TextStyle(
+                              color: _time_value == index
+                                  ? Colors.white
+                                  : Color.fromARGB(255, 8, 33, 99),
+                            ),
+                            selectedColor: Color.fromARGB(255, 8, 33, 99),
+                            disabledColor: Color.fromARGB(255, 223, 230, 248),
+                            labelPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            side: BorderSide(
+                                color: Color.fromARGB(255, 149, 172, 230)),
+                            showCheckmark: false,
+                            label: ConstrainedBox(
+                              constraints: BoxConstraints(minWidth: 100),
+                              child: Text(
+                                timeslotsProvider[index],
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            selected: _time_value == index,
+                            onSelected: (bool selected) {
+                              setState(() {
+                                _time_value = selected ? index : null;
+                              });
+                            },
+                          ),
+                        );
+                      },
+                    ).toList(),
+                  )),
+            ),
           ),
           Spacer(),
           Padding(

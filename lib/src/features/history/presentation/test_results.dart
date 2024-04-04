@@ -26,13 +26,16 @@ class _TestResultsState extends State<TestResults> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                          backgroundColor: Color.fromARGB(255, 214, 223, 238),
+                          backgroundColor: Colors.white,
                           scrollable: true,
                           title: TextCustom(
-                            text: "Responses",
-                            color: Color.fromARGB(255, 8, 33, 99),
+                            size: 17,
+                            text: "Progressive Depressive Dissorder",
                             isBold: true,
+                            color: Color.fromARGB(255, 8, 33, 99),
+                            overflow: true,
                           ),
+                          
                           content: SizedBox(
                             height: 500,
                             width: 300,
@@ -144,12 +147,14 @@ class _TestResultsState extends State<TestResults> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                          backgroundColor: Color.fromARGB(255, 214, 223, 238),
+                          backgroundColor: Colors.white,
                           scrollable: true,
                           title: TextCustom(
-                            text: "Responses",
-                            color: Color.fromARGB(255, 8, 33, 99),
+                            size: 17,
+                            text: "Progressive Depressive Dissorder",
                             isBold: true,
+                            color: Color.fromARGB(255, 8, 33, 99),
+                            overflow: true,
                           ),
                           content: SizedBox(
                             height: 500,
@@ -261,12 +266,14 @@ class _TestResultsState extends State<TestResults> {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                          backgroundColor: Color.fromARGB(255, 214, 223, 238),
+                          backgroundColor: Colors.white,
                           scrollable: true,
                           title: TextCustom(
-                            text: "Responses",
-                            color: Color.fromARGB(255, 8, 33, 99),
+                            size: 17,
+                            text: "Progressive Depressive Dissorder",
                             isBold: true,
+                            color: Color.fromARGB(255, 8, 33, 99),
+                            overflow: true,
                           ),
                           content: SizedBox(
                             height: 500,

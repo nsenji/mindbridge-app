@@ -18,13 +18,7 @@ List dateTime = [
     "day": "12",
     "month": "Apr",
     "year": "2024",
-    "time_slots": [
-      "10:00 AM",
-      "2:00 PM",
-      "4:00 PM",
-      "6:00 PM",
-      "8:00 PM"
-    ]
+    "time_slots": ["10:00 AM", "2:00 PM", "4:00 PM", "6:00 PM", "8:00 PM"]
   },
   {
     "dayName": "FRI",
@@ -59,13 +53,7 @@ List dateTime = [
     "day": "16",
     "month": "Apr",
     "year": "2024",
-    "time_slots": [
-      "9:30 AM",
-      "11:30 AM",
-      "3:30 PM",
-      "5:30 PM",
-      "7:30 PM"
-    ]
+    "time_slots": ["9:30 AM", "11:30 AM", "3:30 PM", "5:30 PM", "7:30 PM"]
   },
   {
     "dayName": "TUE",
@@ -85,13 +73,7 @@ List dateTime = [
     "day": "18",
     "month": "Apr",
     "year": "2024",
-    "time_slots": [
-      "9:45 AM",
-      "11:45 AM",
-      "1:45 PM",
-      "3:45 PM",
-      "7:45 PM"
-    ]
+    "time_slots": ["9:45 AM", "11:45 AM", "1:45 PM", "3:45 PM", "7:45 PM"]
   },
   {
     "dayName": "THU",
@@ -121,4 +103,14 @@ List dateTime = [
       "7:15 PM"
     ]
   }
+];
+
+List example_timeslots = [
+  "9:15 AM",
+  "11:15 AM",
+  "1:15 PM",
+  "3:15 PM",
+  "5:15 PM",
+  "7:15 PM",
+  
 ];
