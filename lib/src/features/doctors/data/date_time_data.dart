@@ -2,7 +2,7 @@ List dateTime = [
   {
     "dayName": "WED",
     "day": "11",
-    "month": "mar",
+    "month": "Apr",
     "year": "2024",
     "time_slots": [
       "9:30 AM",
@@ -16,7 +16,7 @@ List dateTime = [
   {
     "dayName": "THU",
     "day": "12",
-    "month": "mar",
+    "month": "Apr",
     "year": "2024",
     "time_slots": [
       "10:00 AM",
@@ -29,7 +29,7 @@ List dateTime = [
   {
     "dayName": "FRI",
     "day": "13",
-    "month": "mar",
+    "month": "Apr",
     "year": "2024",
     "time_slots": [
       "9:45 AM",
@@ -43,7 +43,7 @@ List dateTime = [
   {
     "dayName": "SAT",
     "day": "14",
-    "month": "mar",
+    "month": "Apr",
     "year": "2024",
     "time_slots": [
       "10:30 AM",
@@ -57,7 +57,7 @@ List dateTime = [
   {
     "dayName": "MON",
     "day": "16",
-    "month": "mar",
+    "month": "Apr",
     "year": "2024",
     "time_slots": [
       "9:30 AM",
@@ -70,7 +70,7 @@ List dateTime = [
   {
     "dayName": "TUE",
     "day": "17",
-    "month": "mar",
+    "month": "Apr",
     "year": "2024",
     "time_slots": [
       "10:15 AM",
@@ -83,7 +83,7 @@ List dateTime = [
   {
     "dayName": "WED",
     "day": "18",
-    "month": "mar",
+    "month": "Apr",
     "year": "2024",
     "time_slots": [
       "9:45 AM",
@@ -96,7 +96,7 @@ List dateTime = [
   {
     "dayName": "THU",
     "day": "19",
-    "month": "mar",
+    "month": "Apr",
     "year": "2024",
     "time_slots": [
       "10:30 AM",
@@ -110,7 +110,7 @@ List dateTime = [
   {
     "dayName": "FRI",
     "day": "20",
-    "month": "mar",
+    "month": "Apr",
     "year": "2024",
     "time_slots": [
       "9:15 AM",

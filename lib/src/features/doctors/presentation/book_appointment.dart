@@ -3,6 +3,7 @@ import 'package:medbridge/src/common_widgets/circle_avatar.dart';
 import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
+import 'package:medbridge/src/features/doctors/data/date_time_data.dart';
 import 'package:medbridge/src/features/doctors/presentation/confirm_appointment.dart';
 
 class BookAppointment extends StatefulWidget {
@@ -13,6 +14,8 @@ class BookAppointment extends StatefulWidget {
 }
 
 class _BookAppointmentState extends State<BookAppointment> {
+  int? _value;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,7 +84,69 @@ class _BookAppointmentState extends State<BookAppointment> {
           Padding(
             padding:
                 const EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 0),
-            child: TextCustom(text: "Select date and time"),
+            child: TextCustom(text: "Select date"),
+          ),
+          Container(
+            child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: List<Widget>.generate(
+                    dateTime.length,
+                    (int index) {
+                      return Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
+                        child: ChoiceChip(
+                          padding: EdgeInsets.fromLTRB(5, 3, 5, 3),
+                          backgroundColor: Color.fromARGB(255, 223, 230, 248),
+                          labelStyle: TextStyle(
+                            color: _value == index
+                                ? Colors.white
+                                : Color.fromARGB(255, 8, 33, 99),
+                          ),
+                          selectedColor: Color.fromARGB(255, 8, 33, 99),
+                          disabledColor: Color.fromARGB(255, 223, 230, 248),
+                          labelPadding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                          // shape: RoundedRectangleBorder(
+                          //     borderRadius: BorderRadiusDirectional.circular(50)),
+                          side: BorderSide(
+                              color: Color.fromARGB(255, 149, 172, 230)),
+                          showCheckmark: false,
+                          label: ConstrainedBox(
+                              constraints:
+                                  BoxConstraints(minWidth: 50, maxWidth: 60),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(dateTime[index]["month"]),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 5, bottom: 5),
+                                    child: Text(
+                                      dateTime[index]["day"],
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 22),
+                                    ),
+                                  ),
+                                  Text(
+                                    dateTime[index]["dayName"],
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17),
+                                  )
+                                ],
+                              )),
+                          selected: _value == index,
+                          onSelected: (bool selected) {
+                            setState(() {
+                              _value = selected ? index : null;
+                            });
+                          },
+                        ),
+                      );
+                    },
+                  ).toList(),
+                )),
           ),
           Spacer(),
           Padding(
