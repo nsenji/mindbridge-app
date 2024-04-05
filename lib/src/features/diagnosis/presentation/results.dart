@@ -11,7 +11,8 @@ import 'package:medbridge/src/features/diagnosis/presentation/screen_1.dart';
 import 'package:medbridge/src/features/navbar/navbar.dart';
 
 class Results extends ConsumerStatefulWidget {
-  const Results({super.key});
+  final String results;
+  const Results({super.key, required this.results});
 
   @override
   ConsumerState<Results> createState() => _ResultsState();
@@ -46,11 +47,11 @@ class _ResultsState extends ConsumerState<Results> {
                         text: "Your Results",
                         color: Colors.white,
                       ),
-                      H(h: 20),
+                      H(h: 15),
                       SizedBox(
                         width: 300,
                         child: TextCustom(
-                          text: "Major Depressive Dissorder",
+                          text: widget.results,
                           color: Colors.white,
                           isBold: true,
                           size: 30,
@@ -77,7 +78,7 @@ class _ResultsState extends ConsumerState<Results> {
                     children: [
                       TextCustom(
                         text:
-                            "Your test result suggests symptoms consistent with Major Depressive Disorder.",
+                            "Your test result suggests symptoms consistent with ${widget.results}",
                         isBold: true,
                       ),
                       H(h: 10),
@@ -95,24 +96,30 @@ class _ResultsState extends ConsumerState<Results> {
               padding: const EdgeInsets.only(left: 10, right: 10, bottom: 30),
               child: Column(
                 children: [
-                  MainButton(text: "Talk To a Professional", onpressed: () {
-                     Navigator.push(context,
+                  MainButton(
+                      text: "Talk To a Professional",
+                      onpressed: () {
+                        Navigator.push(context,
                             MaterialPageRoute(builder: (context) => NavBar()));
-                  }),
+                      }),
                   H(h: 15),
-                  OutButton(text: "Login To Save Results", onpressed: () {
-                     Navigator.push(context,
+                  OutButton(
+                      text: "Login To Save Results",
+                      onpressed: () {
+                        Navigator.push(context,
                             MaterialPageRoute(builder: (context) => NavBar()));
-                  }),
+                      }),
                   H(h: 15),
-                  OutButton(text: "Take Another Test", onpressed: () {
-                    Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (context) => const Screen1()),
-                              (Route<dynamic> route) =>
-                                  false, // Remove all routes from the stack
-                            );
-                  })
+                  OutButton(
+                      text: "Take Another Test",
+                      onpressed: () {
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                              builder: (context) => const Screen1()),
+                          (Route<dynamic> route) =>
+                              false, // Remove all routes from the stack
+                        );
+                      })
                 ],
               ),
             )

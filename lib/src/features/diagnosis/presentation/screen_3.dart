@@ -1,12 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/common_widgets/app_logo.dart';
 import 'package:medbridge/src/common_widgets/custom_snackbar.dart';
 import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
+import 'package:medbridge/src/features/diagnosis/data/diagnosis_repository.dart';
 import 'package:medbridge/src/features/diagnosis/data/questions.dart';
 import 'package:medbridge/src/features/diagnosis/presentation/diagnosis_controller_provider.dart';
 import 'package:medbridge/src/features/diagnosis/presentation/normal_question_container.dart';
@@ -22,6 +21,7 @@ class Screen3 extends ConsumerStatefulWidget {
 }
 
 class _Screen3State extends ConsumerState<Screen3> {
+  bool disabled = false;
   List screen3List = screen_3;
 
   @override
@@ -137,14 +137,34 @@ class _Screen3State extends ConsumerState<Screen3> {
                 padding: const EdgeInsets.only(
                     top: 30, bottom: 30, right: 20, left: 20),
                 child: MainButton(
+                    disabled: disabled,
                     text: "See Results",
-                    onpressed: () {
+                    onpressed: () async {
                       if (currentDiagnosisState.getProgress().round() < 100) {
                         CustomSnackBar.show(
                             context, "Missed some fields", true);
                       } else {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Results()));
+                        setState(() {
+                          disabled = true;
+                        });
+                        var resultValue = await ref.read(
+                            diagnosisResultsFutureProvider(
+                                    currentDiagnosisState.toMap())
+                                .future);
+
+                        if (resultValue != "Application Error") {
+                          setState(() {
+                            disabled = false;
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        Results(results: resultValue)));
+                          });
+                        } else {
+                          disabled = true;
+                          CustomSnackBar.show(context, "Results Error", true);
+                        }
                       }
                     }),
               ),
