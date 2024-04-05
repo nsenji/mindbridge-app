@@ -137,7 +137,7 @@ class _BookAppointmentState extends ConsumerState<BookAppointment> {
                                     dateTime[index]["dayName"],
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 17),
+                                        fontSize: 16),
                                   )
                                 ],
                               )),
@@ -147,7 +147,9 @@ class _BookAppointmentState extends ConsumerState<BookAppointment> {
                               _value = selected ? index : null;
                               ref
                                   .read(timeslotsControllerProvider.notifier)
-                                  .setList(selected? dateTime[index]["time_slots"]:[]);
+                                  .setList(selected
+                                      ? dateTime[index]["time_slots"]
+                                      : []);
                             });
                           },
                         ),
@@ -156,11 +158,13 @@ class _BookAppointmentState extends ConsumerState<BookAppointment> {
                   ).toList(),
                 )),
           ),
-          !timeslotsProvider.isEmpty ? Padding(
-            padding:
-                const EdgeInsets.only(left: 10, right: 10, top: 30, bottom: 0),
-            child: TextCustom(text: "Select time"),
-          ):SizedBox(),
+          !timeslotsProvider.isEmpty
+              ? Padding(
+                  padding: const EdgeInsets.only(
+                      left: 10, right: 10, top: 30, bottom: 0),
+                  child: TextCustom(text: "Select time"),
+                )
+              : SizedBox(),
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 5, 10, 0),
             child: Container(

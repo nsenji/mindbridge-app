@@ -7,6 +7,8 @@ import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/outlined_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
+import 'package:medbridge/src/features/diagnosis/presentation/screen_1.dart';
+import 'package:medbridge/src/features/navbar/navbar.dart';
 
 class Results extends ConsumerStatefulWidget {
   const Results({super.key});
@@ -93,11 +95,24 @@ class _ResultsState extends ConsumerState<Results> {
               padding: const EdgeInsets.only(left: 10, right: 10, bottom: 30),
               child: Column(
                 children: [
-                  MainButton(text: "Talk To a Professional", onpressed: () {}),
+                  MainButton(text: "Talk To a Professional", onpressed: () {
+                     Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => NavBar()));
+                  }),
                   H(h: 15),
-                  OutButton(text: "Login To Save Results", onpressed: () {}),
+                  OutButton(text: "Login To Save Results", onpressed: () {
+                     Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => NavBar()));
+                  }),
                   H(h: 15),
-                  OutButton(text: "Take Another Test", onpressed: () {})
+                  OutButton(text: "Take Another Test", onpressed: () {
+                    Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (context) => const Screen1()),
+                              (Route<dynamic> route) =>
+                                  false, // Remove all routes from the stack
+                            );
+                  })
                 ],
               ),
             )

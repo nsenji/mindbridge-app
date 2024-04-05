@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Color.fromARGB(255, 8, 33, 99),
           fontFamily: "Roboto",
           textTheme: textThemelight(context)),
-      home: NavBar(),
+      home: Landing(),
     );
   }
 }
