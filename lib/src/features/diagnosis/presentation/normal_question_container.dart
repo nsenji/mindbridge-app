@@ -8,17 +8,19 @@ class NormalQuestionContainer extends ConsumerStatefulWidget {
   final String symptom;
   final String question;
   final List<String> options;
-  const  NormalQuestionContainer(
+  const NormalQuestionContainer(
       {super.key,
       required this.question,
       required this.options,
       required this.symptom});
 
   @override
-  ConsumerState<NormalQuestionContainer> createState() => _NormalQuestionContainerState();
+  ConsumerState<NormalQuestionContainer> createState() =>
+      _NormalQuestionContainerState();
 }
 
-class _NormalQuestionContainerState extends ConsumerState<NormalQuestionContainer> {
+class _NormalQuestionContainerState
+    extends ConsumerState<NormalQuestionContainer> {
   int? _value;
 
   @override

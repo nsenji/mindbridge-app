@@ -162,8 +162,10 @@ class _Screen3State extends ConsumerState<Screen3> {
                                         Results(results: resultValue)));
                           });
                         } else {
-                          disabled = true;
                           CustomSnackBar.show(context, "Results Error", true);
+                          setState(() {
+                            disabled = false;
+                          });
                         }
                       }
                     }),

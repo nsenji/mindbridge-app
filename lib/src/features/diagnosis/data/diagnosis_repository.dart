@@ -9,9 +9,6 @@ class DiagnosisRepository {
         "https://medbridge-ml-pipeline.up.railway.app/predictdata", data);
 
     if (response != "Application Error") {
-      print("request returned");
-      print(response);
-      // print(response.runtimeType);
       return response;
     } else {
       return response;

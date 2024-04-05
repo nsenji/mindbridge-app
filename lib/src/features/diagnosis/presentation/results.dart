@@ -7,6 +7,7 @@ import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/outlined_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
+import 'package:medbridge/src/features/diagnosis/presentation/diagnosis_controller_provider.dart';
 import 'package:medbridge/src/features/diagnosis/presentation/screen_1.dart';
 import 'package:medbridge/src/features/navbar/navbar.dart';
 
@@ -113,6 +114,9 @@ class _ResultsState extends ConsumerState<Results> {
                   OutButton(
                       text: "Take Another Test",
                       onpressed: () {
+                        ref
+                            .read(diagnosisControllerProvider.notifier)
+                            .killDiagnosisState();
                         Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                               builder: (context) => const Screen1()),

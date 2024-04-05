@@ -6,7 +6,6 @@ class DiagnosisController extends StateNotifier<Diagnosis> {
       : super(Diagnosis("", "", "", "", "", "", "", "", "", "", "", "", "", "",
             "", "", ""));
 
-
   void updateDiagnosis(String option, String symptom) {
     String unique_option = option;
 
@@ -71,6 +70,11 @@ class DiagnosisController extends StateNotifier<Diagnosis> {
         print('Unknown symptom: $symptom');
         break;
     }
+  }
+
+  void killDiagnosisState() {
+    state = Diagnosis(
+        "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
   }
 }
 
