@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-Future<String> fetchData(String newUrl, Map<dynamic, dynamic> newData) async {
+Future<String> fetchDiagnosis(String newUrl, Map<dynamic, dynamic> newData) async {
   // const String baseUrl = '';
   String url = newUrl;
 

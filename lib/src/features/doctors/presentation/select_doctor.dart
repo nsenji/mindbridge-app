@@ -1,22 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_field.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
+import 'package:medbridge/src/features/doctors/data/all_doctors_repository.dart';
+import 'package:medbridge/src/features/doctors/presentation/all_doctors_controller.dart';
 import 'package:medbridge/src/features/doctors/presentation/doctor_card.dart';
 import 'package:medbridge/src/features/profile/presentation/profile_widget.dart';
 
-class SelectDoctors extends StatefulWidget {
+class SelectDoctors extends ConsumerStatefulWidget {
   const SelectDoctors({super.key});
 
   @override
-  State<SelectDoctors> createState() => _SelectDoctorsState();
+  ConsumerState<SelectDoctors> createState() => _SelectDoctorsState();
 }
 
-class _SelectDoctorsState extends State<SelectDoctors> {
+class _SelectDoctorsState extends ConsumerState<SelectDoctors> {
   TextEditingController _searchContoller = TextEditingController();
   @override
   Widget build(BuildContext context) {
+   var value =  ref.watch(getalldoctorsFutureProvider);
+    value.when(
+      data: (newData) {
+        print(newData);
+        // newData.forEach((element) {});
+      },
+      error: (er, str) {
+        print("there is an error" + er.toString());
+      },
+      loading: () {
+        print("loading state");
+      },
+    );
+    List doctorList = ref.watch(alldoctorsControllerProvider);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -88,7 +105,9 @@ class _SelectDoctorsState extends State<SelectDoctors> {
                                             padding:
                                                 const EdgeInsets.only(right: 5),
                                             child: InkWell(
-                                              onTap: () {},
+                                              onTap: () {
+                                                // getallDoctors();
+                                              },
                                               child: Icon(
                                                 Icons.logout,
                                                 color: Colors.red,
@@ -123,12 +142,19 @@ class _SelectDoctorsState extends State<SelectDoctors> {
                   onChanged: (value) {}),
             )),
             SliverList(
-              delegate:
-                  SliverChildBuilderDelegate(childCount: 5, (context, index) {
+              delegate: SliverChildBuilderDelegate(
+                  childCount: doctorList.length, (context, index) {
                 return Padding(
                     padding:
                         const EdgeInsets.only(bottom: 10, right: 10, left: 10),
-                    child: DoctorCard());
+                    child: DoctorCard(
+                      doctorName: doctorList[index]["dataValues"]["name"],
+                      proTitle: doctorList[index]["dataValues"]["pro_title"],
+                      languagesSPoken: doctorList[index]["dataValues"]["languages_spoken"],
+                      rate: doctorList[index]["dataValues"]["rate"],
+                      medSpecialty: doctorList[index]["dataValues"]["med_specialty"],
+                      hospitalName: doctorList[index]["dataValues"]["hospitalName"],
+                    ));
               }),
             ),
           ],

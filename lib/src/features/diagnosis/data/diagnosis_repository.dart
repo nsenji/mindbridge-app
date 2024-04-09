@@ -5,7 +5,7 @@ class DiagnosisRepository {
   const DiagnosisRepository();
 
   Future<String> fetchDiagnosisResults(Map<dynamic, dynamic> data) async {
-    String response = await fetchData(
+    String response = await fetchDiagnosis(
         "https://medbridge-ml-pipeline.up.railway.app/predictdata", data);
 
     if (response != "Application Error") {

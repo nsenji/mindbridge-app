@@ -6,7 +6,20 @@ import 'package:medbridge/src/common_widgets/text_template.dart';
 import 'package:medbridge/src/features/doctors/presentation/book_appointment.dart';
 
 class DoctorCard extends StatefulWidget {
-  const DoctorCard({super.key});
+  final String doctorName;
+  final String proTitle;
+  final String hospitalName;
+  final String languagesSPoken;
+  final int rate;
+  final String medSpecialty;
+  const DoctorCard(
+      {super.key,
+      required this.doctorName,
+      required this.proTitle,
+      required this.languagesSPoken,
+      required this.rate,
+      required this.medSpecialty,
+      required this.hospitalName});
 
   @override
   State<DoctorCard> createState() => _DoctorCardState();
@@ -51,13 +64,13 @@ class _DoctorCardState extends State<DoctorCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TextCustom(
-                        text: "Dr Frank James",
+                        text: widget.doctorName,
                         size: 18,
                         isBold: true,
                         color: Color.fromARGB(255, 8, 33, 99),
                       ),
-                      TextCustom(text: "Psychiatrist"),
-                      TextCustom(text: "RayWay Clinic"),
+                      TextCustom(text: widget.proTitle),
+                      TextCustom(text: widget.hospitalName),
                       H(h: 10),
                       TextCustom(
                         text: "Earliest slot: 23-05-24 12:34",
@@ -73,35 +86,31 @@ class _DoctorCardState extends State<DoctorCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         H(h: 20),
-
                         TextCustom(
                           text: "Professional profile",
                           isBold: true,
                         ),
                         // H(h: 10),
-                        TextCustom(
-                          text: "Addiction Psychiatry",
-                          size: 14,
-                          color: Color.fromARGB(255, 122, 122, 122),
-                        ),
-                        TextCustom(
-                          text: "Child and Adoloscent Psychiatry",
-                          size: 14,
-                          color: Color.fromARGB(255, 122, 122, 122),
-                        ),
-                        TextCustom(
-                          text: "Cognitive-behavioral Therapy",
-                          size: 14,
-                          color: Color.fromARGB(255, 122, 122, 122),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: List.generate(
+                            widget.medSpecialty.split(",").length,
+                            (index) => TextCustom(
+                              text: widget.medSpecialty.split(",")[index].trim(),
+                              size: 14,
+                              color: Color.fromARGB(255, 122, 122, 122),
+                            ),
+                          ).toList()
+                          
                         ),
                         H(h: 10),
                         TextCustom(
-                          text: "Languages: English, Luganda",
+                          text: "Languages: ${widget.languagesSPoken}",
                           size: 14,
                         ),
                         H(h: 10),
                         TextCustom(
-                          text: "Rate: Ugx 45000",
+                          text: "Rate: Ugx ${widget.rate}",
                           isBold: true,
                           size: 14,
                         ),
