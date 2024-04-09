@@ -20,7 +20,7 @@ class _SelectDoctorsState extends ConsumerState<SelectDoctors> {
   TextEditingController _searchContoller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-   var value =  ref.watch(getalldoctorsFutureProvider);
+    var value = ref.watch(getalldoctorsFutureProvider);
     value.when(
       data: (newData) {
         print(newData);
@@ -150,10 +150,14 @@ class _SelectDoctorsState extends ConsumerState<SelectDoctors> {
                     child: DoctorCard(
                       doctorName: doctorList[index]["dataValues"]["name"],
                       proTitle: doctorList[index]["dataValues"]["pro_title"],
-                      languagesSPoken: doctorList[index]["dataValues"]["languages_spoken"],
+                      languagesSPoken: doctorList[index]["dataValues"]
+                          ["languages_spoken"],
                       rate: doctorList[index]["dataValues"]["rate"],
-                      medSpecialty: doctorList[index]["dataValues"]["med_specialty"],
-                      hospitalName: doctorList[index]["dataValues"]["hospitalName"],
+                      medSpecialty: doctorList[index]["dataValues"]
+                          ["med_specialty"],
+                      hospitalName: doctorList[index]["dataValues"]
+                          ["hospitalName"],
+                      timeSlots: doctorList[index]["time_slots"] 
                     ));
               }),
             ),

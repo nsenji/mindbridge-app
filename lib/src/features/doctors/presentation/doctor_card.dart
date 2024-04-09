@@ -6,6 +6,7 @@ import 'package:medbridge/src/common_widgets/text_template.dart';
 import 'package:medbridge/src/features/doctors/presentation/book_appointment.dart';
 
 class DoctorCard extends StatefulWidget {
+  final Map timeSlots;
   final String doctorName;
   final String proTitle;
   final String hospitalName;
@@ -19,6 +20,7 @@ class DoctorCard extends StatefulWidget {
       required this.languagesSPoken,
       required this.rate,
       required this.medSpecialty,
+      required this.timeSlots,
       required this.hospitalName});
 
   @override
@@ -73,7 +75,7 @@ class _DoctorCardState extends State<DoctorCard> {
                       TextCustom(text: widget.hospitalName),
                       H(h: 10),
                       TextCustom(
-                        text: "Earliest slot: 23-05-24 12:34",
+                        text: widget.timeSlots.isEmpty ? "Earliest slot: -- ": "Earliest slot:  ${widget.timeSlots.values.first["date"]}  ${widget.timeSlots.values.first["actual_time"][0]}",
                         size: 14,
                         color: Color.fromARGB(255, 122, 122, 122),
                       )
@@ -92,17 +94,17 @@ class _DoctorCardState extends State<DoctorCard> {
                         ),
                         // H(h: 10),
                         Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: List.generate(
-                            widget.medSpecialty.split(",").length,
-                            (index) => TextCustom(
-                              text: widget.medSpecialty.split(",")[index].trim(),
-                              size: 14,
-                              color: Color.fromARGB(255, 122, 122, 122),
-                            ),
-                          ).toList()
-                          
-                        ),
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: List.generate(
+                              widget.medSpecialty.split(",").length,
+                              (index) => TextCustom(
+                                text: widget.medSpecialty
+                                    .split(",")[index]
+                                    .trim(),
+                                size: 14,
+                                color: Color.fromARGB(255, 122, 122, 122),
+                              ),
+                            ).toList()),
                         H(h: 10),
                         TextCustom(
                           text: "Languages: ${widget.languagesSPoken}",
