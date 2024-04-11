@@ -68,7 +68,7 @@ class _DoctorCardState extends ConsumerState<DoctorCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TextCustom(
-                        text: widget.doctorName,
+                        text: "Dr ${widget.doctorName}",
                         size: 18,
                         isBold: true,
                         color: Color.fromARGB(255, 8, 33, 99),
@@ -130,7 +130,7 @@ class _DoctorCardState extends ConsumerState<DoctorCard> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => BookAppointment()));
+                                      builder: (context) => BookAppointment(doctorName: widget.doctorName ,hospitalName: widget.hospitalName,proTitle: widget.proTitle,)));
                             })
                       ],
                     )

@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:medbridge/src/common_widgets/circle_avatar.dart';
-import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
-import 'package:medbridge/src/common_widgets/text_template.dart';
-import 'package:medbridge/src/features/doctors/presentation/book_appointment.dart';
-import 'package:medbridge/src/features/doctors/presentation/date_of_selected_doctor_controller.dart';
 import 'package:shimmer/shimmer.dart';
 
 class DoctorCardShimmer extends ConsumerStatefulWidget {
@@ -18,7 +13,6 @@ class DoctorCardShimmer extends ConsumerStatefulWidget {
 }
 
 class _DoctorCardState extends ConsumerState<DoctorCardShimmer> {
-  bool expand = false;
 
   @override
   Widget build(BuildContext context) {

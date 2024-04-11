@@ -9,7 +9,14 @@ import 'package:medbridge/src/features/doctors/presentation/date_of_selected_doc
 import 'package:medbridge/src/features/doctors/presentation/time_slots_controller.dart';
 
 class BookAppointment extends ConsumerStatefulWidget {
-  const BookAppointment({super.key});
+  final String doctorName;
+  final String proTitle;
+  final String hospitalName;
+  const BookAppointment(
+      {super.key,
+      required this.doctorName,
+      required this.hospitalName,
+      required this.proTitle});
 
   @override
   ConsumerState<BookAppointment> createState() => _BookAppointmentState();
@@ -66,14 +73,19 @@ class _BookAppointmentState extends ConsumerState<BookAppointment> {
                       children: [
                         TextCustom(
                           size: 18,
-                          text: "Dr Frank James",
+                          text: "Dr ${widget.doctorName}",
                           isBold: true,
                           color: Colors.white,
                         ),
-                        TextCustom(
-                          size: 15,
-                          text: "Psychiatrist - RayWay Clinic",
-                          color: Color.fromARGB(255, 197, 197, 197),
+                        SizedBox(
+                          width: 250,
+                          child: Text(
+                            "${widget.proTitle} - ${widget.hospitalName}",
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: Color.fromARGB(255, 197, 197, 197),
+                                overflow: TextOverflow.ellipsis),
+                          ),
                         ),
                         TextCustom(
                           size: 15,
@@ -90,7 +102,7 @@ class _BookAppointmentState extends ConsumerState<BookAppointment> {
           Padding(
             padding:
                 const EdgeInsets.only(left: 10, right: 10, top: 20, bottom: 0),
-            child: TextCustom(text: "Select date"),
+            child: TextCustom(text: "Available dates"),
           ),
           Container(
             child: SingleChildScrollView(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_field.dart';
@@ -9,7 +8,6 @@ import 'package:medbridge/src/features/doctors/presentation/all_doctors_controll
 import 'package:medbridge/src/features/doctors/presentation/doctor_card.dart';
 import 'package:medbridge/src/features/doctors/presentation/doctor_shimmer_screen.dart';
 import 'package:medbridge/src/features/profile/presentation/profile_widget.dart';
-import 'package:shimmer/shimmer.dart';
 
 class SelectDoctors extends ConsumerStatefulWidget {
   const SelectDoctors({super.key});
