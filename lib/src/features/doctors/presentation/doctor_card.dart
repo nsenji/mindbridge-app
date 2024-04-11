@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/common_widgets/circle_avatar.dart';
 import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
 import 'package:medbridge/src/features/doctors/presentation/book_appointment.dart';
+import 'package:medbridge/src/features/doctors/presentation/date_of_selected_doctor_controller.dart';
 
-class DoctorCard extends StatefulWidget {
-  final Map timeSlots;
+class DoctorCard extends ConsumerStatefulWidget {
+  final List timeSlots;
   final String doctorName;
   final String proTitle;
   final String hospitalName;
@@ -24,10 +26,10 @@ class DoctorCard extends StatefulWidget {
       required this.hospitalName});
 
   @override
-  State<DoctorCard> createState() => _DoctorCardState();
+  ConsumerState<DoctorCard> createState() => _DoctorCardState();
 }
 
-class _DoctorCardState extends State<DoctorCard> {
+class _DoctorCardState extends ConsumerState<DoctorCard> {
   bool expand = false;
 
   @override
@@ -75,7 +77,9 @@ class _DoctorCardState extends State<DoctorCard> {
                       TextCustom(text: widget.hospitalName),
                       H(h: 10),
                       TextCustom(
-                        text: widget.timeSlots.isEmpty ? "Earliest slot: -- ": "Earliest slot:  ${widget.timeSlots.values.first["date"]}  ${widget.timeSlots.values.first["actual_time"][0]}",
+                        text: widget.timeSlots.isEmpty
+                            ? "Earliest slot: -- "
+                            : "Earliest slot:  ${widget.timeSlots[0]["date"]}  ${widget.timeSlots[0]["actual_time"][0]}",
                         size: 14,
                         color: Color.fromARGB(255, 122, 122, 122),
                       )
@@ -120,6 +124,9 @@ class _DoctorCardState extends State<DoctorCard> {
                         MainButton(
                             text: "Select",
                             onpressed: () {
+                              ref
+                                  .read(dateControllerProvider.notifier)
+                                  .setList(widget.timeSlots);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(

@@ -4,8 +4,8 @@ import 'package:medbridge/src/common_widgets/circle_avatar.dart';
 import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
-import 'package:medbridge/src/features/doctors/data/date_time_data.dart';
 import 'package:medbridge/src/features/doctors/presentation/confirm_appointment.dart';
+import 'package:medbridge/src/features/doctors/presentation/date_of_selected_doctor_controller.dart';
 import 'package:medbridge/src/features/doctors/presentation/time_slots_controller.dart';
 
 class BookAppointment extends ConsumerStatefulWidget {
@@ -22,6 +22,7 @@ class _BookAppointmentState extends ConsumerState<BookAppointment> {
   @override
   Widget build(BuildContext context) {
     List timeslotsProvider = ref.watch(timeslotsControllerProvider);
+    List dateProvider = ref.watch(dateControllerProvider);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -96,7 +97,7 @@ class _BookAppointmentState extends ConsumerState<BookAppointment> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: List<Widget>.generate(
-                    dateTime.length,
+                    dateProvider.length,
                     (int index) {
                       return Padding(
                         padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
@@ -122,19 +123,19 @@ class _BookAppointmentState extends ConsumerState<BookAppointment> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text(dateTime[index]["month"]),
+                                  Text(dateProvider[index]["month"]),
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         top: 5, bottom: 5),
                                     child: Text(
-                                      dateTime[index]["day"],
+                                      dateProvider[index]["day"],
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 22),
                                     ),
                                   ),
                                   Text(
-                                    dateTime[index]["dayName"],
+                                    dateProvider[index]["dayName"],
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16),
@@ -148,7 +149,7 @@ class _BookAppointmentState extends ConsumerState<BookAppointment> {
                               ref
                                   .read(timeslotsControllerProvider.notifier)
                                   .setList(selected
-                                      ? dateTime[index]["time_slots"]
+                                      ? dateProvider[index]["time_slots"]
                                       : []);
                             });
                           },

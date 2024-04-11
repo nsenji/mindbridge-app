@@ -10,6 +10,7 @@ class AllDoctorsRepository {
   Future<List> getallDoctors(AllDoctorsController allDoctorsController) async {
     print("it has reached here");
     String url = "http://192.168.43.145:3000/alldoctors/getalldoctors";
+    // String url = "http://localhost:3000/alldoctors/getalldoctors";
 
     final response = await http.get(
       Uri.parse(url),

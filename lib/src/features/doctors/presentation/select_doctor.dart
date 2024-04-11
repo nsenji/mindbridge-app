@@ -24,7 +24,6 @@ class _SelectDoctorsState extends ConsumerState<SelectDoctors> {
     value.when(
       data: (newData) {
         print(newData);
-        // newData.forEach((element) {});
       },
       error: (er, str) {
         print("there is an error" + er.toString());

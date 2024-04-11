@@ -35,7 +35,6 @@ class _TestResultsState extends State<TestResults> {
                             color: Color.fromARGB(255, 8, 33, 99),
                             overflow: true,
                           ),
-                          
                           content: SizedBox(
                             height: 500,
                             width: 300,
@@ -128,6 +127,7 @@ class _TestResultsState extends State<TestResults> {
                           Icon(
                             Icons.arrow_forward_ios_rounded,
                             color: Color.fromARGB(255, 8, 33, 99),
+                            size: 18,
                           ),
                         ],
                       ),
@@ -247,6 +247,7 @@ class _TestResultsState extends State<TestResults> {
                           Icon(
                             Icons.arrow_forward_ios_rounded,
                             color: Color.fromARGB(255, 8, 33, 99),
+                            size: 18,
                           ),
                         ],
                       ),
@@ -366,6 +367,7 @@ class _TestResultsState extends State<TestResults> {
                           Icon(
                             Icons.arrow_forward_ios_rounded,
                             color: Color.fromARGB(255, 8, 33, 99),
+                            size: 18,
                           ),
                         ],
                       ),
