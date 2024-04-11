@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/common_widgets/circle_avatar.dart';
+import 'package:medbridge/src/common_widgets/custom_snackbar.dart';
 import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
-import 'package:medbridge/src/features/doctors/presentation/confirm_appointment.dart';
-import 'package:medbridge/src/features/doctors/presentation/date_of_selected_doctor_controller.dart';
-import 'package:medbridge/src/features/doctors/presentation/time_slots_controller.dart';
+import 'package:medbridge/src/features/doctors/presentation/appointment_summary.dart';
+import 'package:medbridge/src/features/doctors/presentation/controllers_providers/date_of_selected_doctor_controller.dart';
+import 'package:medbridge/src/features/doctors/presentation/controllers_providers/selected_date_controller.dart';
+import 'package:medbridge/src/features/doctors/presentation/controllers_providers/selected_time_controller.dart';
+import 'package:medbridge/src/features/doctors/presentation/controllers_providers/time_slots_controller.dart';
 
 class BookAppointment extends ConsumerStatefulWidget {
   final String doctorName;
   final String proTitle;
   final String hospitalName;
+  final int rate;
   const BookAppointment(
       {super.key,
       required this.doctorName,
       required this.hospitalName,
-      required this.proTitle});
+      required this.proTitle,
+      required this.rate});
 
   @override
   ConsumerState<BookAppointment> createState() => _BookAppointmentState();
@@ -25,11 +30,15 @@ class BookAppointment extends ConsumerStatefulWidget {
 class _BookAppointmentState extends ConsumerState<BookAppointment> {
   int? _value;
   int? _time_value;
+  bool disabled = false;
 
   @override
   Widget build(BuildContext context) {
     List timeslotsProvider = ref.watch(timeslotsControllerProvider);
     List dateProvider = ref.watch(dateControllerProvider);
+
+     String selectedDate = ref.watch(selectedDateControllerProvider);
+    String selectedTime = ref.watch(selectedTimeControllerProvider);
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -158,12 +167,17 @@ class _BookAppointmentState extends ConsumerState<BookAppointment> {
                           onSelected: (bool selected) {
                             setState(() {
                               _value = selected ? index : null;
-                              ref
-                                  .read(timeslotsControllerProvider.notifier)
-                                  .setList(selected
-                                      ? dateProvider[index]["time_slots"]
-                                      : []);
                             });
+                            ref
+                                .read(timeslotsControllerProvider.notifier)
+                                .setList(selected
+                                    ? dateProvider[index]["time_slots"]
+                                    : []);
+                            ref
+                                .read(selectedDateControllerProvider.notifier)
+                                .setDate(selected
+                                    ? "${dateProvider[index]["dayName"]}, ${dateProvider[index]["day"]} ${dateProvider[index]["month"]} ${dateProvider[index]["year"]}"
+                                    : "");
                           },
                         ),
                       );
@@ -217,6 +231,11 @@ class _BookAppointmentState extends ConsumerState<BookAppointment> {
                               setState(() {
                                 _time_value = selected ? index : null;
                               });
+                               ref
+                                .read(selectedTimeControllerProvider.notifier)
+                                .setTime(selected
+                                    ? "${timeslotsProvider[index]}"
+                                    : "");
                             },
                           ),
                         );
@@ -229,12 +248,17 @@ class _BookAppointmentState extends ConsumerState<BookAppointment> {
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10, bottom: 30),
             child: MainButton(
+                disabled: disabled,
                 text: "Confirm",
                 onpressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ConfirmAppointment()));
+                  if (selectedTime.isEmpty || selectedDate.isEmpty) {
+                    CustomSnackBar.show(context, "Select date and time", true);
+                  } else {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AppointmentSummary(doctorName: widget.doctorName,rate: widget.rate,)));
+                  }
                 }),
           )
         ],

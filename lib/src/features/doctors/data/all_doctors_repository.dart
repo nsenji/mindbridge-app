@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
-import 'package:medbridge/src/features/doctors/presentation/all_doctors_controller.dart';
+import 'package:medbridge/src/features/doctors/presentation/controllers_providers/all_doctors_controller.dart';
 
 class AllDoctorsRepository {
   const AllDoctorsRepository();

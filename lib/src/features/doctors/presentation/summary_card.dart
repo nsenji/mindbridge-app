@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/svg_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
+import 'package:medbridge/src/features/doctors/presentation/controllers_providers/selected_date_controller.dart';
+import 'package:medbridge/src/features/doctors/presentation/controllers_providers/selected_time_controller.dart';
 
-class SummaryCard extends StatefulWidget {
+class SummaryCard extends ConsumerStatefulWidget {
+  final String doctorName;
+  final int rate;
   final bool checkmark;
-  const SummaryCard({super.key, this.checkmark = false});
+  const SummaryCard(
+      {super.key, this.checkmark = false, required this.doctorName, required this.rate});
 
   @override
-  State<SummaryCard> createState() => _SummaryCardState();
+  ConsumerState<SummaryCard> createState() => _SummaryCardState();
 }
 
-class _SummaryCardState extends State<SummaryCard> {
+class _SummaryCardState extends ConsumerState<SummaryCard> {
   @override
   Widget build(BuildContext context) {
+    String selectedDate = ref.watch(selectedDateControllerProvider);
+    String selectedTime = ref.watch(selectedTimeControllerProvider);
     return Column(
       children: [
         Container(
@@ -37,16 +45,16 @@ class _SummaryCardState extends State<SummaryCard> {
                       color: Color.fromARGB(255, 8, 33, 99),
                     ),
                     TextCustom(
-                      text: "Dr Frank James",
+                      text: "Dr ${widget.doctorName}",
                       isBold: true,
                     ),
                     H(h: 10),
                     TextCustom(
-                      text: "22nd Wed, June 2024",
+                      text: selectedDate,
                       size: 15,
                     ),
                     TextCustom(
-                      text: "9:42AM - 10:41AM",
+                      text: "${selectedTime} (60 mins)",
                       size: 15,
                     ),
                   ],
@@ -83,13 +91,13 @@ class _SummaryCardState extends State<SummaryCard> {
                   color: Colors.white,
                 ),
                 TextCustom(
-                  text: "Ugx 45000",
+                  text: "Ugx ${widget.rate}",
                   color: Colors.white,
                 )
               ],
             ),
           ),
-        )
+        ),
       ],
     );
   }

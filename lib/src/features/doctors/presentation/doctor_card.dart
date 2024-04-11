@@ -5,7 +5,7 @@ import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
 import 'package:medbridge/src/features/doctors/presentation/book_appointment.dart';
-import 'package:medbridge/src/features/doctors/presentation/date_of_selected_doctor_controller.dart';
+import 'package:medbridge/src/features/doctors/presentation/controllers_providers/date_of_selected_doctor_controller.dart';
 
 class DoctorCard extends ConsumerStatefulWidget {
   final List timeSlots;
@@ -130,7 +130,7 @@ class _DoctorCardState extends ConsumerState<DoctorCard> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => BookAppointment(doctorName: widget.doctorName ,hospitalName: widget.hospitalName,proTitle: widget.proTitle,)));
+                                      builder: (context) => BookAppointment(doctorName: widget.doctorName ,hospitalName: widget.hospitalName,proTitle: widget.proTitle,rate:widget.rate ,)));
                             })
                       ],
                     )

@@ -5,14 +5,16 @@ import 'package:medbridge/src/common_widgets/text_template.dart';
 import 'package:medbridge/src/features/doctors/presentation/summary_card.dart';
 import 'package:medbridge/src/features/navbar/navbar.dart';
 
-class ConfirmAppointment extends StatefulWidget {
-  const ConfirmAppointment({super.key});
+class AppointmentSummary extends StatefulWidget {
+  final String doctorName;
+  final int rate;
+  const AppointmentSummary({super.key, required this.doctorName, required this.rate});
 
   @override
-  State<ConfirmAppointment> createState() => _ConfirmAppointmentState();
+  State<AppointmentSummary> createState() => _AppointmentSummaryState();
 }
 
-class _ConfirmAppointmentState extends State<ConfirmAppointment> {
+class _AppointmentSummaryState extends State<AppointmentSummary> {
   bool donePayment = false;
 
   @override
@@ -34,6 +36,8 @@ class _ConfirmAppointmentState extends State<ConfirmAppointment> {
         child: Column(
           children: [
             SummaryCard(
+              rate: widget.rate,
+              doctorName: widget.doctorName,
               checkmark: donePayment,
             ),
             H(h: 20),

@@ -17,6 +17,8 @@ class _ReceiptsState extends State<Receipts> {
         slivers: [
           SliverToBoxAdapter(
             child: SummaryCard(
+              rate: 45000,
+              doctorName: "Dr N/A",
               checkmark: true,
             ),
           )

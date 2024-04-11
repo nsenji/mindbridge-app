@@ -4,7 +4,7 @@ import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_field.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
 import 'package:medbridge/src/features/doctors/data/all_doctors_repository.dart';
-import 'package:medbridge/src/features/doctors/presentation/all_doctors_controller.dart';
+import 'package:medbridge/src/features/doctors/presentation/controllers_providers/all_doctors_controller.dart';
 import 'package:medbridge/src/features/doctors/presentation/doctor_card.dart';
 import 'package:medbridge/src/features/doctors/presentation/doctor_shimmer_screen.dart';
 import 'package:medbridge/src/features/profile/presentation/profile_widget.dart';
