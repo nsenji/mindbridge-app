@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:medbridge/src/features/diagnosis/presentation/results.dart';
 import 'package:medbridge/src/features/landingPage/landing_page.dart';
-import 'package:medbridge/src/features/navbar/navbar.dart';
-import 'package:medbridge/src/mockTests/layout_tests.dart';
-
 import 'package:medbridge/src/utils/custom_theme.dart';
 
 void main() {

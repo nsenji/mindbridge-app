@@ -7,7 +7,9 @@ import 'package:medbridge/src/common_widgets/text_template.dart';
 import 'package:medbridge/src/features/doctors/data/all_doctors_repository.dart';
 import 'package:medbridge/src/features/doctors/presentation/all_doctors_controller.dart';
 import 'package:medbridge/src/features/doctors/presentation/doctor_card.dart';
+import 'package:medbridge/src/features/doctors/presentation/doctor_shimmer_screen.dart';
 import 'package:medbridge/src/features/profile/presentation/profile_widget.dart';
+import 'package:shimmer/shimmer.dart';
 
 class SelectDoctors extends ConsumerStatefulWidget {
   const SelectDoctors({super.key});
@@ -140,26 +142,37 @@ class _SelectDoctorsState extends ConsumerState<SelectDoctors> {
                   label: "Search for therapist",
                   onChanged: (value) {}),
             )),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                  childCount: doctorList.length, (context, index) {
-                return Padding(
-                    padding:
-                        const EdgeInsets.only(bottom: 10, right: 10, left: 10),
-                    child: DoctorCard(
-                      doctorName: doctorList[index]["dataValues"]["name"],
-                      proTitle: doctorList[index]["dataValues"]["pro_title"],
-                      languagesSPoken: doctorList[index]["dataValues"]
-                          ["languages_spoken"],
-                      rate: doctorList[index]["dataValues"]["rate"],
-                      medSpecialty: doctorList[index]["dataValues"]
-                          ["med_specialty"],
-                      hospitalName: doctorList[index]["dataValues"]
-                          ["hospitalName"],
-                      timeSlots: doctorList[index]["time_slots"] 
-                    ));
-              }),
-            ),
+            doctorList.isEmpty
+                ? SliverList(
+                    delegate: SliverChildBuilderDelegate(childCount: 5,
+                        (context, index) {
+                      return Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: 10, right: 10, left: 10),
+                          child: DoctorCardShimmer());
+                    }),
+                  )
+                : SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                        childCount: doctorList.length, (context, index) {
+                      return Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: 10, right: 10, left: 10),
+                          child: DoctorCard(
+                              doctorName: doctorList[index]["dataValues"]
+                                  ["name"],
+                              proTitle: doctorList[index]["dataValues"]
+                                  ["pro_title"],
+                              languagesSPoken: doctorList[index]["dataValues"]
+                                  ["languages_spoken"],
+                              rate: doctorList[index]["dataValues"]["rate"],
+                              medSpecialty: doctorList[index]["dataValues"]
+                                  ["med_specialty"],
+                              hospitalName: doctorList[index]["dataValues"]
+                                  ["hospitalName"],
+                              timeSlots: doctorList[index]["time_slots"]));
+                    }),
+                  ),
           ],
         ),
       ),
