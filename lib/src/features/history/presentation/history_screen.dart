@@ -1,20 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
 import 'package:medbridge/src/features/history/presentation/receipts.dart';
 import 'package:medbridge/src/features/history/presentation/test_results.dart';
+import 'package:medbridge/src/features/profile/presentation/current_user_controller.dart';
 import 'package:medbridge/src/features/profile/presentation/profile_widget.dart';
 
-class HistoryScreen extends StatefulWidget {
+class HistoryScreen extends ConsumerStatefulWidget {
   const HistoryScreen({super.key});
 
   @override
-  State<HistoryScreen> createState() => _HistoryScreenState();
+  ConsumerState<HistoryScreen> createState() => _HistoryScreenState();
 }
 
-class _HistoryScreenState extends State<HistoryScreen> {
+class _HistoryScreenState extends ConsumerState<HistoryScreen> {
+  
   @override
   Widget build(BuildContext context) {
+        Map currentUser = ref.watch(currentUserControllerProvider);
+
     return Material(
       child: DefaultTabController(
         length: 2,
@@ -52,12 +57,12 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                         CircleAvatar(
                                           backgroundColor:
                                               Color.fromARGB(255, 8, 33, 99),
+                                          radius: 20,
                                           child: TextCustom(
-                                            text: "V",
+                                            text: currentUser["name"][0].toString().toUpperCase(),
                                             color: Colors.white,
                                             isBold: true,
                                           ),
-                                          radius: 20,
                                         ),
                                         W(w: 15),
                                         Column(
@@ -67,17 +72,17 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                               MainAxisAlignment.center,
                                           children: [
                                             TextCustom(
-                                              size: 18,
-                                              text: "Victor Nsenji",
-                                              isBold: true,
-                                            ),
-                                            TextCustom(
-                                              size: 15,
-                                              text:
-                                                  "nsengiyumvavictor@gmail.com",
-                                              color: Color.fromARGB(
-                                                  255, 122, 122, 122),
-                                            ),
+                                                size: 18,
+                                                text: currentUser["name"],
+                                                isBold: true,
+                                              ),
+                                              TextCustom(
+                                                size: 15,
+                                                text:
+                                                    currentUser["email"],
+                                                color: Color.fromARGB(
+                                                    255, 122, 122, 122),
+                                              ),
                                           ],
                                         ),
                                         Spacer(),
@@ -105,7 +110,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(right: 10.0),
-                  child: ProfileWidget(),
+                  child: ProfileWidget(firstLetter: currentUser["name"][0].toString().toUpperCase(),),
                 ),
               )
             ],

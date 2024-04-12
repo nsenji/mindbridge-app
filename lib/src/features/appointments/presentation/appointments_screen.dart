@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
 import 'package:medbridge/src/features/appointments/presentation/appointment_card.dart';
+import 'package:medbridge/src/features/profile/presentation/current_user_controller.dart';
 import 'package:medbridge/src/features/profile/presentation/profile_widget.dart';
 
-class AppointmentsScreen extends StatefulWidget {
+class AppointmentsScreen extends ConsumerStatefulWidget {
   const AppointmentsScreen({super.key});
 
   @override
-  State<AppointmentsScreen> createState() => _AppointmentsScreenState();
+  ConsumerState<AppointmentsScreen> createState() => _AppointmentsScreenState();
 }
 
-class _AppointmentsScreenState extends State<AppointmentsScreen> {
+class _AppointmentsScreenState extends ConsumerState<AppointmentsScreen> {
   var status = [false, false, true];
   @override
   Widget build(BuildContext context) {
+        Map currentUser = ref.watch(currentUserControllerProvider);
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
@@ -53,7 +57,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                                           backgroundColor:
                                               Color.fromARGB(255, 8, 33, 99),
                                           child: TextCustom(
-                                            text: "V",
+                                            text: currentUser["name"][0].toString().toUpperCase(),
                                             color: Colors.white,
                                             isBold: true,
                                           ),
@@ -67,17 +71,17 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                                               MainAxisAlignment.center,
                                           children: [
                                             TextCustom(
-                                              size: 18,
-                                              text: "Victor Nsenji",
-                                              isBold: true,
-                                            ),
-                                            TextCustom(
-                                              size: 15,
-                                              text:
-                                                  "nsengiyumvavictor@gmail.com",
-                                              color: Color.fromARGB(
-                                                  255, 122, 122, 122),
-                                            ),
+                                                size: 18,
+                                                text: currentUser["name"],
+                                                isBold: true,
+                                              ),
+                                              TextCustom(
+                                                size: 15,
+                                                text:
+                                                    currentUser["email"],
+                                                color: Color.fromARGB(
+                                                    255, 122, 122, 122),
+                                              ),
                                           ],
                                         ),
                                         Spacer(),
@@ -105,7 +109,7 @@ class _AppointmentsScreenState extends State<AppointmentsScreen> {
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(right: 10.0),
-                  child: ProfileWidget(),
+                  child: ProfileWidget(firstLetter: currentUser["name"][0].toString().toUpperCase(),),
                 ),
               )
             ],

@@ -102,7 +102,7 @@ class _TestResultsState extends State<TestResults> {
                                         overflow: true,
                                       ),
                                     ),
-                                    H(h: 10),
+                                    H(h: 100),
                                     TextCustom(
                                       size: 15,
                                       text: "Wed, 23 June 2024",

@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
 
-class ProfileWidget extends StatefulWidget {
-  const ProfileWidget({super.key});
+class ProfileWidget extends StatelessWidget {
+  final String firstLetter;
+  const ProfileWidget({super.key, required this.firstLetter});
 
-  @override
-  State<ProfileWidget> createState() => _ProfileWidgetState();
-}
-
-class _ProfileWidgetState extends State<ProfileWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,7 +23,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
             CircleAvatar(
               radius: 12,
               child: TextCustom(
-                text: "V",
+                text: firstLetter,
                 color: Colors.white,
                 isBold: true,
               ),

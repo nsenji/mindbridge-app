@@ -7,6 +7,7 @@ import 'package:medbridge/src/features/doctors/data/all_doctors_repository.dart'
 import 'package:medbridge/src/features/doctors/presentation/controllers_providers/all_doctors_controller.dart';
 import 'package:medbridge/src/features/doctors/presentation/doctor_card.dart';
 import 'package:medbridge/src/features/doctors/presentation/doctor_shimmer_screen.dart';
+import 'package:medbridge/src/features/profile/presentation/current_user_controller.dart';
 import 'package:medbridge/src/features/profile/presentation/profile_widget.dart';
 
 class SelectDoctors extends ConsumerStatefulWidget {
@@ -33,6 +34,7 @@ class _SelectDoctorsState extends ConsumerState<SelectDoctors> {
       },
     );
     List doctorList = ref.watch(alldoctorsControllerProvider);
+    Map currentUser = ref.watch(currentUserControllerProvider);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -71,12 +73,12 @@ class _SelectDoctorsState extends ConsumerState<SelectDoctors> {
                                           CircleAvatar(
                                             backgroundColor:
                                                 Color.fromARGB(255, 8, 33, 99),
+                                            radius: 20,
                                             child: TextCustom(
-                                              text: "V",
+                                              text: currentUser["name"][0].toString().toUpperCase(),
                                               color: Colors.white,
                                               isBold: true,
                                             ),
-                                            radius: 20,
                                           ),
                                           W(w: 15),
                                           Column(
@@ -87,13 +89,13 @@ class _SelectDoctorsState extends ConsumerState<SelectDoctors> {
                                             children: [
                                               TextCustom(
                                                 size: 18,
-                                                text: "Victor Nsenji",
+                                                text: currentUser["name"],
                                                 isBold: true,
                                               ),
                                               TextCustom(
                                                 size: 15,
                                                 text:
-                                                    "nsengiyumvavictor@gmail.com",
+                                                    currentUser["email"],
                                                 color: Color.fromARGB(
                                                     255, 122, 122, 122),
                                               ),
@@ -126,7 +128,7 @@ class _SelectDoctorsState extends ConsumerState<SelectDoctors> {
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(right: 10.0),
-                    child: ProfileWidget(),
+                    child: ProfileWidget(firstLetter:  currentUser["name"][0].toString().toUpperCase(),),
                   ),
                 )
               ],
