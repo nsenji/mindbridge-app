@@ -102,7 +102,7 @@ class _TestResultsState extends State<TestResults> {
                                         overflow: true,
                                       ),
                                     ),
-                                    H(h: 5),
+                                    H(h: 10),
                                     TextCustom(
                                       size: 15,
                                       text: "Wed, 23 June 2024",
@@ -222,7 +222,7 @@ class _TestResultsState extends State<TestResults> {
                                         overflow: true,
                                       ),
                                     ),
-                                    H(h: 5),
+                                    H(h: 10),
                                     TextCustom(
                                       size: 15,
                                       text: "Wed, 23 June 2024",
@@ -342,7 +342,7 @@ class _TestResultsState extends State<TestResults> {
                                         overflow: true,
                                       ),
                                     ),
-                                    H(h: 5),
+                                    H(h: 10),
                                     TextCustom(
                                       size: 15,
                                       text: "Wed, 23 June 2024",

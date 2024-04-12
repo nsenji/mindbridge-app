@@ -55,7 +55,7 @@ class _AppointmentSummaryState extends State<AppointmentSummary> {
                         children: [
                           TextCustom(
                             text:
-                                "A virtual meeting with Dr Frank James has been scheduled.",
+                                "A virtual meeting with Dr ${widget.doctorName} has been scheduled.",
                             isBold: true,
                           ),
                           H(h: 10),

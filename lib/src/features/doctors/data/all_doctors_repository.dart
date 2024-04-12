@@ -11,8 +11,10 @@ class AllDoctorsRepository {
     print("it has reached here");
 
     await Future.delayed(Duration(seconds: 1));
-    String url = "http://192.168.43.145:3000/alldoctors/getalldoctors";
+    // String url = "http://192.168.43.145:3000/alldoctors/getalldoctors";
     // String url = "http://localhost:3000/alldoctors/getalldoctors";
+    String url =
+        "https://final-project-backend-production-273c.up.railway.app/alldoctors/getalldoctors";
 
     final response = await http.get(
       Uri.parse(url),
@@ -42,18 +44,3 @@ final getalldoctorsFutureProvider = FutureProvider.autoDispose<List>((ref) {
 });
 
 
-// Future<dynamic> getallDoctors() async {
-//     print("it has reached here");
-//     String url = "http://192.168.43.145:3000/alldoctors/getalldoctors";
-
-//     final response = await http.get(
-//       Uri.parse(url),
-//       headers: {
-//         'Content-Type':
-//             'application/json', // strictly Add the Content-Type header
-//       },
-//     );
-//     var value = jsonDecode(response.body);
-//     print(value);
-//     return value;
-//   }
