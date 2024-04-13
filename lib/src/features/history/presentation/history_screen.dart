@@ -15,10 +15,9 @@ class HistoryScreen extends ConsumerStatefulWidget {
 }
 
 class _HistoryScreenState extends ConsumerState<HistoryScreen> {
-  
   @override
   Widget build(BuildContext context) {
-        Map currentUser = ref.watch(currentUserControllerProvider);
+    Map currentUser = ref.watch(currentUserControllerProvider);
 
     return Material(
       child: DefaultTabController(
@@ -59,7 +58,9 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
                                               Color.fromARGB(255, 8, 33, 99),
                                           radius: 20,
                                           child: TextCustom(
-                                            text: currentUser["name"][0].toString().toUpperCase(),
+                                            text: currentUser["name"][0]
+                                                .toString()
+                                                .toUpperCase(),
                                             color: Colors.white,
                                             isBold: true,
                                           ),
@@ -72,17 +73,16 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
                                               MainAxisAlignment.center,
                                           children: [
                                             TextCustom(
-                                                size: 18,
-                                                text: currentUser["name"],
-                                                isBold: true,
-                                              ),
-                                              TextCustom(
-                                                size: 15,
-                                                text:
-                                                    currentUser["email"],
-                                                color: Color.fromARGB(
-                                                    255, 122, 122, 122),
-                                              ),
+                                              size: 18,
+                                              text: currentUser["name"],
+                                              isBold: true,
+                                            ),
+                                            TextCustom(
+                                              size: 15,
+                                              text: currentUser["email"],
+                                              color: Color.fromARGB(
+                                                  255, 122, 122, 122),
+                                            ),
                                           ],
                                         ),
                                         Spacer(),
@@ -110,7 +110,10 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(right: 10.0),
-                  child: ProfileWidget(firstLetter: currentUser["name"][0].toString().toUpperCase(),),
+                  child: ProfileWidget(
+                    firstLetter:
+                        currentUser["name"][0].toString().toUpperCase(),
+                  ),
                 ),
               )
             ],

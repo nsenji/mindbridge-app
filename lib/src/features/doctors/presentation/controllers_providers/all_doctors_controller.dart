@@ -4,8 +4,6 @@ class AllDoctorsController extends StateNotifier<List> {
   AllDoctorsController() : super([]);
 
   void setDoctorList(List newList) {
-    print("this has been set");
-    print(newList);
     state = newList;
   }
 }

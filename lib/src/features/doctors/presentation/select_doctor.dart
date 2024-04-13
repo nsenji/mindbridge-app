@@ -24,13 +24,13 @@ class _SelectDoctorsState extends ConsumerState<SelectDoctors> {
     var value = ref.watch(getalldoctorsFutureProvider);
     value.when(
       data: (newData) {
-        print(newData);
+        // print(newData);
       },
       error: (er, str) {
         print("there is an error" + er.toString());
       },
       loading: () {
-        print("loading state");
+        // print("loading state");
       },
     );
     List doctorList = ref.watch(alldoctorsControllerProvider);
