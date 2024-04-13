@@ -17,7 +17,7 @@ class PastDiagnosisRepository {
     };
 
     var jsonData = jsonEncode(data);
-    Future.delayed(Duration(seconds: 3));
+    Future.delayed( const Duration(seconds: 1));
     final response = await http.post(
       Uri.parse(url),
       body: jsonData,
@@ -27,7 +27,6 @@ class PastDiagnosisRepository {
       },
     );
     var value = jsonDecode(response.body);
-    print(value);
 
     pastDiagnosesController.setList(value["data"]);
     return true;
@@ -40,7 +39,7 @@ final pastDiagnosissRepositoryProvider =
 });
 
 final getpastdiagnosisListFutureProvider =
-    FutureProvider.family<bool, String>((ref, patientID) {
+    FutureProvider.autoDispose.family<bool, String>((ref, patientID) {
   final pastDiagnosisRepository = ref.watch(pastDiagnosissRepositoryProvider);
   final pastDiagnosesController =
       ref.read(pastDiagnosesControllerProvider.notifier);
