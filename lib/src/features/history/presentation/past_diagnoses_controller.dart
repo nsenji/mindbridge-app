@@ -11,6 +11,7 @@ class PastDiagnosesController extends StateNotifier<List> {
     List newStateList = newlist.map((element_1) {
       List incomingKeys = element_1.keys.toList();
       List questionkeys = allQuestions.keys.toList();
+      Map questionResponse_2 = {};
       Map questionResponse = {};
       for (int i = 0; i < incomingKeys.length; i++) {
         for (int j = 0; j < questionkeys.length; j++) {
@@ -20,11 +21,14 @@ class PastDiagnosesController extends StateNotifier<List> {
           }
         }
       }
-      questionResponse["result"] = element_1["result"];
-      questionResponse["createdAt"] = DateFormat('EE, M/d/y').format(DateTime.parse( element_1["createdAt"])) ;
-      return questionResponse;
+      questionResponse_2["q&a"] = questionResponse;
+      questionResponse_2["result"] = element_1["result"];
+      questionResponse_2["createdAt"] = DateFormat('EE, M/d/y')
+          .format(DateTime.parse(element_1["createdAt"]));
+      return questionResponse_2;
     }).toList();
     print(newStateList);
+
     state = newStateList;
   }
 }

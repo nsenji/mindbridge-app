@@ -29,8 +29,9 @@ class _TestResultsState extends ConsumerState<TestResults> {
       data: (newdata) => CustomScrollView(
         slivers: [
           SliverList(
-            delegate:
-                SliverChildBuilderDelegate(childCount: pastDiagnosisState.length, (context, index) {
+            delegate: SliverChildBuilderDelegate(
+                childCount: pastDiagnosisState.length, (context, index_1) {
+           Map   questionKeys = pastDiagnosisState[index_1]["q&a"];
               return Padding(
                 padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
                 child: GestureDetector(
@@ -41,9 +42,9 @@ class _TestResultsState extends ConsumerState<TestResults> {
                           return AlertDialog(
                               backgroundColor: Colors.white,
                               scrollable: true,
-                              title: const TextCustom(
+                              title: TextCustom(
                                 size: 17,
-                                text: "Progressive Depressive Dissorder",
+                                text: pastDiagnosisState[index_1]["result"],
                                 isBold: true,
                                 color: Color.fromARGB(255, 8, 33, 99),
                                 overflow: true,
@@ -55,8 +56,13 @@ class _TestResultsState extends ConsumerState<TestResults> {
                                   slivers: [
                                     SliverList(
                                       delegate: SliverChildBuilderDelegate(
-                                          childCount: allQuestionsList.length,
-                                          (context, index) {
+                                          childCount:
+                                              questionKeys
+                                                  .keys
+                                                  .toList()
+                                                  .length, (context, index_2) {
+                                        Map questionAndAnswer =
+                                            pastDiagnosisState[index_1]["q&a"];
                                         return Padding(
                                             padding: const EdgeInsets.only(
                                                 bottom: 15),
@@ -66,10 +72,13 @@ class _TestResultsState extends ConsumerState<TestResults> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   TextCustom(
-                                                      text: allQuestionsList[
-                                                          index]["question"]),
-                                                  const TextCustom(
-                                                      text: "MOST-OFTEN",
+                                                      text: questionAndAnswer
+                                                          .keys
+                                                          .toList()[index_2]),
+                                                  TextCustom(
+                                                      text: questionAndAnswer
+                                                          .values
+                                                          .toList()[index_2],
                                                       color: Color.fromARGB(
                                                           255, 8, 33, 99),
                                                       isBold: true)
@@ -95,7 +104,7 @@ class _TestResultsState extends ConsumerState<TestResults> {
                         Column(
                           children: [
                             Container(
-                              child: const Padding(
+                              child: Padding(
                                 padding: EdgeInsets.only(
                                     left: 0, top: 10, bottom: 10),
                                 child: Row(
@@ -109,18 +118,19 @@ class _TestResultsState extends ConsumerState<TestResults> {
                                           width: 200,
                                           child: TextCustom(
                                             size: 17,
-                                            text:
-                                                "Progressive Depressive Dissorder",
+                                            text: pastDiagnosisState[index_1]
+                                                ["result"],
                                             isBold: true,
                                             color:
                                                 Color.fromARGB(255, 8, 33, 99),
                                             overflow: true,
                                           ),
                                         ),
-                                        H(h: 11),
+                                        H(h: 10),
                                         TextCustom(
                                           size: 15,
-                                          text: "Wed, 23 June 2024",
+                                          text: pastDiagnosisState[index_1]
+                                              ["createdAt"],
                                           color: Colors.black,
                                         ),
                                       ],
