@@ -27,8 +27,6 @@ class PastDiagnosesController extends StateNotifier<List> {
           .format(DateTime.parse(element_1["createdAt"]));
       return questionResponse_2;
     }).toList();
-    print(newStateList);
-
     state = newStateList;
   }
 }

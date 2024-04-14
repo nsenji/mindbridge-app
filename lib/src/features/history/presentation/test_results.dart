@@ -167,7 +167,6 @@ class _TestResultsState extends ConsumerState<TestResults> {
         ],
       ),
       loading: () {
-        print("i am loading as we speak");
         return CustomScrollView(
           slivers: [
             SliverList(
