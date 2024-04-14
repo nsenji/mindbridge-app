@@ -5,6 +5,7 @@ import 'package:medbridge/src/common_widgets/text_template.dart';
 import 'package:medbridge/src/features/history/data/all_questions.dart';
 import 'package:medbridge/src/features/history/data/past_diagnosis_repository.dart';
 import 'package:medbridge/src/features/history/presentation/past_diagnoses_controller.dart';
+import 'package:medbridge/src/features/history/presentation/result_shimmer_screen.dart';
 import 'package:medbridge/src/features/profile/presentation/current_user_controller.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -175,15 +176,7 @@ class _TestResultsState extends ConsumerState<TestResults> {
                 return Padding(
                     padding: const EdgeInsets.only(
                         bottom: 10, right: 15, left: 15, top: 10),
-                    child: Shimmer.fromColors(
-                      baseColor: Colors.grey.shade300,
-                      highlightColor: Colors.grey.shade100,
-                      child: Container(
-                        color: Colors.grey,
-                        width: double.maxFinite,
-                        height: 75,
-                      ),
-                    ));
+                    child: ResultCardShimmer());
               }),
             )
           ],

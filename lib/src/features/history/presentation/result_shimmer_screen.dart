@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:shimmer/shimmer.dart';
 
-class DoctorCardShimmer extends StatelessWidget {
-  const DoctorCardShimmer({
+class ResultCardShimmer extends StatelessWidget {
+  const ResultCardShimmer({
     super.key,
   });
 
@@ -24,15 +24,7 @@ class DoctorCardShimmer extends StatelessWidget {
           children: [
             Row(
               children: [
-                Shimmer.fromColors(
-                  baseColor: Colors.grey.shade300,
-                  highlightColor: Colors.grey.shade100,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.grey,
-                    radius: 50,
-                  ),
-                ),
-                W(w: 15),
+               
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -41,27 +33,7 @@ class DoctorCardShimmer extends StatelessWidget {
                       highlightColor: Colors.grey.shade100,
                       child: Container(
                         height: 10,
-                        width: 150,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    H(h: 10),
-                    Shimmer.fromColors(
-                      baseColor: Colors.grey.shade300,
-                      highlightColor: Colors.grey.shade100,
-                      child: Container(
-                        height: 10,
-                        width: 150,
-                        color: Colors.grey,
-                      ),
-                    ),
-                    H(h: 10),
-                    Shimmer.fromColors(
-                      baseColor: Colors.grey.shade300,
-                      highlightColor: Colors.grey.shade100,
-                      child: Container(
-                        height: 10,
-                        width: 150,
+                        width: 200,
                         color: Colors.grey,
                       ),
                     ),
@@ -71,10 +43,11 @@ class DoctorCardShimmer extends StatelessWidget {
                       highlightColor: Colors.grey.shade100,
                       child: Container(
                         height: 10,
-                        width: 210,
+                        width: 150,
                         color: Colors.grey,
                       ),
                     ),
+                   
                   ],
                 )
               ],

@@ -39,7 +39,7 @@ final pastDiagnosissRepositoryProvider =
 });
 
 final getpastdiagnosisListFutureProvider =
-    FutureProvider.family<bool, String>((ref, patientID) {
+    FutureProvider.autoDispose.family<bool, String>((ref, patientID) {
   final pastDiagnosisRepository = ref.watch(pastDiagnosissRepositoryProvider);
   final pastDiagnosesController =
       ref.read(pastDiagnosesControllerProvider.notifier);
