@@ -16,10 +16,12 @@ class BookAppointment extends ConsumerStatefulWidget {
   final String proTitle;
   final String hospitalName;
   final int rate;
+  final String doctorID;
   const BookAppointment(
       {super.key,
       required this.doctorName,
       required this.hospitalName,
+      required this.doctorID,
       required this.proTitle,
       required this.rate});
 
@@ -37,7 +39,7 @@ class _BookAppointmentState extends ConsumerState<BookAppointment> {
     List timeslotsProvider = ref.watch(timeslotsControllerProvider);
     List dateProvider = ref.watch(dateControllerProvider);
 
-     String selectedDate = ref.watch(selectedDateControllerProvider);
+    String selectedDate = ref.watch(selectedDateControllerProvider);
     String selectedTime = ref.watch(selectedTimeControllerProvider);
 
     return Scaffold(
@@ -231,11 +233,11 @@ class _BookAppointmentState extends ConsumerState<BookAppointment> {
                               setState(() {
                                 _time_value = selected ? index : null;
                               });
-                               ref
-                                .read(selectedTimeControllerProvider.notifier)
-                                .setTime(selected
-                                    ? "${timeslotsProvider[index]}"
-                                    : "");
+                              ref
+                                  .read(selectedTimeControllerProvider.notifier)
+                                  .setTime(selected
+                                      ? "${timeslotsProvider[index]}"
+                                      : "");
                             },
                           ),
                         );
@@ -257,7 +259,11 @@ class _BookAppointmentState extends ConsumerState<BookAppointment> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => AppointmentSummary(doctorName: widget.doctorName,rate: widget.rate,)));
+                            builder: (context) => AppointmentSummary(
+                              doctorID: widget.doctorID,
+                                  doctorName: widget.doctorName,
+                                  rate: widget.rate,
+                                )));
                   }
                 }),
           )

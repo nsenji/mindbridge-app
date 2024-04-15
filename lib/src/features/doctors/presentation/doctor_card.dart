@@ -10,6 +10,7 @@ import 'package:medbridge/src/features/doctors/presentation/controllers_provider
 class DoctorCard extends ConsumerStatefulWidget {
   final List timeSlots;
   final String doctorName;
+  final String doctorID;
   final String proTitle;
   final String hospitalName;
   final String languagesSPoken;
@@ -19,6 +20,7 @@ class DoctorCard extends ConsumerStatefulWidget {
       {super.key,
       required this.doctorName,
       required this.proTitle,
+      required this.doctorID,
       required this.languagesSPoken,
       required this.rate,
       required this.medSpecialty,
@@ -130,7 +132,13 @@ class _DoctorCardState extends ConsumerState<DoctorCard> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => BookAppointment(doctorName: widget.doctorName ,hospitalName: widget.hospitalName,proTitle: widget.proTitle,rate:widget.rate ,)));
+                                      builder: (context) => BookAppointment(
+                                        doctorID: widget.doctorID,
+                                            doctorName: widget.doctorName,
+                                            hospitalName: widget.hospitalName,
+                                            proTitle: widget.proTitle,
+                                            rate: widget.rate,
+                                          )));
                             })
                       ],
                     )

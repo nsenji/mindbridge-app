@@ -26,7 +26,6 @@ class AppointmentsRepository {
       },
     );
     var value = jsonDecode(response.body);
-    print(value["data"]);
     appointmentsController.setList(value["data"]);
     return true;
   }

@@ -159,6 +159,7 @@ class _SelectDoctorsState extends ConsumerState<SelectDoctors> {
                           padding: const EdgeInsets.only(
                               bottom: 10, right: 10, left: 10),
                           child: DoctorCard(
+                            doctorID:doctorList[index]["dataValues"]["doc_ID"] ,
                               doctorName: doctorList[index]["dataValues"]
                                   ["name"],
                               proTitle: doctorList[index]["dataValues"]

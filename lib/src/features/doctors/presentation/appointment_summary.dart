@@ -1,24 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
+import 'package:medbridge/src/features/doctors/presentation/controllers_providers/selected_date_controller.dart';
+import 'package:medbridge/src/features/doctors/presentation/controllers_providers/selected_time_controller.dart';
 import 'package:medbridge/src/features/doctors/presentation/summary_card.dart';
 import 'package:medbridge/src/features/navbar/navbar.dart';
+import 'package:medbridge/src/features/payments/data/payment_repository.dart';
+import 'package:medbridge/src/features/payments/presentation/done_payment_controller.dart';
+import 'package:medbridge/src/features/payments/presentation/pay_button_state_controller.dart';
+import 'package:medbridge/src/features/profile/presentation/current_user_controller.dart';
 
-class AppointmentSummary extends StatefulWidget {
+class AppointmentSummary extends ConsumerStatefulWidget {
   final String doctorName;
   final int rate;
-  const AppointmentSummary({super.key, required this.doctorName, required this.rate});
+  final String doctorID;
+  const AppointmentSummary(
+      {super.key,
+      required this.doctorName,
+      required this.rate,
+      required this.doctorID});
 
   @override
-  State<AppointmentSummary> createState() => _AppointmentSummaryState();
+  ConsumerState<AppointmentSummary> createState() => _AppointmentSummaryState();
 }
 
-class _AppointmentSummaryState extends State<AppointmentSummary> {
-  bool donePayment = false;
+class _AppointmentSummaryState extends ConsumerState<AppointmentSummary> {
+  bool disabled = false;
 
   @override
   Widget build(BuildContext context) {
+    bool donePayment = ref.watch(donePaymentControllerProvider);
+    Map currentUser = ref.watch(currentUserControllerProvider);
+    String selectedDate = ref.watch(selectedDateControllerProvider);
+    String selectedTime = ref.watch(selectedTimeControllerProvider);
+    bool payButtonState = ref.watch(payButtonControllerProvider);
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 60,
@@ -75,21 +92,34 @@ class _AppointmentSummaryState extends State<AppointmentSummary> {
                 bottom: 30,
               ),
               child: MainButton(
+                  disabled: payButtonState,
                   text: donePayment ? "Done" : "Process payment",
                   onpressed: () {
+                    ref
+                        .read(payButtonControllerProvider.notifier)
+                        .setState(true);
+
+                    String txRef = generateRandomString();
+
                     !donePayment
-                        ? setState(() {
-                            donePayment = true;
-                          })
-                        : setState(() {
-                            Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (context) => const NavBar()),
-                              (Route<dynamic> route) =>
-                                  false, // Remove all routes from the stack
-                            );
-                          });
-                    
+                        ? handlePaymentInitialization(
+                            ref,
+                            currentUser["name"],
+                            "",
+                            currentUser["email"],
+                            widget.rate,
+                            txRef,
+                            currentUser["patientID"],
+                            widget.doctorID,
+                            selectedTime,
+                            selectedDate,
+                            context)
+                        : Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => const NavBar()),
+                            (Route<dynamic> route) =>
+                                false, // Remove all routes from the stack
+                          );
                   }),
             )
           ],
