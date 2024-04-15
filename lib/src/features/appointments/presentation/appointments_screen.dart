@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
+import 'package:medbridge/src/features/appointments/data/appointments_repository.dart';
 import 'package:medbridge/src/features/appointments/presentation/appointment_card.dart';
+import 'package:medbridge/src/features/appointments/presentation/appointment_shimmer.dart';
+import 'package:medbridge/src/features/appointments/presentation/appointments_controller.dart';
 import 'package:medbridge/src/features/profile/presentation/current_user_controller.dart';
 import 'package:medbridge/src/features/profile/presentation/profile_widget.dart';
 
@@ -17,7 +20,10 @@ class _AppointmentsScreenState extends ConsumerState<AppointmentsScreen> {
   var status = [false, false, true];
   @override
   Widget build(BuildContext context) {
-        Map currentUser = ref.watch(currentUserControllerProvider);
+    Map currentUser = ref.watch(currentUserControllerProvider);
+    List currentAppointments = ref.watch(appointmentsControllerProvider);
+    var asyncValue =
+        ref.watch(getappointmentsListFutureProvider(currentUser["patientID"]));
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -57,7 +63,9 @@ class _AppointmentsScreenState extends ConsumerState<AppointmentsScreen> {
                                           backgroundColor:
                                               Color.fromARGB(255, 8, 33, 99),
                                           child: TextCustom(
-                                            text: currentUser["name"][0].toString().toUpperCase(),
+                                            text: currentUser["name"][0]
+                                                .toString()
+                                                .toUpperCase(),
                                             color: Colors.white,
                                             isBold: true,
                                           ),
@@ -71,17 +79,16 @@ class _AppointmentsScreenState extends ConsumerState<AppointmentsScreen> {
                                               MainAxisAlignment.center,
                                           children: [
                                             TextCustom(
-                                                size: 18,
-                                                text: currentUser["name"],
-                                                isBold: true,
-                                              ),
-                                              TextCustom(
-                                                size: 15,
-                                                text:
-                                                    currentUser["email"],
-                                                color: Color.fromARGB(
-                                                    255, 122, 122, 122),
-                                              ),
+                                              size: 18,
+                                              text: currentUser["name"],
+                                              isBold: true,
+                                            ),
+                                            TextCustom(
+                                              size: 15,
+                                              text: currentUser["email"],
+                                              color: Color.fromARGB(
+                                                  255, 122, 122, 122),
+                                            ),
                                           ],
                                         ),
                                         Spacer(),
@@ -109,7 +116,10 @@ class _AppointmentsScreenState extends ConsumerState<AppointmentsScreen> {
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(right: 10.0),
-                  child: ProfileWidget(firstLetter: currentUser["name"][0].toString().toUpperCase(),),
+                  child: ProfileWidget(
+                    firstLetter:
+                        currentUser["name"][0].toString().toUpperCase(),
+                  ),
                 ),
               )
             ],
@@ -123,16 +133,40 @@ class _AppointmentsScreenState extends ConsumerState<AppointmentsScreen> {
               ),
             ),
           ),
-          SliverList(
-            delegate:
-                SliverChildBuilderDelegate(childCount: 3, (context, index) {
-              return Padding(
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-                child: AppointmentCard(
-                  ready: status[index],
+          asyncValue.when(
+            data: (newData) {
+              return SliverList(
+                delegate:
+                    SliverChildBuilderDelegate(childCount: currentAppointments.length, (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                    child: AppointmentCard(
+                      doctorName: "Dr ${currentAppointments[index]["doctor"]["name"]}",
+                      date: currentAppointments[index]["date"],
+                      time: currentAppointments[index]["time"],
+                    ),
+                  );
+                }),
+              );
+            },
+            error: (error, stackTrace) {
+              return SliverToBoxAdapter(
+                child: Center(
+                  child: Text(error.toString()),
                 ),
               );
-            }),
+            },
+            loading: () {
+              return SliverList(
+                delegate:
+                    SliverChildBuilderDelegate(childCount: 3, (context, index) {
+                  return Padding(
+                      padding: const EdgeInsets.only(
+                           right: 10, left: 10, top: 10),
+                      child: AppointmentShimmer());
+                }),
+              );
+            },
           ),
         ],
       ),

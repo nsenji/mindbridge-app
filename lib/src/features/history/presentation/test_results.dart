@@ -7,7 +7,6 @@ import 'package:medbridge/src/features/history/data/past_diagnosis_repository.da
 import 'package:medbridge/src/features/history/presentation/past_diagnoses_controller.dart';
 import 'package:medbridge/src/features/history/presentation/result_shimmer_screen.dart';
 import 'package:medbridge/src/features/profile/presentation/current_user_controller.dart';
-import 'package:shimmer/shimmer.dart';
 
 class TestResults extends ConsumerStatefulWidget {
   const TestResults({super.key});
@@ -175,7 +174,7 @@ class _TestResultsState extends ConsumerState<TestResults> {
                   SliverChildBuilderDelegate(childCount: 3, (context, index) {
                 return Padding(
                     padding: const EdgeInsets.only(
-                        bottom: 10, right: 15, left: 15, top: 10),
+                        right: 10, left: 10, top: 10),
                     child: ResultCardShimmer());
               }),
             )

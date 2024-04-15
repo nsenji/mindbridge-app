@@ -89,7 +89,7 @@ class _AppointmentSummaryState extends State<AppointmentSummary> {
                                   false, // Remove all routes from the stack
                             );
                           });
-                    ;
+                    
                   }),
             )
           ],

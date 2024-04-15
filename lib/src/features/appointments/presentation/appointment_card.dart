@@ -3,15 +3,30 @@ import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
 import 'package:medbridge/src/features/video_call/presentation/join_screen.dart';
 
-class AppointmentCard extends StatefulWidget {
+class AppointmentCard extends StatelessWidget {
+  final String doctorName;
+  final String date;
+  final String time;
   final bool ready;
-  const AppointmentCard({super.key, required this.ready});
+  AppointmentCard(
+      {super.key,
+      required this.doctorName,
+      required this.date,
+      required this.time})
+      : ready = _calculateReady(date);
 
-  @override
-  State<AppointmentCard> createState() => _AppointmentCardState();
-}
+  static bool _calculateReady(String date) {
+    DateTime dueDate = DateTime.parse(date);
+    DateTime now = DateTime.now();
 
-class _AppointmentCardState extends State<AppointmentCard> {
+    // If the date is not today, return false else true
+    if (dueDate.day == now.day && dueDate.month == now.month) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -36,17 +51,17 @@ class _AppointmentCardState extends State<AppointmentCard> {
                         children: [
                           TextCustom(
                               size: 17.5,
-                              text: "Dr Frank James",
+                              text: doctorName,
                               isBold: true,
                               color: Color.fromARGB(255, 8, 33, 99)),
                           TextCustom(
                             size: 14,
-                            text: "Wed, 23 June 2024",
+                            text: date,
                             color: Colors.black,
                           ),
                           TextCustom(
                             size: 13,
-                            text: "9:12 AM (60 min)",
+                            text: "$time (60 min)",
                             color: Colors.black,
                           ),
                         ],
@@ -60,7 +75,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
           Padding(
             padding: const EdgeInsets.only(right: 15),
             child: GestureDetector(
-              onTap: widget.ready
+              onTap: ready
                   ? () {
                       Navigator.push(
                           context,
@@ -70,7 +85,7 @@ class _AppointmentCardState extends State<AppointmentCard> {
                   : null,
               child: Container(
                 decoration: BoxDecoration(
-                    color: widget.ready ? Colors.green : Colors.grey,
+                    color: ready ? Colors.green : Colors.grey,
                     borderRadius: BorderRadius.circular(20)),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
