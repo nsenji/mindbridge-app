@@ -1,14 +1,16 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TimeslotsController extends StateNotifier<List> {
-  TimeslotsController() : super([]);
+  final String doctorID;
+  TimeslotsController({required this.doctorID}) : super([]);
 
-  void setList(List newList) {
+  void setList(List newList) async {
     state = newList;
   }
 }
 
 final timeslotsControllerProvider =
-    StateNotifierProvider<TimeslotsController, List>((ref) {
-  return TimeslotsController();
+    StateNotifierProvider.family<TimeslotsController, List, String>(
+        (ref, doctorID) {
+  return TimeslotsController(doctorID: doctorID);
 });

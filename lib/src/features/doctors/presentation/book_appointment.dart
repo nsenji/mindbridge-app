@@ -30,13 +30,21 @@ class BookAppointment extends ConsumerStatefulWidget {
 }
 
 class _BookAppointmentState extends ConsumerState<BookAppointment> {
+  @override
+  void initState() {
+    super.initState();
+    _value = null;
+    _time_value = null;
+  }
+
   int? _value;
   int? _time_value;
   bool disabled = false;
 
   @override
   Widget build(BuildContext context) {
-    List timeslotsProvider = ref.watch(timeslotsControllerProvider);
+    List timeslotsProvider =
+        ref.watch(timeslotsControllerProvider(widget.doctorID));
     List dateProvider = ref.watch(dateControllerProvider);
 
     String selectedDate = ref.watch(selectedDateControllerProvider);
@@ -171,15 +179,17 @@ class _BookAppointmentState extends ConsumerState<BookAppointment> {
                               _value = selected ? index : null;
                             });
                             ref
-                                .read(timeslotsControllerProvider.notifier)
-                                .setList(selected
-                                    ? dateProvider[index]["time_slots"]
-                                    : []);
-                            ref
                                 .read(selectedDateControllerProvider.notifier)
                                 .setDate(selected
                                     ? "${dateProvider[index]["dayName"]}, ${dateProvider[index]["day"]} ${dateProvider[index]["month"]} ${dateProvider[index]["year"]}"
                                     : "");
+                            ref
+                                .read(
+                                    timeslotsControllerProvider(widget.doctorID)
+                                        .notifier)
+                                .setList(selected
+                                    ? dateProvider[index]["time_slots"]
+                                    : []);
                           },
                         ),
                       );
@@ -253,6 +263,10 @@ class _BookAppointmentState extends ConsumerState<BookAppointment> {
                 disabled: disabled,
                 text: "Confirm",
                 onpressed: () {
+                  setState(() {
+                    _value = null;
+                    _time_value = null;
+                  });
                   if (selectedTime.isEmpty || selectedDate.isEmpty) {
                     CustomSnackBar.show(context, "Select date and time", true);
                   } else {
@@ -260,7 +274,7 @@ class _BookAppointmentState extends ConsumerState<BookAppointment> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => AppointmentSummary(
-                              doctorID: widget.doctorID,
+                                  doctorID: widget.doctorID,
                                   doctorName: widget.doctorName,
                                   rate: widget.rate,
                                 )));

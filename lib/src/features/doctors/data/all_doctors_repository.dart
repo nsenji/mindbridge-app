@@ -8,8 +8,6 @@ class AllDoctorsRepository {
   const AllDoctorsRepository();
 
   Future<List> getallDoctors(AllDoctorsController allDoctorsController) async {
-
-    await Future.delayed(Duration(seconds: 1));
     // String url = "http://192.168.43.145:3000/alldoctors/getalldoctors";
     // String url = "http://localhost:3000/alldoctors/getalldoctors";
     String url =
@@ -29,6 +27,8 @@ class AllDoctorsRepository {
     allDoctorsController.setDoctorList(returnValue);
     return returnValue;
   }
+
+  
 }
 
 final alldoctorsRepositoryProvider = Provider<AllDoctorsRepository>((ref) {
@@ -38,7 +38,6 @@ final alldoctorsRepositoryProvider = Provider<AllDoctorsRepository>((ref) {
 final getalldoctorsFutureProvider = FutureProvider.autoDispose<List>((ref) {
   final alldoctorsRepository = ref.watch(alldoctorsRepositoryProvider);
   var allDoctorsController = ref.read(alldoctorsControllerProvider.notifier);
-
   return alldoctorsRepository.getallDoctors(allDoctorsController);
 });
 

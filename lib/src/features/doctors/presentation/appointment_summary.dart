@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:medbridge/src/common_widgets/custom_snackbar.dart';
 import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
@@ -11,6 +14,7 @@ import 'package:medbridge/src/features/payments/data/payment_repository.dart';
 import 'package:medbridge/src/features/payments/presentation/done_payment_controller.dart';
 import 'package:medbridge/src/features/payments/presentation/pay_button_state_controller.dart';
 import 'package:medbridge/src/features/profile/presentation/current_user_controller.dart';
+import 'package:http/http.dart' as http;
 
 class AppointmentSummary extends ConsumerStatefulWidget {
   final String doctorName;
@@ -27,6 +31,40 @@ class AppointmentSummary extends ConsumerStatefulWidget {
 }
 
 class _AppointmentSummaryState extends ConsumerState<AppointmentSummary> {
+  Future<bool> _getTakenTimeslots(
+      String doctorID, String selectedDate, String selectedTime) async {
+    String url =
+        "https://final-project-backend-production-273c.up.railway.app/appointments/takentimeslots";
+
+    Map<String, dynamic> data = {"doctorID": doctorID, "date": selectedDate};
+
+    var jsonData = jsonEncode(data);
+
+    final response = await http.post(
+      Uri.parse(url),
+      body: jsonData,
+      headers: {
+        'Content-Type':
+            'application/json', // strictly Add the Content-Type header
+      },
+    );
+    var value = jsonDecode(response.body);
+    // print(value);
+
+    var returnValue = value["data"];
+
+    List selectedTimeslotsList = returnValue;
+
+    int evidence = 0;
+    for (var element in selectedTimeslotsList) {
+      if (element["time"] == selectedTime) {
+        evidence++;
+      }
+    }
+
+    return evidence > 0;
+  }
+
   bool disabled = false;
 
   @override
@@ -94,32 +132,43 @@ class _AppointmentSummaryState extends ConsumerState<AppointmentSummary> {
               child: MainButton(
                   disabled: payButtonState,
                   text: donePayment ? "Done" : "Process payment",
-                  onpressed: () {
+                  onpressed: () async {
                     ref
                         .read(payButtonControllerProvider.notifier)
                         .setState(true);
 
                     String txRef = generateRandomString();
 
-                    !donePayment
-                        ? handlePaymentInitialization(
-                            ref,
-                            currentUser["name"],
-                            "",
-                            currentUser["email"],
-                            widget.rate,
-                            txRef,
-                            currentUser["patientID"],
-                            widget.doctorID,
-                            selectedTime,
-                            selectedDate,
-                            context)
-                        : Navigator.of(context).pushAndRemoveUntil(
-                            MaterialPageRoute(
-                                builder: (context) => const NavBar()),
-                            (Route<dynamic> route) =>
-                                false, // Remove all routes from the stack
-                          );
+                    bool value = await _getTakenTimeslots(
+                        widget.doctorID, selectedDate, selectedTime);
+
+                    if (value) {
+                      CustomSnackBar.show(
+                          context, "Unavailable: Select different time", true);
+                      ref
+                          .read(payButtonControllerProvider.notifier)
+                          .setState(false);
+                    } else {
+                      !donePayment
+                          ? handlePaymentInitialization(
+                              ref,
+                              currentUser["name"],
+                              "",
+                              currentUser["email"],
+                              widget.rate,
+                              txRef,
+                              currentUser["patientID"],
+                              widget.doctorID,
+                              selectedTime,
+                              selectedDate,
+                              context)
+                          : Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (context) => const NavBar()),
+                              (Route<dynamic> route) =>
+                                  false, // Remove all routes from the stack
+                            );
+                    }
                   }),
             )
           ],

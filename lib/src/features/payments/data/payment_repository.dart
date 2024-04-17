@@ -89,7 +89,7 @@ Future<bool> createAppointment(
   var jsonData = jsonEncode(data);
 
   try {
-    final response = await http.post(
+    await http.post(
       Uri.parse(url),
       body: jsonData,
       headers: {
@@ -97,9 +97,9 @@ Future<bool> createAppointment(
             'application/json', // strictly Add the Content-Type header
       },
     );
-    var value = jsonDecode(response.body);
+    // var value = jsonDecode(response.body);
 
-    var returnValue = value["data"];
+    // var returnValue = value["data"];
     return true;
   } catch (error) {
     return false;
@@ -121,7 +121,7 @@ Future<bool> createPayment(String patientID, String doctorID, String time,
   var jsonData = jsonEncode(data);
 
   try {
-    final response = await http.post(
+    await http.post(
       Uri.parse(url),
       body: jsonData,
       headers: {
@@ -129,9 +129,9 @@ Future<bool> createPayment(String patientID, String doctorID, String time,
             'application/json', // strictly Add the Content-Type header
       },
     );
-    var value = jsonDecode(response.body);
+    // var value = jsonDecode(response.body);
 
-    var returnValue = value["data"];
+    // var returnValue = value["data"];
     return true;
   } catch (error) {
     return false;
