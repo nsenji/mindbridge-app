@@ -59,18 +59,27 @@ void handlePaymentInitialization(
   ChargeResponse response = await flutterwave.charge();
 
   if (response.toJson()["status"] == "successful") {
-    bool value_1 = await createPayment(patientID, doctorID, time, date, rate);
+    try {
+      bool value_1 = await createPayment(patientID, doctorID, time, date, rate);
 
-    if (value_1) {
-      bool value_2 = await createAppointment(patientID, doctorID, time, date);
-      if (value_2) {
-        ref.read(donePaymentControllerProvider.notifier).setState(true);
-        ref.read(payButtonControllerProvider.notifier).setState(false);
+      if (value_1) {
+        bool value_2 = await createAppointment(patientID, doctorID, time, date);
+        if (value_2) {
+          ref.read(donePaymentControllerProvider.notifier).setState(true);
+          ref.read(payButtonControllerProvider.notifier).setState(false);
+        }
       }
+    } catch (error) {
+      ref.read(payButtonControllerProvider.notifier).setState(false);
+
+      CustomSnackBar.show(
+          context, "Error updating payments", true);
     }
   } else {
+    ref.read(payButtonControllerProvider.notifier).setState(false);
+
     CustomSnackBar.show(
-        context, "Error with payment ${response.toString()}", true);
+        context, "Error with payment. Retry", true);
   }
 }
 
