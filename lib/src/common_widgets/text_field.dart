@@ -18,9 +18,9 @@ class TextFieldWidget extends StatefulWidget {
       this.obscureText = false,
       required this.controller,
       this.textcolor = Colors.black,
-      this.borderSideColor = const Color.fromARGB(255, 160, 187, 253),
+      this.borderSideColor = const Color(0xFF082163),
       required this.label,
-      this.labelColor = Colors.black,
+      this.labelColor = Colors.grey,
       this.keyBoardType = TextInputType.name,
       this.backgroundColor = Colors.white,
       required this.onChanged});

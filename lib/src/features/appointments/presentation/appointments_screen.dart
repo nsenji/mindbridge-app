@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lottie/lottie.dart';
+import 'package:medbridge/src/common_widgets/outlined_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
 import 'package:medbridge/src/features/appointments/data/appointments_repository.dart';
@@ -17,7 +19,6 @@ class AppointmentsScreen extends ConsumerStatefulWidget {
 }
 
 class _AppointmentsScreenState extends ConsumerState<AppointmentsScreen> {
-  var status = [false, false, true];
   @override
   Widget build(BuildContext context) {
     Map currentUser = ref.watch(currentUserControllerProvider);
@@ -26,7 +27,6 @@ class _AppointmentsScreenState extends ConsumerState<AppointmentsScreen> {
         ref.watch(getappointmentsListFutureProvider(currentUser["patientID"]));
 
     return Scaffold(
-      backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -135,24 +135,63 @@ class _AppointmentsScreenState extends ConsumerState<AppointmentsScreen> {
           ),
           asyncValue.when(
             data: (newData) {
-              return SliverList(
-                delegate:
-                    SliverChildBuilderDelegate(childCount: currentAppointments.length, (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-                    child: AppointmentCard(
-                      doctorName: "Dr ${currentAppointments[index]["doctor"]["name"]}",
-                      date: currentAppointments[index]["date"],
-                      time: currentAppointments[index]["time"],
-                    ),
-                  );
-                }),
-              );
+              return currentAppointments.isEmpty
+                  ? SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 90),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Lottie.asset(
+                                "assets/images/empty_list_animation.json",
+                                width: 230,
+                                height: 230,
+                                fit: BoxFit.fill),
+                            TextCustom(
+                              text: "You have no appointments",
+                              isBold: true,
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  : SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                          childCount: currentAppointments.length,
+                          (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+                          child: AppointmentCard(
+                            doctorName:
+                                "Dr ${currentAppointments[index]["doctor"]["name"]}",
+                            date: currentAppointments[index]["date"],
+                            time: currentAppointments[index]["time"],
+                          ),
+                        );
+                      }),
+                    );
             },
             error: (error, stackTrace) {
               return SliverToBoxAdapter(
-                child: Center(
-                  child: Text(error.toString()),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 90),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Lottie.asset("assets/images/network_error_animation.json",
+                          width: 230, height: 230, fit: BoxFit.fill),
+                      TextCustom(
+                        text: "Network Error",
+                        isBold: true,
+                      ),
+                      H(h: 20),
+                      Padding(
+                          padding: const EdgeInsets.only(left: 120, right: 120),
+                          child: OutButton(text: "Retry", onpressed: () {setState(() {
+                            // rebuild so that the widget calles the future provider again
+                          });}))
+                    ],
+                  ),
                 ),
               );
             },
@@ -161,8 +200,7 @@ class _AppointmentsScreenState extends ConsumerState<AppointmentsScreen> {
                 delegate:
                     SliverChildBuilderDelegate(childCount: 3, (context, index) {
                   return Padding(
-                                          padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-
+                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
                       child: AppointmentShimmer());
                 }),
               );

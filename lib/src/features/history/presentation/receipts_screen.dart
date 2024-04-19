@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lottie/lottie.dart';
+import 'package:medbridge/src/common_widgets/outlined_button.dart';
+import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
+import 'package:medbridge/src/common_widgets/text_template.dart';
 import 'package:medbridge/src/features/history/data/history_repository.dart';
 import 'package:medbridge/src/features/history/presentation/receipt.dart';
 import 'package:medbridge/src/features/history/presentation/receipt_shimmer.dart';
@@ -20,23 +24,41 @@ class _ReceiptsState extends ConsumerState<Receipts> {
         ref.watch(getPatmentsListFutureProvider(currentUserState["patientID"]));
 
     return getPayments.when(data: (newData) {
-      return (CustomScrollView(
+      return CustomScrollView(
         slivers: [
-          SliverList(
-              delegate: SliverChildBuilderDelegate(childCount: newData.length,
-                  (context, index) {
-            return Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-              child: Receipt(
-                  time: newData[index]["time"],
-                  date: newData[index]["date"],
-                  checkmark: true,
-                  doctorName: newData[index]["doctor"]["name"],
-                  rate: newData[index]["amount"]),
-            );
-          })),
+          newData.isEmpty
+              ? SliverToBoxAdapter(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 90),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Lottie.asset("assets/images/empty_list_animation.json",
+                            width: 230, height: 230, fit: BoxFit.fill),
+                        TextCustom(
+                          text: "You have no receipts",
+                          isBold: true,
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              : SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                      childCount: newData.length, (context, index) {
+                  return Padding(
+                    padding:
+                        const EdgeInsets.only(left: 10, right: 10, top: 10),
+                    child: Receipt(
+                        time: newData[index]["time"],
+                        date: newData[index]["date"],
+                        checkmark: true,
+                        doctorName: newData[index]["doctor"]["name"],
+                        rate: newData[index]["amount"]),
+                  );
+                })),
         ],
-      ));
+      );
     }, loading: () {
       return CustomScrollView(
         slivers: [
@@ -51,10 +73,36 @@ class _ReceiptsState extends ConsumerState<Receipts> {
         ],
       );
     }, error: (error, stackTrace) {
-      return Container(
-          child: Center(
-        child: Text(error.toString()),
-      ));
+      return CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 90),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Lottie.asset("assets/images/network_error_animation.json",
+                      width: 230, height: 230, fit: BoxFit.fill),
+                  TextCustom(
+                    text: "Network Error",
+                    isBold: true,
+                  ),
+                  H(h: 20),
+                  Padding(
+                      padding: const EdgeInsets.only(left: 120, right: 120),
+                      child: OutButton(
+                          text: "Retry",
+                          onpressed: () {
+                            setState(() {
+                              // rebuild so that the widget calles the future provider again
+                            });
+                          }))
+                ],
+              ),
+            ),
+          ),
+        ],
+      );
     });
   }
 }
