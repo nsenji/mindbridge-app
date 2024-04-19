@@ -8,7 +8,7 @@ import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
 import 'package:medbridge/src/features/doctors/presentation/controllers_providers/selected_date_controller.dart';
 import 'package:medbridge/src/features/doctors/presentation/controllers_providers/selected_time_controller.dart';
-import 'package:medbridge/src/features/doctors/presentation/summary_card.dart';
+import 'package:medbridge/src/features/doctors/presentation/selected_summary_card.dart';
 import 'package:medbridge/src/features/navbar/navbar.dart';
 import 'package:medbridge/src/features/payments/data/payment_repository.dart';
 import 'package:medbridge/src/features/payments/presentation/done_payment_controller.dart';
@@ -90,7 +90,7 @@ class _AppointmentSummaryState extends ConsumerState<AppointmentSummary> {
         padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
         child: Column(
           children: [
-            SummaryCard(
+            SelectedSummaryCard(
               rate: widget.rate,
               doctorName: widget.doctorName,
               checkmark: donePayment,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
-import 'package:medbridge/src/features/history/presentation/receipts.dart';
+import 'package:medbridge/src/features/history/presentation/receipts_screen.dart';
 import 'package:medbridge/src/features/history/presentation/test_results.dart';
 import 'package:medbridge/src/features/profile/presentation/current_user_controller.dart';
 import 'package:medbridge/src/features/profile/presentation/profile_widget.dart';

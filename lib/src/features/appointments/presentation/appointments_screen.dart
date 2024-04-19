@@ -161,8 +161,8 @@ class _AppointmentsScreenState extends ConsumerState<AppointmentsScreen> {
                 delegate:
                     SliverChildBuilderDelegate(childCount: 3, (context, index) {
                   return Padding(
-                      padding: const EdgeInsets.only(
-                           right: 10, left: 10, top: 10),
+                                          padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
+
                       child: AppointmentShimmer());
                 }),
               );

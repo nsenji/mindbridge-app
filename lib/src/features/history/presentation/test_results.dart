@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
 import 'package:medbridge/src/features/history/data/all_questions.dart';
-import 'package:medbridge/src/features/history/data/past_diagnosis_repository.dart';
+import 'package:medbridge/src/features/history/data/history_repository.dart';
 import 'package:medbridge/src/features/history/presentation/past_diagnoses_controller.dart';
 import 'package:medbridge/src/features/history/presentation/result_shimmer_screen.dart';
 import 'package:medbridge/src/features/profile/presentation/current_user_controller.dart';
@@ -31,7 +31,7 @@ class _TestResultsState extends ConsumerState<TestResults> {
           SliverList(
             delegate: SliverChildBuilderDelegate(
                 childCount: pastDiagnosisState.length, (context, index_1) {
-           Map   questionKeys = pastDiagnosisState[index_1]["q&a"];
+              Map questionKeys = pastDiagnosisState[index_1]["q&a"];
               return Padding(
                 padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
                 child: GestureDetector(
@@ -56,11 +56,9 @@ class _TestResultsState extends ConsumerState<TestResults> {
                                   slivers: [
                                     SliverList(
                                       delegate: SliverChildBuilderDelegate(
-                                          childCount:
-                                              questionKeys
-                                                  .keys
-                                                  .toList()
-                                                  .length, (context, index_2) {
+                                          childCount: questionKeys.keys
+                                              .toList()
+                                              .length, (context, index_2) {
                                         Map questionAndAnswer =
                                             pastDiagnosisState[index_1]["q&a"];
                                         return Padding(
@@ -173,8 +171,8 @@ class _TestResultsState extends ConsumerState<TestResults> {
               delegate:
                   SliverChildBuilderDelegate(childCount: 3, (context, index) {
                 return Padding(
-                    padding: const EdgeInsets.only(
-                        right: 10, left: 10, top: 10),
+                    padding:
+                        const EdgeInsets.only(right: 10, left: 10, top: 10),
                     child: ResultCardShimmer());
               }),
             )
