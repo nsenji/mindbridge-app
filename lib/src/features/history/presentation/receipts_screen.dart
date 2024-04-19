@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/features/history/data/history_repository.dart';
 import 'package:medbridge/src/features/history/presentation/receipt.dart';
 import 'package:medbridge/src/features/history/presentation/receipt_shimmer.dart';
-import 'package:medbridge/src/features/history/presentation/result_shimmer_screen.dart';
 import 'package:medbridge/src/features/profile/presentation/current_user_controller.dart';
 
 class Receipts extends ConsumerStatefulWidget {
@@ -43,7 +42,7 @@ class _ReceiptsState extends ConsumerState<Receipts> {
         slivers: [
           SliverList(
             delegate:
-                SliverChildBuilderDelegate(childCount: 3, (context, index) {
+                SliverChildBuilderDelegate(childCount: 2, (context, index) {
               return Padding(
                   padding: const EdgeInsets.only(right: 10, left: 10, top: 10),
                   child: ReceiptShimmer());
