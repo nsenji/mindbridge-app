@@ -15,7 +15,6 @@ class AppointmentsRepository {
     Map<String, dynamic> data = {
       "patientID": patientID,
     };
-
     var jsonData = jsonEncode(data);
     final response = await http.post(
       Uri.parse(url),

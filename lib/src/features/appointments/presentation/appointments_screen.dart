@@ -19,8 +19,12 @@ class AppointmentsScreen extends ConsumerStatefulWidget {
 }
 
 class _AppointmentsScreenState extends ConsumerState<AppointmentsScreen> {
+      bool isDisabled = false;
+
+
   @override
   Widget build(BuildContext context) {
+
     Map currentUser = ref.watch(currentUserControllerProvider);
     List currentAppointments = ref.watch(appointmentsControllerProvider);
     var asyncValue =
@@ -187,9 +191,32 @@ class _AppointmentsScreenState extends ConsumerState<AppointmentsScreen> {
                       H(h: 20),
                       Padding(
                           padding: const EdgeInsets.only(left: 120, right: 120),
-                          child: OutButton(text: "Retry", onpressed: () {setState(() {
-                            // rebuild so that the widget calles the future provider again
-                          });}))
+                          child: OutButton(
+                              disabled: isDisabled,
+                              text: "Retry",
+                              onpressed: () async {
+
+                                  setState(() {
+                                    isDisabled = true;
+                                  });
+                                try {
+                                  
+                                  bool value = await ref.refresh(
+                                      getappointmentsListFutureProvider(
+                                              currentUser["patientID"])
+                                          .future);
+
+                                  if (value) {
+                                    setState(() {
+                                      isDisabled = false;
+                                    });
+                                  }
+                                } catch (error) {
+                                  setState(() {
+                                    isDisabled = false;
+                                  });
+                                }
+                              }))
                     ],
                   ),
                 ),

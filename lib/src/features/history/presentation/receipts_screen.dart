@@ -17,6 +17,7 @@ class Receipts extends ConsumerStatefulWidget {
 }
 
 class _ReceiptsState extends ConsumerState<Receipts> {
+  bool isDisabled = false;
   @override
   Widget build(BuildContext context) {
     Map currentUserState = ref.watch(currentUserControllerProvider);
@@ -91,16 +92,31 @@ class _ReceiptsState extends ConsumerState<Receipts> {
                   Padding(
                       padding: const EdgeInsets.only(left: 120, right: 120),
                       child: OutButton(
+                          disabled: isDisabled,
                           text: "Retry",
-                          onpressed: () {
+                          onpressed: () async {
                             setState(() {
-                              // rebuild so that the widget calles the future provider again
+                              isDisabled = true;
                             });
+                            try {
+                              List value = await ref.refresh(
+                                  getPatmentsListFutureProvider(
+                                          currentUserState["patientID"])
+                                      .future);
+
+                              setState(() {
+                                isDisabled = false;
+                              });
+                            } catch (error) {
+                              setState(() {
+                                isDisabled = false;
+                              });
+                            }
                           }))
                 ],
               ),
             ),
-          ),
+          )
         ],
       );
     });

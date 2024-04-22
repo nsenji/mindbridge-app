@@ -18,6 +18,7 @@ class TestResults extends ConsumerStatefulWidget {
 }
 
 class _TestResultsState extends ConsumerState<TestResults> {
+  bool isDisabled = false;
   List allQuestionsList = all_questions;
 
   @override
@@ -229,16 +230,37 @@ class _TestResultsState extends ConsumerState<TestResults> {
                       text: "Network Error",
                       isBold: true,
                     ),
-                     H(h: 20),
-                      Padding(
-                          padding: const EdgeInsets.only(left: 120, right: 120),
-                          child: OutButton(text: "Retry", onpressed: () {setState(() {
-                            // rebuild so that the widget calles the future provider again
-                          });}))
+                    H(h: 20),
+                    Padding(
+                        padding: const EdgeInsets.only(left: 120, right: 120),
+                        child: OutButton(
+                            disabled: isDisabled,
+                            text: "Retry",
+                            onpressed: () async {
+                              setState(() {
+                                isDisabled = true;
+                              });
+                              try {
+                                bool value = await ref.refresh(
+                                    getpastdiagnosisListFutureProvider(
+                                            currentUserState["patientID"])
+                                        .future);
+
+                                if (value) {
+                                  setState(() {
+                                    isDisabled = false;
+                                  });
+                                }
+                              } catch (error) {
+                                setState(() {
+                                  isDisabled = false;
+                                });
+                              }
+                            }))
                   ],
                 ),
               ),
-            ),
+            )
           ],
         );
       },
