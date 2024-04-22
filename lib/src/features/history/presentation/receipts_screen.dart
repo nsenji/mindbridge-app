@@ -99,6 +99,7 @@ class _ReceiptsState extends ConsumerState<Receipts> {
                               isDisabled = true;
                             });
                             try {
+                              // ignore: unused_local_variable
                               List value = await ref.refresh(
                                   getPatmentsListFutureProvider(
                                           currentUserState["patientID"])

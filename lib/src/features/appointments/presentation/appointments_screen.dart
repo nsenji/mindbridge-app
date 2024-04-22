@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
-import 'package:medbridge/src/common_widgets/custom_snackbar.dart';
 import 'package:medbridge/src/common_widgets/outlined_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
@@ -33,6 +32,7 @@ class _AppointmentsScreenState extends ConsumerState<AppointmentsScreen> {
       body: RefreshIndicator(
         onRefresh: () async {
           try {
+            // ignore: unused_result
             await ref.refresh(
                 getappointmentsListFutureProvider(currentUser["patientID"])
                     .future);
