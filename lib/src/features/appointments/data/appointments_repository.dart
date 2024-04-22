@@ -35,7 +35,7 @@ final appointmentsRepositoryProvider = Provider<AppointmentsRepository>((ref) {
 });
 
 final getappointmentsListFutureProvider =
-    FutureProvider.autoDispose.family<bool, String>((ref, patientID) {
+    FutureProvider.family<bool, String>((ref, patientID) {
   final appointmentsRepository = ref.watch(appointmentsRepositoryProvider);
   final appointmentsStateProvider =
       ref.read(appointmentsControllerProvider.notifier);
