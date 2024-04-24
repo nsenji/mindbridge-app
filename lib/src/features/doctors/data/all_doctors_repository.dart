@@ -24,11 +24,10 @@ class AllDoctorsRepository {
     // print(value);
 
     var returnValue = value["data"];
+    print(returnValue);
     allDoctorsController.setDoctorList(returnValue);
     return returnValue;
   }
-
-  
 }
 
 final alldoctorsRepositoryProvider = Provider<AllDoctorsRepository>((ref) {
@@ -40,4 +39,3 @@ final getalldoctorsFutureProvider = FutureProvider.autoDispose<List>((ref) {
   var allDoctorsController = ref.read(alldoctorsControllerProvider.notifier);
   return alldoctorsRepository.getallDoctors(allDoctorsController);
 });
-
