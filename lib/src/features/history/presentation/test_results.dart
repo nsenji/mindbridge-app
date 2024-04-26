@@ -150,7 +150,7 @@ class _TestResultsState extends ConsumerState<TestResults> {
                                               SizedBox(
                                                 width: 200,
                                                 child: TextCustom(
-                                                  size: 19,
+                                                  size: 18.3,
                                                   text: pastDiagnosisState[
                                                       index_1]["result"],
                                                   isBold: true,
