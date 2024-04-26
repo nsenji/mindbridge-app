@@ -1,3 +1,4 @@
+import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
@@ -15,6 +16,8 @@ class HistoryScreen extends ConsumerStatefulWidget {
 }
 
 class _HistoryScreenState extends ConsumerState<HistoryScreen> {
+  int? activeTab = 0;
+
   @override
   Widget build(BuildContext context) {
     Map currentUser = ref.watch(currentUserControllerProvider);
@@ -117,20 +120,67 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
                 ),
               )
             ],
-            bottom: const TabBar(
-              labelColor: Color.fromARGB(255, 8, 33, 99),
-              indicatorColor: Color.fromARGB(255, 8, 33, 99),
-              tabs: [
-                Tab(
-                  text: "Test Results",
-                ),
-                Tab(
-                  text: "Receipts",
-                ),
-              ],
+            bottom: PreferredSize(
+              preferredSize: Size.fromHeight(80),
+              child: Padding(
+                padding: EdgeInsets.only(bottom: 20),
+                child: Stack(alignment: Alignment.center, children: [
+                  Container(
+                    width: 290,
+                    height: 47,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(9),
+                      color: Colors.grey[200],
+                    ),
+                  ),
+                  ButtonsTabBar(
+                    labelSpacing: 0,
+                    onTap: (value) {
+                      setState(() {
+                        activeTab = value;
+                      });
+                    },
+
+                    backgroundColor: Color(0xFF082163),
+                    unselectedBackgroundColor: Colors.grey[200],
+                    labelStyle: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                    unselectedLabelStyle: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                    // Add your tabs here
+                    tabs: [
+                      Tab(
+                          child: SizedBox(
+                        width: 130,
+                        child: Center(
+                            child: Text("Test Results",
+                                style: TextStyle(
+                                    color: activeTab == 0
+                                        ? Colors.white
+                                        : Color(0xFF082163)))),
+                      )),
+                      Tab(
+                          child: SizedBox(
+                        width: 130,
+                        child: Center(
+                            child: Text(
+                          "Receipts",
+                          style: TextStyle(
+                              color: activeTab == 1
+                                  ? Colors.white
+                                  : Color(0xFF082163)),
+                        )),
+                      )),
+                    ],
+                  ),
+                ]),
+              ),
             ),
           ),
           body: TabBarView(
+            physics: NeverScrollableScrollPhysics(),
             children: [
               TestResults(),
               Receipts(),
