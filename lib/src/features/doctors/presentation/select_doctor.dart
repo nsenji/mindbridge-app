@@ -149,6 +149,12 @@ class _SelectDoctorsState extends ConsumerState<SelectDoctors> {
               padding: const EdgeInsets.only(
                   left: 10, right: 10, top: 10, bottom: 10),
               child: TextFieldWidget(
+                  cancelText: () {
+                    setState(() {
+                      _searchContoller.clear();
+                    });
+                  },
+                  suffixVisible: _searchContoller.text.isNotEmpty,
                   controller: _searchContoller,
                   label: "Search for therapist",
                   onChanged: (value) {
@@ -166,7 +172,7 @@ class _SelectDoctorsState extends ConsumerState<SelectDoctors> {
                           child: DoctorCardShimmer());
                     }),
                   )
-                : _searchContoller.text == ""
+                : _searchContoller.text.isEmpty
                     ? SliverList(
                         delegate: SliverChildBuilderDelegate(
                             childCount: doctorList.length, (context, index) {
@@ -174,8 +180,8 @@ class _SelectDoctorsState extends ConsumerState<SelectDoctors> {
                               padding: const EdgeInsets.only(
                                   bottom: 10, right: 10, left: 10),
                               child: DoctorCard(
-                                avatar:doctorList[index]["dataValues"]
-                                      ["avatar"] ,
+                                  avatar: doctorList[index]["dataValues"]
+                                      ["avatar"],
                                   doctorID: doctorList[index]["dataValues"]
                                       ["doc_ID"],
                                   doctorName: doctorList[index]["dataValues"]
@@ -194,27 +200,30 @@ class _SelectDoctorsState extends ConsumerState<SelectDoctors> {
                       )
                     : SliverList(
                         delegate: SliverChildBuilderDelegate(
-                            childCount: searchResultList.length, (context, index) {
+                            childCount: searchResultList.length,
+                            (context, index) {
                           return Padding(
                               padding: const EdgeInsets.only(
                                   bottom: 10, right: 10, left: 10),
                               child: DoctorCard(
-                                 avatar:searchResultList[index]["dataValues"]
-                                      ["avatar"] ,
-                                  doctorID: searchResultList[index]["dataValues"]
-                                      ["doc_ID"],
-                                  doctorName: searchResultList[index]["dataValues"]
-                                      ["name"],
-                                  proTitle: searchResultList[index]["dataValues"]
-                                      ["pro_title"],
+                                  avatar: searchResultList[index]["dataValues"]
+                                      ["avatar"],
+                                  doctorID: searchResultList[index]
+                                      ["dataValues"]["doc_ID"],
+                                  doctorName: searchResultList[index]
+                                      ["dataValues"]["name"],
+                                  proTitle: searchResultList[index]
+                                      ["dataValues"]["pro_title"],
                                   languagesSPoken: searchResultList[index]
                                       ["dataValues"]["languages_spoken"],
-                                  rate: searchResultList[index]["dataValues"]["rate"],
-                                  medSpecialty: searchResultList[index]["dataValues"]
-                                      ["med_specialty"],
-                                  hospitalName: searchResultList[index]["dataValues"]
-                                      ["hospitalName"],
-                                  timeSlots: searchResultList[index]["time_slots"]));
+                                  rate: searchResultList[index]["dataValues"]
+                                      ["rate"],
+                                  medSpecialty: searchResultList[index]
+                                      ["dataValues"]["med_specialty"],
+                                  hospitalName: searchResultList[index]
+                                      ["dataValues"]["hospitalName"],
+                                  timeSlots: searchResultList[index]
+                                      ["time_slots"]));
                         }),
                       ),
           ],

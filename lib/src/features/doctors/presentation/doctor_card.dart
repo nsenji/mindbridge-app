@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:medbridge/src/common_widgets/circle_avatar.dart';
 import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';

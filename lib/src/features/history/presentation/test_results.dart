@@ -150,7 +150,7 @@ class _TestResultsState extends ConsumerState<TestResults> {
                                               SizedBox(
                                                 width: 200,
                                                 child: TextCustom(
-                                                  size: 17,
+                                                  size: 19,
                                                   text: pastDiagnosisState[
                                                       index_1]["result"],
                                                   isBold: true,
@@ -159,7 +159,7 @@ class _TestResultsState extends ConsumerState<TestResults> {
                                                   overflow: true,
                                                 ),
                                               ),
-                                              H(h: 10),
+                                              H(h: 3),
                                               TextCustom(
                                                 size: 15,
                                                 text:

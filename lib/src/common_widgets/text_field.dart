@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TextFieldWidget extends StatefulWidget {
+class TextFieldWidget extends StatelessWidget {
   final bool obscureText;
   final bool authText;
   final TextEditingController controller;
@@ -10,11 +10,15 @@ class TextFieldWidget extends StatefulWidget {
   final Color labelColor;
   final TextInputType keyBoardType;
   final Color backgroundColor;
+  final bool suffixVisible;
+  final VoidCallback cancelText;
   final void Function(String) onChanged;
 
   const TextFieldWidget(
       {super.key,
       this.authText = false,
+      required this.cancelText,
+      required this.suffixVisible,
       this.obscureText = false,
       required this.controller,
       this.textcolor = Colors.black,
@@ -26,14 +30,9 @@ class TextFieldWidget extends StatefulWidget {
       required this.onChanged});
 
   @override
-  State<TextFieldWidget> createState() => _TextFieldWidgetState();
-}
-
-class _TextFieldWidgetState extends State<TextFieldWidget> {
-  @override
   Widget build(BuildContext context) {
     return TextFormField(
-      obscureText: widget.obscureText ? true : false,
+      obscureText: obscureText ? true : false,
       onFieldSubmitted: (value) {
         // this will  handle the checks when the field is submitted
         // but before the button to proceed is pressed
@@ -42,38 +41,46 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
       // this is used for search functionality where it returns
       // some of the results depending on the values that are
       // already in the field
-      onChanged: widget.onChanged,
+      onChanged: onChanged,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'This field cannot be empty';
         }
         return null;
       },
-      style: TextStyle(
-          color: widget.authText ? Colors.white : widget.textcolor,
-          fontSize: 17),
-      controller: widget.controller,
+      style:
+          TextStyle(color: authText ? Colors.white : textcolor, fontSize: 17),
+      controller: controller,
       decoration: InputDecoration(
+          suffixIcon: suffixVisible
+              ? IconButton(
+                  onPressed: cancelText,
+                  icon: Icon(
+                    Icons.cancel,
+                    color: Color.fromARGB(255, 8, 33, 99),
+                  ),
+                )
+              : null,
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: widget.borderSideColor)),
+              borderSide: BorderSide(color: borderSideColor)),
           prefixIcon: Icon(
             Icons.search,
             color: Color.fromARGB(255, 8, 33, 99),
           ),
-          contentPadding: const EdgeInsets.only(top: 15, bottom: 15, left: 13),
+          contentPadding: const EdgeInsets.only(top: 12, bottom: 12, left: 13),
           filled: true,
-          fillColor: widget.backgroundColor,
+          fillColor: backgroundColor,
           // errorText:
           //     widget.controllerExist.isEmpty ? null : widget.controllerExist,
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: widget.borderSideColor)),
+              borderSide: BorderSide(color: borderSideColor)),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide(color: widget.borderSideColor)),
-          label: Text(widget.label),
-          labelStyle: TextStyle(color: widget.labelColor)
+              borderSide: BorderSide(color: borderSideColor)),
+          label: Text(label),
+          labelStyle: TextStyle(color: labelColor)
           //hintText: 'username',
 
           ),
