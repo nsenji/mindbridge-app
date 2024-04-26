@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:medbridge/src/common_widgets/circle_avatar.dart';
 import 'package:medbridge/src/common_widgets/custom_snackbar.dart';
 import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
@@ -17,9 +16,12 @@ class BookAppointment extends ConsumerStatefulWidget {
   final String hospitalName;
   final int rate;
   final String doctorID;
+  final Map? avatar;
+
   const BookAppointment(
       {super.key,
       required this.doctorName,
+      required this.avatar,
       required this.hospitalName,
       required this.doctorID,
       required this.proTitle,
@@ -82,9 +84,35 @@ class _BookAppointmentState extends ConsumerState<BookAppointment> {
                 padding: const EdgeInsets.all(10.0),
                 child: Row(
                   children: [
-                    Avatar(
-                      assetName: "guy.png",
-                      radius: 28,
+                    SizedBox(
+                      height: 56,
+                      width: 56,
+                      child: ClipOval(
+                        child: widget.avatar != null
+                            ? Image.network(
+                                "https://final-project-backend-production-273c.up.railway.app/uploads/${widget.avatar!["file_name"]}",
+                                fit: BoxFit.cover,
+                                loadingBuilder: (BuildContext context,
+                                    Widget child,
+                                    ImageChunkEvent? loadingProgress) {
+                                  if (loadingProgress == null) return child;
+                                  return Center(
+                                    child: LinearProgressIndicator(
+                                      color: Color(0xFF082163),
+                                      value:
+                                          loadingProgress.expectedTotalBytes !=
+                                                  null
+                                              ? loadingProgress
+                                                      .cumulativeBytesLoaded /
+                                                  loadingProgress
+                                                      .expectedTotalBytes!
+                                              : null,
+                                    ),
+                                  );
+                                },
+                              )
+                            : Image.asset("assets/images/placeholder.jpg"),
+                      ),
                     ),
                     W(w: 15),
                     Column(

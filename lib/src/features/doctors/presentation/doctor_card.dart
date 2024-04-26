@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
@@ -62,25 +64,33 @@ class _DoctorCardState extends ConsumerState<DoctorCard> {
             children: [
               Row(
                 children: [
-                  CircleAvatar(
-                    radius: 50,
-                    backgroundImage: widget.avatar != null ? Image.network(
-                     "https://final-project-backend-production-273c.up.railway.app/uploads/${widget.avatar!["file_name"]}",
-                      fit: BoxFit.fill,
-                      loadingBuilder: (BuildContext context, Widget child,
-                          ImageChunkEvent? loadingProgress) {
-                        if (loadingProgress == null) return child;
-                        return Center(
-                          child: CircularProgressIndicator(
-                            value: loadingProgress.expectedTotalBytes != null
-                                ? loadingProgress.cumulativeBytesLoaded /
-                                    loadingProgress.expectedTotalBytes!
-                                : null,
-                          ),
-                        );
-                      },
-                    ).image: 
-                    Image.asset("assets/images/placeholder.jpg").image,
+                  SizedBox(
+                    height: 100,
+                    width: 100,
+                    child: ClipOval(
+                      child: widget.avatar != null
+                          ? Image.network(
+                              "https://final-project-backend-production-273c.up.railway.app/uploads/${widget.avatar!["file_name"]}",
+                              fit: BoxFit.cover,
+                              loadingBuilder: (BuildContext context,
+                                  Widget child,
+                                  ImageChunkEvent? loadingProgress) {
+                                if (loadingProgress == null) return child;
+                                return Center(
+                                  child: LinearProgressIndicator(
+                                    color: Color(0xFF082163),
+                                    value: loadingProgress.expectedTotalBytes !=
+                                            null
+                                        ? loadingProgress
+                                                .cumulativeBytesLoaded /
+                                            loadingProgress.expectedTotalBytes!
+                                        : null,
+                                  ),
+                                );
+                              },
+                            )
+                          : Image.asset("assets/images/placeholder.jpg"),
+                    ),
                   ),
                   W(w: 15),
                   Column(
@@ -150,6 +160,7 @@ class _DoctorCardState extends ConsumerState<DoctorCard> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => BookAppointment(
+                                            avatar: widget.avatar,
                                             doctorID: widget.doctorID,
                                             doctorName: widget.doctorName,
                                             hospitalName: widget.hospitalName,
