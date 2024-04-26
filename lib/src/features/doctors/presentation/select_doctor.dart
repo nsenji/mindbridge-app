@@ -174,6 +174,8 @@ class _SelectDoctorsState extends ConsumerState<SelectDoctors> {
                               padding: const EdgeInsets.only(
                                   bottom: 10, right: 10, left: 10),
                               child: DoctorCard(
+                                avatar:doctorList[index]["dataValues"]
+                                      ["avatar"] ,
                                   doctorID: doctorList[index]["dataValues"]
                                       ["doc_ID"],
                                   doctorName: doctorList[index]["dataValues"]
@@ -197,6 +199,8 @@ class _SelectDoctorsState extends ConsumerState<SelectDoctors> {
                               padding: const EdgeInsets.only(
                                   bottom: 10, right: 10, left: 10),
                               child: DoctorCard(
+                                 avatar:searchResultList[index]["dataValues"]
+                                      ["avatar"] ,
                                   doctorID: searchResultList[index]["dataValues"]
                                       ["doc_ID"],
                                   doctorName: searchResultList[index]["dataValues"]

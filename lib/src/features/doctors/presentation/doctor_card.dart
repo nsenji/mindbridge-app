@@ -16,6 +16,7 @@ class DoctorCard extends ConsumerStatefulWidget {
   final String languagesSPoken;
   final int rate;
   final String medSpecialty;
+  final Map? avatar;
   const DoctorCard(
       {super.key,
       required this.doctorName,
@@ -25,7 +26,8 @@ class DoctorCard extends ConsumerStatefulWidget {
       required this.rate,
       required this.medSpecialty,
       required this.timeSlots,
-      required this.hospitalName});
+      required this.hospitalName,
+      required this.avatar});
 
   @override
   ConsumerState<DoctorCard> createState() => _DoctorCardState();
@@ -61,9 +63,25 @@ class _DoctorCardState extends ConsumerState<DoctorCard> {
             children: [
               Row(
                 children: [
-                  Avatar(
-                    assetName: "guy.png",
+                  CircleAvatar(
                     radius: 50,
+                    backgroundImage: widget.avatar != null ? Image.network(
+                     "https://final-project-backend-production-273c.up.railway.app/uploads/${widget.avatar!["file_name"]}",
+                      fit: BoxFit.fill,
+                      loadingBuilder: (BuildContext context, Widget child,
+                          ImageChunkEvent? loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Center(
+                          child: CircularProgressIndicator(
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                    loadingProgress.expectedTotalBytes!
+                                : null,
+                          ),
+                        );
+                      },
+                    ).image: 
+                    Image.asset("assets/images/placeholder.jpg").image,
                   ),
                   W(w: 15),
                   Column(
@@ -133,7 +151,7 @@ class _DoctorCardState extends ConsumerState<DoctorCard> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => BookAppointment(
-                                        doctorID: widget.doctorID,
+                                            doctorID: widget.doctorID,
                                             doctorName: widget.doctorName,
                                             hospitalName: widget.hospitalName,
                                             proTitle: widget.proTitle,
