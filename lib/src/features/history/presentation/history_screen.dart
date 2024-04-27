@@ -130,7 +130,7 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
                     height: 47,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(9),
-                      color: Colors.grey[200],
+                      color: Colors.grey[300],
                     ),
                   ),
                   ButtonsTabBar(
@@ -142,7 +142,7 @@ class _HistoryScreenState extends ConsumerState<HistoryScreen> {
                     },
 
                     backgroundColor: Color(0xFF082163),
-                    unselectedBackgroundColor: Colors.grey[200],
+                    unselectedBackgroundColor: Colors.grey[300],
                     labelStyle: const TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
