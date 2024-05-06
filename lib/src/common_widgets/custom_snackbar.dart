@@ -19,7 +19,7 @@ class CustomSnackBar {
               width: 20,
             ),
             SizedBox(
-                width: 260,
+                width: 252,
                 child: Text(
                   message,
                   style: const TextStyle(overflow: TextOverflow.ellipsis),

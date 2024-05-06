@@ -127,7 +127,7 @@ class _BookAppointmentState extends ConsumerState<BookAppointment> {
                         SizedBox(
                           width: 250,
                           child: Text(
-                            "${widget.proTitle} - ${widget.hospitalName}",
+                            "${widget.proTitle}",
                             style: TextStyle(
                                 fontSize: 15,
                                 color: Color.fromARGB(255, 197, 197, 197),
