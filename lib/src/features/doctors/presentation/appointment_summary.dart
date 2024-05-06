@@ -143,6 +143,7 @@ class _AppointmentSummaryState extends ConsumerState<AppointmentSummary> {
                         widget.doctorID, selectedDate, selectedTime);
 
                     if (value) {
+                      // possible correction here. add another state check for whether donePayment so that the done button takes you to NavBar
                       CustomSnackBar.show(
                           context, "Unavailable: Select different time", true);
                       ref
