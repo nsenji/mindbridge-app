@@ -1,4 +1,4 @@
-# medbridge
+# MindBridge App
 
 A new Flutter project.
 
