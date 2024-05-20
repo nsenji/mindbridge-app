@@ -4,6 +4,9 @@
 
 MindBridge is a mobile application that uses a custom AI-driven mental health checker to detect presence of the different types of bipolar and depression and offers mental health services to users through access to mental health professionals through virtual video meetings on the app
 
+## Backend
+This mobile application is supported by a RESTful API backend built with Express.js availble here [MindBridge Backend](https://github.com/victor-nsengiyumva/mindBridge-backend)
+
 ## :sparkles: App Features
 
 - Authentication
@@ -35,5 +38,5 @@ Loading State | Empty lists Screen | Network Error Screen |
 ## 🚀 Technologies
 - Flutter 3.19.3
 - Dart 3.3.1
-- IMDB movie Database
-- Firebase
+- SendGrid 
+- videosdk 
