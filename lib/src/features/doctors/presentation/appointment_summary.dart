@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/common_widgets/custom_snackbar.dart';
 import 'package:medbridge/src/common_widgets/main_button.dart';
@@ -33,8 +34,10 @@ class AppointmentSummary extends ConsumerStatefulWidget {
 class _AppointmentSummaryState extends ConsumerState<AppointmentSummary> {
   Future<bool> _getTakenTimeslots(
       String doctorID, String selectedDate, String selectedTime) async {
+    String baseUrl = dotenv.env["BASE_URL_DEV"]!;
+
     String url =
-        "https://final-project-backend-production-273c.up.railway.app/appointments/takentimeslots";
+        "$baseUrl/appointments/takentimeslots";
 
     Map<String, dynamic> data = {"doctorID": doctorID, "date": selectedDate};
 

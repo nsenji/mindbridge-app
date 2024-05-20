@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
@@ -72,22 +73,21 @@ void handlePaymentInitialization(
     } catch (error) {
       ref.read(payButtonControllerProvider.notifier).setState(false);
 
-      CustomSnackBar.show(
-          context, "Error updating payments", true);
+      CustomSnackBar.show(context, "Error updating payments", true);
     }
   } else {
     ref.read(payButtonControllerProvider.notifier).setState(false);
 
-    CustomSnackBar.show(
-        context, "Error with payment. Retry", true);
+    CustomSnackBar.show(context, "Error with payment. Retry", true);
   }
 }
 
 /// Funtion to update the amount in the database to reflect your balance in the app
 Future<bool> createAppointment(
     String patientID, String doctorID, String time, String date) async {
-  String url =
-      "https://final-project-backend-production-273c.up.railway.app/appointments/createappointment";
+  String baseUrl = dotenv.env["BASE_URL_DEV"]!;
+
+  String url = "$baseUrl/appointments/createappointment";
 
   Map<String, dynamic> data = {
     "patientID": patientID,
@@ -117,8 +117,9 @@ Future<bool> createAppointment(
 
 Future<bool> createPayment(String patientID, String doctorID, String time,
     String date, int rate) async {
-  String url =
-      "https://final-project-backend-production-273c.up.railway.app/payments/addpayment";
+  String baseUrl = dotenv.env["BASE_URL_DEV"]!;
+
+  String url = "$baseUrl/payments/addpayment";
 
   Map<String, dynamic> data = {
     "patientID": patientID,

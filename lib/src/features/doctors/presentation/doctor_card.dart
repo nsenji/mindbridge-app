@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
@@ -39,6 +40,8 @@ class _DoctorCardState extends ConsumerState<DoctorCard> {
 
   @override
   Widget build(BuildContext context) {
+            String baseUrl = dotenv.env["BASE_URL_DEV"]!;
+
     return InkWell(
       onTap: () {
         expand
@@ -70,7 +73,7 @@ class _DoctorCardState extends ConsumerState<DoctorCard> {
                     child: ClipOval(
                       child: widget.avatar != null
                           ? Image.network(
-                              "https://final-project-backend-production-273c.up.railway.app/uploads/${widget.avatar!["file_name"]}",
+                              "$baseUrl/uploads/${widget.avatar!["file_name"]}",
                               fit: BoxFit.cover,
                               loadingBuilder: (BuildContext context,
                                   Widget child,

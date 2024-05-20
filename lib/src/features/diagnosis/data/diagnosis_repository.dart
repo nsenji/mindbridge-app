@@ -1,3 +1,4 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/features/diagnosis/data/fetchData_function.dart';
 
@@ -5,8 +6,11 @@ class DiagnosisRepository {
   const DiagnosisRepository();
 
   Future<String> fetchDiagnosisResults(Map<dynamic, dynamic> data) async {
+
+    String baseUrl = dotenv.env["BASE_URL_DEV"]!;
+
     String response = await fetchDiagnosis(
-        "https://medbridge-ml-pipeline.up.railway.app/predictdata", data);
+        "$baseUrl/predictdata", data);
 
     if (response != "Application Error") {
       return response;

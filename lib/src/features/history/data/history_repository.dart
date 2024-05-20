@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:medbridge/src/features/history/presentation/past_diagnoses_controller.dart';
@@ -9,8 +10,10 @@ class HistoryRepository {
 
   Future<bool> getDiagnosis(
       PastDiagnosesController pastDiagnosesController, String patientID) async {
+                String baseUrl = dotenv.env["BASE_URL_DEV"]!;
+
     String url =
-        "https://final-project-backend-production-273c.up.railway.app/diagnosis/getdiagnoses";
+        "$baseUrl/diagnosis/getdiagnoses";
 
     Map<String, dynamic> data = {
       "patientID": patientID,
@@ -32,9 +35,10 @@ class HistoryRepository {
   }
 
   Future<List> getPayments(String patientID) async {
+            String baseUrl = dotenv.env["BASE_URL_DEV"]!;
 
     String url =
-        "https://final-project-backend-production-273c.up.railway.app/payments/getpayments";
+        "$baseUrl/payments/getpayments";
 
     Map<String, dynamic> data = {
       "patientID": patientID,

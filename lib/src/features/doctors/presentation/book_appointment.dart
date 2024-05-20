@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/common_widgets/custom_snackbar.dart';
 import 'package:medbridge/src/common_widgets/main_button.dart';
@@ -45,6 +46,8 @@ class _BookAppointmentState extends ConsumerState<BookAppointment> {
 
   @override
   Widget build(BuildContext context) {
+        String baseUrl = dotenv.env["BASE_URL_DEV"]!;
+
     List timeslotsProvider =
         ref.watch(timeslotsControllerProvider(widget.doctorID));
     List dateProvider = ref.watch(dateControllerProvider);
@@ -90,7 +93,7 @@ class _BookAppointmentState extends ConsumerState<BookAppointment> {
                       child: ClipOval(
                         child: widget.avatar != null
                             ? Image.network(
-                                "https://final-project-backend-production-273c.up.railway.app/uploads/${widget.avatar!["file_name"]}",
+                                "$baseUrl/uploads/${widget.avatar!["file_name"]}",
                                 fit: BoxFit.cover,
                                 loadingBuilder: (BuildContext context,
                                     Widget child,

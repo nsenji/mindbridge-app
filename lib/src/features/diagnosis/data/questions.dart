@@ -92,6 +92,6 @@ List scaled = [
   },
   {
     "symptom": "optimism",
-    "question": "How optmistic are you (Select from scale)",
+    "question": "How optimistic are you (Select from scale)",
   },
 ];
