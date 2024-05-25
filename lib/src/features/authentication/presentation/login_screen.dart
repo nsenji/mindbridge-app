@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:medbridge/src/common_widgets/app_logo.dart';
 import 'package:medbridge/src/common_widgets/custom_snackbar.dart';
 import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/text_field_custom.dart';
-import 'package:medbridge/src/features/authentication/data/authRepository.dart';
+import 'package:medbridge/src/features/authentication/presentation/sign_up_screen.dart';
 
-class SignUpScreen extends ConsumerStatefulWidget {
-  const SignUpScreen({super.key});
+class LoginScreen extends ConsumerStatefulWidget {
+  const LoginScreen({super.key});
 
   @override
-  ConsumerState<SignUpScreen> createState() => _SignUpScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _SignUpScreenState extends ConsumerState<SignUpScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final nameController = TextEditingController();
+  final userNameController = TextEditingController();
+  final phoneNumberController = TextEditingController();
 
   bool buttonActive = true;
 
@@ -26,39 +28,37 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    AuthRepo authRepo = AuthRepo.instance;
     return Scaffold(
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
         child: MainButton(
             disabled: buttonActive ? false : true,
             //disabled: buttonIsDisabled,
-            text: "Sign Up",
+            text: "Log in",
             onpressed: () async {
               if (_formKey.currentState!.validate()) {
+                // If the form is valid, display a snackbar. In the real world,
+                // you'd often call a server or save the information in a database.
+
                 setState(() {
                   buttonActive = false;
                 });
-                bool response = await authRepo.signUp(
-                  nameController.text,
-                  emailController.text,
-                  passwordController.text,
-                );
-                if (response) {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => const LoginScreen()));
-                  setState(() {
-                    buttonActive = true;
-                  });
-                  print("thing has worked 34444444444444444444444444");
-                } else {
-                  CustomSnackBar.show(context, "failed signup", true);
-                  setState(() {
-                    buttonActive = true;
-                  });
-                }
+                // String response = await value.register(
+                //     emailController.text,
+                //     passwordController.text,
+                //     userNameController.text,
+                //     phoneNumberController.text);
+                // if (response == "success") {
+                //   // Navigator.push(
+                //   //     context,
+                //   //     MaterialPageRoute(
+                //   //         builder: (context) => const LoginScreen()));
+                // } else {
+                //   CustomSnackBar.show(context, response, true);
+                //   setState(() {
+                //     buttonActive = true;
+                //   });
+                // }
               }
             }),
       ),
@@ -70,10 +70,14 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
-                height: 50,
+                height: 40,
               ),
+              AppLogo(),
+              // const SizedBox(
+              //   height: 20,
+              // ),
               const Text(
-                "Create an account",
+                "Login to your account",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 25,
@@ -83,7 +87,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 height: 7,
               ),
               const Text(
-                "Lets get started! Provide both names",
+                "Welcome Back!",
                 style: TextStyle(fontSize: 12, color: Colors.black),
               ),
               const SizedBox(
@@ -93,14 +97,6 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    TextFieldCustom(
-                      controller: nameController,
-                      label: "Name",
-                      keyBoardType: TextInputType.emailAddress,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
                     TextFieldCustom(
                       controller: emailController,
                       label: "Email",
@@ -118,9 +114,37 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   ],
                 ),
               ),
+
               const SizedBox(
-                height: 30,
+                height: 20,
               ),
+              Row(
+                children: [
+                  const Text(
+                    "Dont have an account?",
+                    style: TextStyle(fontSize: 15, color: Colors.black),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignUpScreen()));
+                    },
+                    child: const Text(
+                      "Sign Up",
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Color(0xFF082163),
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+             
             ],
           ),
         ),
