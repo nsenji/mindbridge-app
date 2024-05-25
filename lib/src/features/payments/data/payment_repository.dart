@@ -43,7 +43,7 @@ void handlePaymentInitialization(
 
   final Flutterwave flutterwave = Flutterwave(
       context: context,
-      publicKey: "FLWPUBK_TEST-9a87c713ef68a600a7869a05022ef2fa-X",
+      publicKey: dotenv.env["FLUTTERWAVE_PUBLIC_KEY"]!,
       currency: "UGX",
       redirectUrl: "add-your-redirect-url-here",
       /* the page to display after the trensaction is successful */

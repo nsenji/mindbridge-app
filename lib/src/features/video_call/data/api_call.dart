@@ -1,9 +1,9 @@
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 //Auth token we will use to generate a meeting and connect to it
-String token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiIxMzRiNGM5Zi0xN2U0LTRjNjYtYjM5My02OWYyMWZhMGJkY2EiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTcxNjIzNjIyNSwiZXhwIjoxNzE4ODI4MjI1fQ.NSazP8YsCJnB2JQdREIC9ZhQ4KiPoQwZjE0vTxII0UM";
+String token = dotenv.env["VIDEOSDK_TOKEN"]!;
 
 // API call to create meeting
 Future<String> getAccessToken() async {

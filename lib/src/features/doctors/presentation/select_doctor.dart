@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:medbridge/src/common_widgets/search_field.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
-import 'package:medbridge/src/common_widgets/text_field.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
 import 'package:medbridge/src/features/doctors/data/all_doctors_repository.dart';
 import 'package:medbridge/src/features/doctors/presentation/controllers_providers/all_doctors_controller.dart';
