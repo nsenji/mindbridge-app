@@ -8,6 +8,7 @@ import 'package:medbridge/src/features/appointments/data/appointments_repository
 import 'package:medbridge/src/features/appointments/presentation/appointment_card.dart';
 import 'package:medbridge/src/features/appointments/presentation/appointment_shimmer.dart';
 import 'package:medbridge/src/features/appointments/presentation/appointments_controller.dart';
+import 'package:medbridge/src/features/landingPage/landing_page.dart';
 import 'package:medbridge/src/features/profile/presentation/current_user_controller.dart';
 import 'package:medbridge/src/features/profile/presentation/profile_widget.dart';
 
@@ -24,6 +25,7 @@ class _AppointmentsScreenState extends ConsumerState<AppointmentsScreen> {
   @override
   Widget build(BuildContext context) {
     Map currentUser = ref.watch(currentUserControllerProvider);
+
     List currentAppointments = ref.watch(appointmentsControllerProvider);
     var asyncValue =
         ref.watch(getappointmentsListFutureProvider(currentUser["patientID"]));
@@ -110,7 +112,17 @@ class _AppointmentsScreenState extends ConsumerState<AppointmentsScreen> {
                                             padding:
                                                 const EdgeInsets.only(right: 5),
                                             child: InkWell(
-                                              onTap: () {},
+                                              onTap: () {
+                                                
+                                                Navigator.of(context)
+                                                    .pushAndRemoveUntil(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const Landing()),
+                                                  (Route<dynamic> route) =>
+                                                      false, // Remove all routes from the stack
+                                                );
+                                              },
                                               child: Icon(
                                                 Icons.logout,
                                                 color: Colors.red,

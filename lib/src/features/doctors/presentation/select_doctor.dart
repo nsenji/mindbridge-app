@@ -8,6 +8,7 @@ import 'package:medbridge/src/features/doctors/presentation/controllers_provider
 import 'package:medbridge/src/features/doctors/presentation/controllers_providers/search_resultlist_controller.dart';
 import 'package:medbridge/src/features/doctors/presentation/doctor_card.dart';
 import 'package:medbridge/src/features/doctors/presentation/doctor_shimmer_screen.dart';
+import 'package:medbridge/src/features/landingPage/landing_page.dart';
 import 'package:medbridge/src/features/profile/presentation/current_user_controller.dart';
 import 'package:medbridge/src/features/profile/presentation/profile_widget.dart';
 
@@ -37,6 +38,7 @@ class _SelectDoctorsState extends ConsumerState<SelectDoctors> {
   Widget build(BuildContext context) {
     ref.watch(getalldoctorsFutureProvider);
     List doctorList = ref.watch(alldoctorsControllerProvider);
+  
     Map currentUser = ref.watch(currentUserControllerProvider);
     var searchResultController =
         ref.read(searchResultControllerProvider.notifier);
@@ -115,7 +117,15 @@ class _SelectDoctorsState extends ConsumerState<SelectDoctors> {
                                                 const EdgeInsets.only(right: 5),
                                             child: InkWell(
                                               onTap: () {
-                                                // getallDoctors();
+                                                Navigator.of(context)
+                                                    .pushAndRemoveUntil(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const Landing()),
+                                                  (Route<dynamic> route) =>
+                                                      false, // Remove all routes from the stack
+                                                );
+                                            
                                               },
                                               child: Icon(
                                                 Icons.logout,

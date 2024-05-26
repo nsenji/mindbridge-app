@@ -1,13 +1,12 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/common_widgets/app_logo.dart';
-import 'package:medbridge/src/common_widgets/custom_snackbar.dart';
+import 'package:medbridge/src/common_widgets/auth_snack_bar.dart';
 import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/text_field_custom.dart';
 import 'package:medbridge/src/features/authentication/data/authRepository.dart';
 import 'package:medbridge/src/features/authentication/presentation/sign_up_screen.dart';
+import 'package:medbridge/src/features/navbar/navbar.dart';
 import 'package:medbridge/src/features/profile/presentation/current_user_controller.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -31,10 +30,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     AuthRepo authRepo = AuthRepo.instance;
-    CurrentUserController currentUserState = ref.read(currentUserControllerProvider.notifier);
+
+    CurrentUserController currentUserState =
+        ref.read(currentUserControllerProvider.notifier);
     return Scaffold(
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+        padding: const EdgeInsets.only(bottom: 40, left: 20, right: 20),
         child: MainButton(
             disabled: buttonActive ? false : true,
             //disabled: buttonIsDisabled,
@@ -48,22 +49,17 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   buttonActive = false;
                 });
                 bool response = await authRepo.login(
-                  emailController.text,
-                  passwordController.text,
-                  currentUserState
-                );
+                    emailController.text.trim(),
+                    passwordController.text.trim(),
+                    currentUserState);
                 if (response) {
-                  log("this has worked too 44444444444444444444444");
-
-                  setState(() {
-                    buttonActive = true;
-                  });
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => const LoginScreen()));
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => NavBar()),
+                    (Route<dynamic> route) =>
+                        false, // Remove all routes from the stack
+                  );
                 } else {
-                  CustomSnackBar.show(context, "Login Failed", true);
+                  AuthSnackBar.show(context, "Login Failed", true);
                   setState(() {
                     buttonActive = true;
                   });

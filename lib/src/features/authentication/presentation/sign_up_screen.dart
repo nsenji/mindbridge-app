@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:medbridge/src/common_widgets/custom_snackbar.dart';
+import 'package:medbridge/src/common_widgets/auth_snack_bar.dart';
 import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/text_field_custom.dart';
 import 'package:medbridge/src/features/authentication/data/authRepository.dart';
+import 'package:medbridge/src/features/navbar/navbar.dart';
 
 class SignUpScreen extends ConsumerStatefulWidget {
   const SignUpScreen({super.key});
@@ -29,7 +30,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
     AuthRepo authRepo = AuthRepo.instance;
     return Scaffold(
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
+        padding: const EdgeInsets.only(bottom: 40, left: 20, right: 20),
         child: MainButton(
             disabled: buttonActive ? false : true,
             //disabled: buttonIsDisabled,
@@ -40,21 +41,18 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   buttonActive = false;
                 });
                 bool response = await authRepo.signUp(
-                  nameController.text,
-                  emailController.text,
-                  passwordController.text,
+                  nameController.text.trim(),
+                  emailController.text.trim(),
+                  passwordController.text.trim(),
                 );
                 if (response) {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => const LoginScreen()));
-                  setState(() {
-                    buttonActive = true;
-                  });
-                  print("thing has worked 34444444444444444444444444");
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => NavBar()),
+                    (Route<dynamic> route) =>
+                        false, // Remove all routes from the stack
+                  );
                 } else {
-                  CustomSnackBar.show(context, "failed signup", true);
+                  AuthSnackBar.show(context, "Sign up Failed", true);
                   setState(() {
                     buttonActive = true;
                   });

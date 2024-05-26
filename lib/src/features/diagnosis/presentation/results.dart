@@ -7,9 +7,9 @@ import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/outlined_button.dart';
 import 'package:medbridge/src/common_widgets/sizedbox_template.dart';
 import 'package:medbridge/src/common_widgets/text_template.dart';
+import 'package:medbridge/src/features/authentication/presentation/login_screen.dart';
 import 'package:medbridge/src/features/diagnosis/presentation/diagnosis_controller_provider.dart';
 import 'package:medbridge/src/features/diagnosis/presentation/screen_1.dart';
-import 'package:medbridge/src/features/navbar/navbar.dart';
 
 class Results extends ConsumerStatefulWidget {
   final String results;
@@ -101,14 +101,14 @@ class _ResultsState extends ConsumerState<Results> {
                       text: "Talk To a Professional",
                       onpressed: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => NavBar()));
+                            MaterialPageRoute(builder: (context) => LoginScreen()));
                       }),
                   H(h: 15),
                   OutButton(
                       text: "Login To Save Results",
                       onpressed: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => NavBar()));
+                            MaterialPageRoute(builder: (context) => LoginScreen()));
                       }),
                   H(h: 15),
                   OutButton(

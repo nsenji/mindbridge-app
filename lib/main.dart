@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:medbridge/src/features/authentication/presentation/login_screen.dart';
-import 'package:medbridge/src/features/authentication/presentation/sign_up_screen.dart';
 import 'package:medbridge/src/features/landingPage/landing_page.dart';
 import 'package:medbridge/src/utils/custom_theme.dart';
 
@@ -30,7 +28,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Color.fromARGB(255, 8, 33, 99),
           fontFamily: "Roboto",
           textTheme: textThemelight(context)),
-      home: LoginScreen(),
+      home: Landing(),
     );
   }
 }
