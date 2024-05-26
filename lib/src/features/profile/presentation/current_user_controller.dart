@@ -9,8 +9,8 @@ class CurrentUserController extends StateNotifier<Map> {
           "password": "ilikedj48"
         });
 
-  void setUser(Map newdate) {
-    state = newdate;
+  void setUser(Map newUser) {
+    state = newUser;
   }
 }
 

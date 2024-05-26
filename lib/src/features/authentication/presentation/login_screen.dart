@@ -1,10 +1,14 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:medbridge/src/common_widgets/app_logo.dart';
 import 'package:medbridge/src/common_widgets/custom_snackbar.dart';
 import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/text_field_custom.dart';
+import 'package:medbridge/src/features/authentication/data/authRepository.dart';
 import 'package:medbridge/src/features/authentication/presentation/sign_up_screen.dart';
+import 'package:medbridge/src/features/profile/presentation/current_user_controller.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -16,8 +20,6 @@ class LoginScreen extends ConsumerStatefulWidget {
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final userNameController = TextEditingController();
-  final phoneNumberController = TextEditingController();
 
   bool buttonActive = true;
 
@@ -28,6 +30,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    AuthRepo authRepo = AuthRepo.instance;
+    CurrentUserController currentUserState = ref.read(currentUserControllerProvider.notifier);
     return Scaffold(
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
@@ -43,22 +47,27 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 setState(() {
                   buttonActive = false;
                 });
-                // String response = await value.register(
-                //     emailController.text,
-                //     passwordController.text,
-                //     userNameController.text,
-                //     phoneNumberController.text);
-                // if (response == "success") {
-                //   // Navigator.push(
-                //   //     context,
-                //   //     MaterialPageRoute(
-                //   //         builder: (context) => const LoginScreen()));
-                // } else {
-                //   CustomSnackBar.show(context, response, true);
-                //   setState(() {
-                //     buttonActive = true;
-                //   });
-                // }
+                bool response = await authRepo.login(
+                  emailController.text,
+                  passwordController.text,
+                  currentUserState
+                );
+                if (response) {
+                  log("this has worked too 44444444444444444444444");
+
+                  setState(() {
+                    buttonActive = true;
+                  });
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => const LoginScreen()));
+                } else {
+                  CustomSnackBar.show(context, "Login Failed", true);
+                  setState(() {
+                    buttonActive = true;
+                  });
+                }
               }
             }),
       ),
@@ -144,7 +153,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ),
                 ],
               ),
-             
             ],
           ),
         ),
