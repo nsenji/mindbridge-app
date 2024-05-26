@@ -43,7 +43,7 @@ class _ParticipantTileState extends State<ParticipantTile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(0), // this is where the padding was updated
       child: videoStream != null
           ? RTCVideoView(
               videoStream?.renderer as RTCVideoRenderer,
