@@ -36,8 +36,7 @@ class _AppointmentSummaryState extends ConsumerState<AppointmentSummary> {
       String doctorID, String selectedDate, String selectedTime) async {
     String baseUrl = dotenv.env["BASE_URL_DEV"]!;
 
-    String url =
-        "$baseUrl/appointments/takentimeslots";
+    String url = "$baseUrl/appointments/takentimeslots";
 
     Map<String, dynamic> data = {"doctorID": doctorID, "date": selectedDate};
 
@@ -145,7 +144,7 @@ class _AppointmentSummaryState extends ConsumerState<AppointmentSummary> {
                     bool value = await _getTakenTimeslots(
                         widget.doctorID, selectedDate, selectedTime);
 
-                    if (value) {
+                    if (value && !donePayment) {
                       // possible correction here. add another state check for whether donePayment so that the done button takes you to NavBar
                       CustomSnackBar.show(
                           context, "Unavailable: Select different time", true);
@@ -153,25 +152,36 @@ class _AppointmentSummaryState extends ConsumerState<AppointmentSummary> {
                           .read(payButtonControllerProvider.notifier)
                           .setState(false);
                     } else {
-                      !donePayment
-                          ? handlePaymentInitialization(
-                              ref,
-                              currentUser["name"],
-                              "",
-                              currentUser["email"],
-                              widget.rate,
-                              txRef,
-                              currentUser["patientID"],
-                              widget.doctorID,
-                              selectedTime,
-                              selectedDate,
-                              context)
-                          : Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                  builder: (context) => const NavBar()),
-                              (Route<dynamic> route) =>
-                                  false, // Remove all routes from the stack
-                            );
+                      if (!donePayment) {
+                        handlePaymentInitialization(
+                            ref,
+                            currentUser["name"],
+                            "",
+                            currentUser["email"],
+                            widget.rate,
+                            txRef,
+                            currentUser["patientID"],
+                            widget.doctorID,
+                            selectedTime,
+                            selectedDate,
+                            context);
+                      } else {
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                              builder: (context) => const NavBar()),
+                          (Route<dynamic> route) =>
+                              false, // Remove all routes from the stack
+                        );
+                        ref
+                            .read(payButtonControllerProvider.notifier)
+                            .setState(false);
+                        ref
+                            .read(payButtonControllerProvider.notifier)
+                            .setState(false);
+                        ref
+                            .read(donePaymentControllerProvider.notifier)
+                            .setState(false);
+                      }
                     }
                   }),
             )
