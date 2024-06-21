@@ -7,7 +7,7 @@ class DiagnosisRepository {
 
   Future<String> fetchDiagnosisResults(Map<dynamic, dynamic> data) async {
 
-    String baseUrl = dotenv.env["BASE_URL_DEV"]!;
+    String baseUrl = dotenv.env["BASE_URL_MODEL"]!;
 
     String response = await fetchDiagnosis(
         "$baseUrl/predictdata", data);

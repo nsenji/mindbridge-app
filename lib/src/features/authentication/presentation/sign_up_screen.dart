@@ -4,7 +4,7 @@ import 'package:medbridge/src/common_widgets/auth_snack_bar.dart';
 import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/text_field_custom.dart';
 import 'package:medbridge/src/features/authentication/data/authRepository.dart';
-import 'package:medbridge/src/features/navbar/navbar.dart';
+import 'package:medbridge/src/features/authentication/presentation/login_screen.dart';
 
 class SignUpScreen extends ConsumerStatefulWidget {
   const SignUpScreen({super.key});
@@ -47,7 +47,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                 );
                 if (response) {
                   Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => NavBar()),
+                    MaterialPageRoute(builder: (context) => LoginScreen()),
                     (Route<dynamic> route) =>
                         false, // Remove all routes from the stack
                   );
