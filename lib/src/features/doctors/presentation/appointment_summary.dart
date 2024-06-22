@@ -51,7 +51,6 @@ class _AppointmentSummaryState extends ConsumerState<AppointmentSummary> {
       },
     );
     var value = jsonDecode(response.body);
-    // print(value);
 
     var returnValue = value["data"];
 

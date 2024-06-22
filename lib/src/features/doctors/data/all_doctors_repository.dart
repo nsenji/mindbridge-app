@@ -26,10 +26,8 @@ class AllDoctorsRepository {
       },
     );
     var value = jsonDecode(response.body);
-    // print(value);
 
     var returnValue = value["data"];
-    print(returnValue);
     allDoctorsController.setDoctorList(returnValue);
     return returnValue;
   }
