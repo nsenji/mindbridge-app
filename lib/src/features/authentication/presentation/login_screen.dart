@@ -6,11 +6,13 @@ import 'package:medbridge/src/common_widgets/main_button.dart';
 import 'package:medbridge/src/common_widgets/text_field_custom.dart';
 import 'package:medbridge/src/features/authentication/data/authRepository.dart';
 import 'package:medbridge/src/features/authentication/presentation/sign_up_screen.dart';
+import 'package:medbridge/src/features/diagnosis/presentation/diagnosis_controller_provider.dart';
 import 'package:medbridge/src/features/navbar/navbar.dart';
 import 'package:medbridge/src/features/profile/presentation/current_user_controller.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
-  const LoginScreen({super.key});
+  final String? results;
+  const LoginScreen({super.key, this.results});
 
   @override
   ConsumerState<LoginScreen> createState() => _LoginScreenState();
@@ -30,6 +32,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     AuthRepo authRepo = AuthRepo.instance;
+    var currentDiagnosisState = ref.watch(diagnosisControllerProvider);
 
     CurrentUserController currentUserState =
         ref.read(currentUserControllerProvider.notifier);
@@ -51,7 +54,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 bool response = await authRepo.login(
                     emailController.text.trim(),
                     passwordController.text.trim(),
-                    currentUserState);
+                    currentUserState,
+                    widget.results,
+                    currentDiagnosisState);
                 if (response) {
                   Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(builder: (context) => NavBar()),

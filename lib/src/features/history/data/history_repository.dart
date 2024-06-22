@@ -63,7 +63,7 @@ final pastDiagnosissRepositoryProvider = Provider<HistoryRepository>((ref) {
 });
 
 final getpastdiagnosisListFutureProvider =
-    FutureProvider.family<bool, String>((ref, patientID) {
+    FutureProvider.autoDispose.family<bool, String>((ref, patientID) {
   final pastDiagnosisRepository = ref.watch(pastDiagnosissRepositoryProvider);
   final pastDiagnosesController =
       ref.read(pastDiagnosesControllerProvider.notifier);
@@ -73,7 +73,7 @@ final getpastdiagnosisListFutureProvider =
 });
 
 final getPatmentsListFutureProvider =
-    FutureProvider.family<List, String>((ref, patientID) {
+    FutureProvider.autoDispose.family<List, String>((ref, patientID) {
   final historyRepository = ref.watch(pastDiagnosissRepositoryProvider);
   return historyRepository.getPayments(patientID);
 });

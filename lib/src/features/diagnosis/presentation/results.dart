@@ -108,7 +108,7 @@ class _ResultsState extends ConsumerState<Results> {
                       text: "Login To Save Results",
                       onpressed: () {
                         Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => LoginScreen()));
+                            MaterialPageRoute(builder: (context) => LoginScreen(results: widget.results,)));
                       }),
                   H(h: 15),
                   OutButton(
