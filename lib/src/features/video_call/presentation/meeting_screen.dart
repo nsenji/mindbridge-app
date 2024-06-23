@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:medbridge/src/features/navbar/navbar.dart';
 import 'package:medbridge/src/features/video_call/presentation/call_layout.dart';
 import 'package:medbridge/src/features/video_call/presentation/meeting_controls.dart';
 import 'package:videosdk/videosdk.dart';
@@ -136,6 +137,11 @@ class _MeetingScreenState extends State<MeetingScreen> {
                     },
                     onLeaveButtonPressed: () {
                       _room.leave();
+                      Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(builder: (context) => NavBar()),
+                        (Route<dynamic> route) =>
+                            false, // Remove all routes from the stack
+                      );
                     },
                   ),
                 ),
@@ -147,10 +153,3 @@ class _MeetingScreenState extends State<MeetingScreen> {
     );
   }
 }
-
-
-
-
-
-
-
