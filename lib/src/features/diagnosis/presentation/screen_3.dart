@@ -129,7 +129,7 @@ class _Screen3State extends ConsumerState<Screen3> {
                 padding: EdgeInsets.only(bottom: 20, right: 10, left: 10),
                 child: ScaledQuestionContainer(
                     symptom: "sexual_activity",
-                    question: "How optmistic are you (Select from scale)"),
+                    question: "How frequently do you engage in sexual activity (Select from scale)"),
               ),
             ),
             SliverToBoxAdapter(
